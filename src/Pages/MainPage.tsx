@@ -1,12 +1,13 @@
+import { Navbar } from "../Components/Navbar"
+import { AnimButton } from "../Components/anim_button"
+
 export function Fooldal(){
     return<div className="container">
+        <Navbar/>
         <div className="hero-section">
-            <h1>
-                BeerCycle
-            </h1>
-            <button>
-                Fogalalj
-            </button>
+            <img src="src/Images/BeerCycleText.png" id="BeerCycleLogo"/>
+            <img src="src/Images/heroSection.png" id="hero-sectionLogo"/>
+            <AnimButton/>
         </div>
         <div className="second-section">
             <h2>
