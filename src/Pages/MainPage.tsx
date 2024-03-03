@@ -3,7 +3,6 @@ import { AnimButton } from "../Components/anim_button"
 
 export function Fooldal(){
     return<div className="container">
-        <Navbar/>
         <div className="hero-section">
             <img src="src/Images/BeerCycleText.png" id="BeerCycleLogo"/>
             <img src="src/Images/heroSection.png" id="hero-sectionLogo"/>
