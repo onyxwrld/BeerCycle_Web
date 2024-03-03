@@ -1,0 +1,13 @@
+body{
+  color: white;
+  background-color: rgb(40, 49, 61);
+}
+
+.hero-section, .second-section, .mobil-section, .review-section{
+  min-height: 500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 20vw;
+}
