@@ -105,4 +105,11 @@ a{
   font-size: 30px;
 }
 
+.flip{
+  transform: rotate(180deg);
+}
 
+.svg{
+  transform: (-50%,-50%);
+  z-index: -1;
+}
