@@ -40,23 +40,12 @@ const router = createBrowserRouter([
   },
 
 ])
-const theme = createTheme({
-  palette: {
-      primary: {
-          main: '#F2C879',
-          light: '#FF9518',
-          dark: '#8A2A23'
-      }
-  }
-})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   
   <React.StrictMode>
     <ApiProvider>
-      <ThemeProvider theme={theme}>
       <RouterProvider router={router}/>
-      </ThemeProvider>
     </ApiProvider>
   </React.StrictMode>
 )

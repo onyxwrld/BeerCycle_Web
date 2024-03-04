@@ -1,7 +1,4 @@
-import { Box, IconButton } from "@mui/material";
-import { Navbar } from "../Components/Navbar"
 import { AnimButton } from "../Components/anim_button"
-import SportsBarIcon from '@mui/icons-material/SportsBar';
 
 export function Fooldal() {
     return <div className="container">

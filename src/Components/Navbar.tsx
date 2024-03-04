@@ -1,14 +1,16 @@
-import { AppBar, Box, Button, IconButton, ImageListItem, ThemeProvider, Toolbar, Typography, createTheme, makeStyles } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 import { Guest, LoggedIn } from "./Auth/loginAuth";
-
+import { IconButton } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export function Navbar() {
-    const [fix, setFix] = useState(false);
+    /*const [fix, setFix] = useState(false);
 
     function setFixed() {
         if (window.scrollY >= 300) {
@@ -17,26 +19,32 @@ export function Navbar() {
         else {
             setFix(false)
         }
-    }
-
-
-
-    window.addEventListener("scroll", setFixed);
-    return <div>
-            <AppBar position="fixed">
-                <Toolbar>
-                    <Box sx={{ flexGrow: 1 }}>
-                        <Link to='/'>
-                            <img src="src/Images/logo2.png" alt="BeerCycle logo" className="logo" style={{ width: "50px", height: "50px" }} />
-                        </Link>
-                    </Box>
-                    <Box display="flex" justifyContent="flex-end">
-                        <Button color="inherit"><Link to="gallery">Galléria</Link></Button>
-                        <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
-                        <Button color="inherit"><Link to="menu">Étlap</Link></Button>
-                        <Button color="inherit" id="loginButton"><Link to="menu">Étlap</Link></Button>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-    </div>
+         <Button color="inherit"><Link to="gallery">Galléria</Link></Button>
+                    <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
+                    <Button color="inherit"><Link to="menu">Étlap</Link></Button>
+                    <Button color="inherit" id="loginButton"><Link to="menu">Étlap</Link></Button>
+        window.addEventListener("scroll", setFixed);
+    }*/
+    return <AppBar position="fixed" >
+            <Toolbar>
+                <Typography>
+                 <img src="src/Images/logo2.png" className="logo"/>
+                </Typography>  
+                <Box>
+                <Button color="inherit"><Link to="gallery">Galléria</Link></Button>
+                    <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
+                    <Button color="inherit"><Link to="menu">Étlap</Link></Button>
+                    <Button color="inherit" id="loginButton">
+                        <Guest>
+                        <Link to="login">Belépés</Link>
+                        </Guest>
+                        <LoggedIn>
+                            <IconButton>
+                                <AccountCircleIcon></AccountCircleIcon>
+                            </IconButton>
+                        </LoggedIn>
+                    </Button>
+                </Box>  
+            </Toolbar>
+        </AppBar>
 }
