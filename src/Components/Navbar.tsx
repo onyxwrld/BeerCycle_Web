@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, IconButton, ThemeProvider, Toolbar, Typography, createTheme } from "@mui/material";
+import { AppBar, Box, Button, IconButton, ThemeProvider, Toolbar, Typography, createTheme, makeStyles } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
@@ -16,6 +16,7 @@ export function Navbar(){
             setFix(false)
         }
     }
+
     const theme = createTheme({
         palette:{
             primary:{
@@ -25,14 +26,11 @@ export function Navbar(){
             }
         }
     })
-
     window.addEventListener("scroll",setFixed);
-    return(
-        <><ThemeProvider theme={theme}>
-            <AppBar position="static">
+    return<div><ThemeProvider theme={theme}>
+            <AppBar position="fixed">
                 <Toolbar>
-                    <img src="src/Images/logo2.png" className="logo" />
-                    <Box sx={{ flexGrow: -1 }}>
+                    <Box style={{float: "left"}}>
                         <Button color="inherit"><Link to="gallery">Galléria</Link></Button>
                         <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
                         <Button color="inherit"><Link to="menu">Étlap</Link></Button>
@@ -41,6 +39,6 @@ export function Navbar(){
 
                 </Toolbar>
             </AppBar>
-        </ThemeProvider></>
-    )
+        </ThemeProvider>
+        </div>
 }

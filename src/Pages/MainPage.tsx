@@ -43,10 +43,5 @@ export function Fooldal(){
                 Letöltöm!
             </button>
         </div>
-        <div className="footer-section">
-            <p>
-                asd
-            </p>
-        </div>
     </div>
 }
