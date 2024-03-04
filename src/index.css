@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
 
 body {
-  color: white;
-  background-color: rgb(40, 49, 61);
+  color: rgb(25, 25, 50);
+  background-color: rgb(27, 29, 50);
   padding: 0;
   margin: 0;
 }
@@ -18,18 +18,65 @@ body {
   align-items: center;
 
 }
+.bulletPointContainer{
+  display: flex;
+  margin-top: 5vw;
+}
 
 .hero-section {
   background-color: rgb(15, 13, 17);
 }
 
 .second-section {
-  background-color: aquamarine;
+  background-color: rgb(255, 255, 255);
+  height: 500px;
 }
 .logo {
-  width: 8%;
+  width: 8%;padding: 0;margin: 0;
 }
 
+.shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.shape svg {
+  position: relative;
+  display: block;
+  width: calc(116% + 1.3px);
+  height: 134px;
+}
+
+.shape .shape-fill {
+  fill: #B0ACA1;
+}
+
+p{
+  flex: 2;
+  margin: 5px;
+  padding: 3px;
+  color: rgb(75, 75, 75);
+}
+#loginButton{
+  display: inline-block;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  background-color: #840000;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+}
+a{
+  text-shadow: #0a0404;
+  color: bisque;
+  text-decoration: none;
+}
 #BeerCycleLogo {
   position: absolute;
   z-index: 1;
@@ -57,3 +104,5 @@ body {
   text-transform: uppercase;
   font-size: 30px;
 }
+
+

@@ -7,7 +7,10 @@ import { Fooldal } from './Pages/MainPage.tsx'
 import { Menu } from './Pages/Menu.tsx'
 import { GalleryPage } from './Pages/GalleryPage.tsx'
 import { RulesPage } from './Pages/RulesPage.tsx'
-import { LoginPage } from './Pages/Login.tsx'
+import SignIn from './Pages/Login.tsx'
+import { ApiProvider } from './Components/Auth/ApiProvider.tsx'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -28,18 +31,32 @@ const router = createBrowserRouter([
       {
         path: 'rules',
         element: <RulesPage/>
-      },
-      {
-        path: 'login',
-        element: <LoginPage/>
       }
-    ]
+    ],
+  },
+  {
+    path: 'login',
+    element: <SignIn/>
   },
 
 ])
+const theme = createTheme({
+  palette: {
+      primary: {
+          main: '#F2C879',
+          light: '#FF9518',
+          dark: '#8A2A23'
+      }
+  }
+})
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <ApiProvider>
+      <ThemeProvider theme={theme}>
+      <RouterProvider router={router}/>
+      </ThemeProvider>
+    </ApiProvider>
   </React.StrictMode>
 )
