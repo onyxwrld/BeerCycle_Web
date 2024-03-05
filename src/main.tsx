@@ -4,13 +4,14 @@ import App from './App.tsx'
 import './index.css'
 import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import { Fooldal } from './Pages/MainPage.tsx'
-import { Menu } from './Pages/Menu.tsx'
+
 import { GalleryPage } from './Pages/GalleryPage.tsx'
 import { RulesPage } from './Pages/RulesPage.tsx'
 import SignIn from './Pages/Login.tsx'
 import { ApiProvider } from './Components/Auth/ApiProvider.tsx'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import SignUp from './Pages/Register.tsx'
+import Menu from './Pages/Menu.tsx'
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,10 @@ const router = createBrowserRouter([
 const theme = createTheme({
   palette:{
     primary:{
-      main: '#F2C879'
+      main: '#F2C879',
+    },
+    secondary: {
+      main: '#8A2A23'
     }
   }
 })

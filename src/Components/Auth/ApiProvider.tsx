@@ -2,35 +2,36 @@ import { createContext, useEffect, useState } from "react";
 import { User } from "../../Interfaces/User";
 
 export const ApiContext = createContext({
-    login: async (username:string,password:string):Promise<void> => {
+    login: async (username: string, password: string): Promise<void> => {
         throw new Error("nincs implementálva");
     },
-    logout: () => {},
+    logout: () => { },
     currentUser: null as (User | null),
-    register: async(username:string,passwod:string,email:string,last_name:string,first_name:string):Promise<void> =>{
+    register: async (username: string, passwod: string, email: string, last_name: string, first_name: string): Promise<void> => {
         throw new Error("nincs implementálva");
     }
 })
 
-interface Props{
+interface Props {
     children: React.ReactNode;
 }
 
-export function ApiProvider({children}:Props){
+export function ApiProvider({ children }: Props) {
     const [token, setToken] = useState('');
+    const [loeggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null as User | null)
-    const [ error, setError ] = useState('')
-    
-    useEffect(()=>{
-        const storedToken = localStorage.getItem('token');
-        if(storedToken){
-            setToken(storedToken);
-        }
-    },[])
+    const [error, setError] = useState('')
 
     useEffect(() => {
-        async function loadUserData(){
-            const response = await fetch('http://localhost:3000/user/me',{
+        const storedToken = localStorage.getItem('token');
+        if (storedToken) {
+            setToken(storedToken);
+        }
+    }, [])
+
+    useEffect(() => {
+        async function loadUserData() {
+            const response = await fetch('http://localhost:3000/user/me', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -50,13 +51,13 @@ export function ApiProvider({children}:Props){
             const userData = await response.json() as User;
             setUser(userData);
         }
-    if(token){
-        loadUserData();
-    }
-    else{
-        setUser(null);
-    }
-    },[token])
+        if (token) {
+            loadUserData();
+        }
+        else {
+            setUser(null);
+        }
+    }, [token])
 
     const apiObj = {
         currentUser: user,
@@ -72,16 +73,20 @@ export function ApiProvider({children}:Props){
                 },
                 body: JSON.stringify(loginData),
             });
-            
+
             const tokenObj = await response.json();
             setToken(tokenObj.token);
+            setLoggedIn(true);
             localStorage.setItem('token', tokenObj.token);
-           },
-           logout: () => {
+        },
+        isLoggedIn: () => {
+            return loeggedIn;
+        },
+        logout: () => {
             setToken('');
             localStorage.removeItem('token');
         },
-        register: async (username:string,password:string,email:string,last_name:string,first_name:string) => {
+        register: async (username: string, password: string, email: string, last_name: string, first_name: string) => {
             const registerData = {
                 username,
                 password,
@@ -97,7 +102,7 @@ export function ApiProvider({children}:Props){
                     },
                     body: JSON.stringify(registerData),
                 });
-            
+
                 if (!response.ok) {
                     throw new Error('Hiba történt a kérés során');
                 }
@@ -105,9 +110,9 @@ export function ApiProvider({children}:Props){
             } catch (error) {
                 console.error('Hiba történt a kérés során:', error);
             }
-        }   
-        };
-        return <ApiContext.Provider value={apiObj}>
-            {children}
-        </ApiContext.Provider>
+        }
+    };
+    return <ApiContext.Provider value={apiObj}>
+        {children}
+    </ApiContext.Provider>
 };
