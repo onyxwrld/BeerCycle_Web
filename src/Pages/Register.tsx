@@ -25,8 +25,11 @@ function Copyright(props: any) {
 }
 
 
-export default function SignIn() {
+export default function SignUp() {
     const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [pass, setPass] = useState('');
     const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
@@ -39,15 +42,26 @@ export default function SignIn() {
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPass(event.target.value);
     };
-
+    const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLastName(event.target.value);
+    };
+    const handlelFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFirstName(event.target.value);
+    };
+    const handleEmailAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
+    };
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        api.login(userName, pass)
+        api.register(userName, pass,email,firstName,lastName)
             .then(() => {
                 setLoginError('');
                 setUserName('');
                 setPass('');
-                navigate('/');
+                setEmail('');
+                setLastName('');
+                setFirstName('');
+                navigate('/login');
             })
             .catch((e: Error) => {
                 setLoginError(e.message);
@@ -56,7 +70,7 @@ export default function SignIn() {
 
     return (
         <Container component="main" sx={{
-            marginTop: 20
+            marginTop: 2
         }}>
 
             <Grid container spacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -66,7 +80,7 @@ export default function SignIn() {
                 <Grid item xs={4}>
                     <Box>
                         <Typography component="h1" variant="h5">
-                            Bejelentkezés
+                            Regisztáció
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                             <TextField
@@ -80,6 +94,42 @@ export default function SignIn() {
                                 autoFocus
                                 value={userName}
                                 onChange={handleUsernameChange}
+                            />
+                             <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email cím"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                value={email}
+                                onChange={handleEmailAddress}
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="vezeteknev"
+                                label="Vezetéknév"
+                                name="vezeteknev"
+                                autoComplete="vezeteknev"
+                                autoFocus
+                                value={lastName}
+                                onChange={handleLastNameChange}
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="keresztnev"
+                                label="Keresztnév"
+                                name="keresztnev"
+                                autoComplete="keresztnev"
+                                autoFocus
+                                value={firstName}
+                                onChange={handlelFirstNameChange}
                             />
                             <TextField
                                 margin="normal"
@@ -99,15 +149,8 @@ export default function SignIn() {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Bejelentkezés
+                                Regisztráció
                             </Button>
-                            <Grid container>
-                                <Grid item>
-                                    <Link href="register" variant="body2">
-                                        {"Nincs fiókja? Regisztráljon"}
-                                    </Link>
-                                </Grid>
-                            </Grid>
                         </Box>
                     </Box>
                 </Grid>

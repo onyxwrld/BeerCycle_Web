@@ -6,7 +6,10 @@ export const ApiContext = createContext({
         throw new Error("nincs implementálva");
     },
     logout: () => {},
-    currentUser: null as (User | null)
+    currentUser: null as (User | null),
+    register: async(username:string,passwod:string,email:string,last_name:string,first_name:string):Promise<void> =>{
+        throw new Error("nincs implementálva");
+    }
 })
 
 interface Props{
@@ -77,6 +80,31 @@ export function ApiProvider({children}:Props){
            logout: () => {
             setToken('');
             localStorage.removeItem('token');
+        },
+        register: async (username:string,password:string,email:string,last_name:string,first_name:string) => {
+            const registerData = {
+                username,
+                password,
+                email,
+                last_name,
+                first_name
+            };
+            try {
+                const response = await fetch('http://localhost:3000/user/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(registerData),
+                });
+            
+                if (!response.ok) {
+                    throw new Error('Hiba történt a kérés során');
+                }
+                const responseData = await response.json();
+            } catch (error) {
+                console.error('Hiba történt a kérés során:', error);
+            }
         }   
         };
         return <ApiContext.Provider value={apiObj}>

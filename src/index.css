@@ -2,7 +2,7 @@
 
 body {
   color: rgb(25, 25, 50);
-  background-color: rgb(27, 29, 50);
+  background-color: rgb(255, 255, 255);
   padding: 0;
   margin: 0;
 }
@@ -22,14 +22,17 @@ body {
   display: flex;
   margin-top: 5vw;
 }
-
+.review-section{
+  height: 500px;
+  background-color: rgb(128, 0, 255);
+}
 .hero-section {
   background-color: rgb(15, 13, 17);
 }
 
 .second-section {
   background-color: rgb(255, 255, 255);
-  height: 500px;
+  height: 600px;
 }
 .logo {
   width: 8%;padding: 0;margin: 0;
@@ -112,4 +115,12 @@ a{
 .svg{
   transform: (-50%,-50%);
   z-index: -1;
+}
+
+.blob:hover {
+  filter: drop-shadow(0 0 10px #00ff00); 
+}
+
+footer{
+  background-color: grey;
 }

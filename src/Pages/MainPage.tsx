@@ -2,7 +2,9 @@ import Card from "@mui/material/Card"
 import { AnimButton } from "../Components/anim_button"
 import { Button, CardActions, CardContent, CardHeader, CardMedia, Container, Grid, IconButton, Typography } from "@mui/material"
 import SportsBarIcon from '@mui/icons-material/SportsBar';
+import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import { Link } from "react-router-dom";
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 export function Fooldal() {
     return <div className="container">
@@ -18,82 +20,76 @@ export function Fooldal() {
                 </svg>
             </div>
             <div className="bulletPointContainer">
-                <div>
+                <div style={{ marginTop: '50px' }}>
                     <Container>
-                    <Grid  container spacing={1} sx={{ }}>
-                    <Card sx={{ maxWidth: 345,mx: 2 }}>
-                        <CardMedia
-                            sx={{ height: 140 }}
-                            image=""
-                            title="Étlap"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Fogyassz korlátok nélkül
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Az általad kiválaszott biciglire korátlan mennyiségű ételt és italt szállitunk izlésed szerint!
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Link to="menu">
-                                <Button size="small">Válogass étlapunkból</Button>
-                            </Link>
+                        <Grid container spacing={1}>
+                            <Card sx={{ maxWidth: 345, mx: 2 }}>
 
-                        </CardActions>
-                    </Card>
-                    <Card sx={{ maxWidth: 345,mx: 2 }}>
-                        <CardMedia
-                            sx={{ height: 140 }}
-                            image=""
-                            title="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Lizard
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">Share</Button>
-                            <Button size="small">Learn More</Button>
-                        </CardActions>
-                    </Card>
-                    <Card sx={{ maxWidth: 345,mx: 2 }}>
-                        <CardMedia
-                            sx={{ height: 140 }}
-                            image=""
-                            title="green iguana"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Lizard
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">Share</Button>
-                            <Button size="small">Learn More</Button>
-                        </CardActions>
-                    </Card>
-                    </Grid>
+                                <CardMedia
+                                    sx={{ height: 140 }}
+                                    image="src/Images/ham.png"
+                                    title="Étlap"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        Fogyassz korlátok nélkül<IconButton><SportsBarIcon></SportsBarIcon></IconButton>
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Az általad kiválaszott biciglire korátlan mennyiségű ételt és italt szállitunk izlésed szerint!
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Link to="menu">
+                                        <Button size="small">Válogass étlapunkból</Button>
+                                    </Link>
+
+                                </CardActions>
+                            </Card>
+                            <Card sx={{ maxWidth: 345, mx: 2 }}>
+
+                                <CardMedia
+                                    sx={{ height: 140 }}
+                                    title="Biciglik"
+                                    image="src/Images/bicycle.png"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        Több méretű bicikli<IconButton>
+                                            <DirectionsBikeIcon></DirectionsBikeIcon>
+                                        </IconButton>
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Válassz személyre szabott, saját ízlésednek megfelelő biciklit.
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Link to='rolunk'><Button size="small">Fedezd fel BeerCycle-t</Button></Link>
+                                </CardActions>
+                            </Card>
+                            <Card sx={{ maxWidth: 345, mx: 2 }}>
+                                <CardMedia
+                                    sx={{ height: 140 }}
+                                    image="src/Images/beer1.png"
+                                    title="galleryPromo"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        Látogass el gallériánkba<IconButton><CameraAltIcon></CameraAltIcon></IconButton>
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Több tucat vendégünk készitett élmény fotót nagyszerű menetükről.
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Link to="gallery"> <Button size="small">Irány a galléria</Button></Link>
+                                </CardActions>
+                            </Card>
+                        </Grid>
                     </Container>
                 </div>
             </div>
         </div>
         <div className="review-section">
-            <h2>
-                Visszajelzések
-            </h2>
-            <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, odit error aliquid velit impedit soluta exercitationem eaque repudiandae dolorem, consequatur optio possimus iusto harum cupiditate minus nihil hic distinctio facere!
-            </p>
         </div>
         <div className="mobil-section">
             <h2>
