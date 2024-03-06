@@ -30,24 +30,28 @@ export function Navbar() {
     return <AppBar position="fixed" >
         <Toolbar>
             <Typography>
-                <img src="src/Images/logo2.png" className="logo" />
+
+                <IconButton>
+                    <Link to='/'><img src="src/Images/logo2.png" className="logo" /></Link>
+                </IconButton>
+
             </Typography>
             <Box>
                 <Button><Link to="gallery">Galléria</Link></Button>
                 <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
                 <Button color="inherit"><Link to="menu">Étlap</Link></Button>
                 <Button color="inherit">
-                <LoggedIn>
-                    <IconButton>
-                        <AccountCircleIcon />
-                    </IconButton>
-                    <IconButton>
-                        <ShoppingCartIcon />
-                    </IconButton>
-                </LoggedIn>
-                <Guest>
-                    <NavLink to="login" id="loginButton">Belépés</NavLink>
-                </Guest>
+                    <LoggedIn>
+                        <IconButton>
+                            <AccountCircleIcon />
+                        </IconButton>
+                        <IconButton>
+                            <ShoppingCartIcon />
+                        </IconButton>
+                    </LoggedIn>
+                    <Guest>
+                        <NavLink to="login" id="loginButton">Belépés</NavLink>
+                    </Guest>
                 </Button>
             </Box>
         </Toolbar>
