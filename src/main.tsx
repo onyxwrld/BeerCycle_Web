@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import { Fooldal } from './Pages/MainPage.tsx'
 
 import { GalleryPage } from './Pages/GalleryPage.tsx'
@@ -12,6 +11,7 @@ import { ApiProvider } from './Components/Auth/ApiProvider.tsx'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import SignUp from './Pages/Register.tsx'
 import Menu from './Pages/Menu.tsx'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'menu',
-        element: <Menu />
+        element: <Menu/>
       },
       {
         path: 'gallery',

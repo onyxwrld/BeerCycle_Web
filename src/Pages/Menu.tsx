@@ -1,7 +1,15 @@
-import { Padding } from "@mui/icons-material";
-import { Box, Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
+
 import { useEffect, useState } from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 
 interface Menu {
     name: string;
@@ -9,9 +17,20 @@ interface Menu {
     price: number;
 }
 
+
+
 export default function Menu() {
     const [food, setFood] = useState([] as Menu[]);
     const [types, setType] = useState<string[]>([]);
+    const [selectedFoods, setSelectedFoods] = useState<Menu[]>([]);
+    const handleChange = (event: SelectChangeEvent<typeof types>) => {
+        const {
+            target: { value },
+        } = event;
+        setType(
+            typeof value === 'string' ? value.split(',') : value,
+        );
+    }
 
     useEffect(() => {
         async function LoadData() {
@@ -26,46 +45,56 @@ export default function Menu() {
             }
         }
         LoadData();
+       
+    }, [])
+    useEffect(() => {
+        if (types.length > 0) {
+            const filteredFoods = food.filter(item => types.includes(item.type));
+            setSelectedFoods(filteredFoods);
+        } else {
+            setSelectedFoods(food);
+        }
         const uniqueTypes = Array.from(new Set(food.map(item => item.type)));
         setType(uniqueTypes);
-    }, [])
-
-    const handleChange = (event: SelectChangeEvent<typeof types>) => {
-        const {
-            target: { value },
-        } = event;
-        setType(
-            typeof value === 'string' ? value.split(',') : value,
-        );
-    }
+    }, [types])
 
     return (
         <>
-            <FormControl sx={{ mt: 15, width: "10vw" }}>
-                <InputLabel id="demo-simple-select-label">Kategória</InputLabel>
-                <Select
-                    labelId="lable"
-                    id="asd"
-                    value={types}
-                    onChange={handleChange}
-                >
-                    {types.map((type, index) => (
-                        <MenuItem
-                            key={index}
-                            value={type}
+            <Container fixed sx={{ mt: 15,mb:100 }}>
+                <Grid container spacing={{sx:3}}>
+                    <Grid item xs={6}>
+                    <FormControl sx={{ width: "10vw" }}>
+                        <InputLabel id="demo-simple-select-label">Kategória</InputLabel>
+                        <Select
+                            labelId="lable"
+                            id="asd"
+                            value={types}
+                            onChange={handleChange}
                         >
-                            {type}
-                        </MenuItem>
+                            
+                            {
+                                
+                            types.map((type, index) => (
+                                <MenuItem
+                                    key={index}
+                                    value={type}
+                                >
+                                    {type}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                    <Typography>
+                        Válasszon sokszín kinálatunkból igényeinek megfelelően! Majd kattintson a termék csomag ikonjára, hogy terméke a kosárba kerülhessen.
+                    </Typography>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={{ xs: 3, md: 4 }} >
 
-                    ))}
-                </Select>
-            </FormControl>
-
-            <Container fixed sx={{ mt: 15 }}>
-                <Grid container spacing={{ xs: 3, md: 4 }}>
-                    
                     {
-                        food.map((x, index) => (
+                        selectedFoods.map((x, index) => (
                             <Box sx={{
                                 borderRadius: 2,
                                 boxShadow: 3,
@@ -76,7 +105,7 @@ export default function Menu() {
                             }} flexGrow={1}>
                                 <Grid >
                                     <Grid>
-                                        <Typography sx={{ fontStyle: 'oblique',top:0, left:0 }}>
+                                        <Typography sx={{ fontStyle: 'oblique', top: 0, left: 0 }}>
                                             {
                                                 x.name
                                             }

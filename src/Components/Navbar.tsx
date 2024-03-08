@@ -8,52 +8,54 @@ import { Guest, LoggedIn } from "./Auth/loginAuth";
 import { IconButton } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ApiContext } from "./Auth/ApiProvider";
+import DrawerSide  from "./Drawer";
+import BasketDrawer from "./BasketDrawer";
 
 export function Navbar() {
-    /*const [fix, setFix] = useState(false);
 
-    function setFixed() {
-        if (window.scrollY >= 300) {
-            setFix(true)
-        }
-        else {
-            setFix(false)
-        }
-         <Button color="inherit"><Link to="gallery">Galléria</Link></Button>
-                    <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
-                    <Button color="inherit"><Link to="menu">Étlap</Link></Button>
-                    <Button color="inherit" id="loginButton"><Link to="menu">Étlap</Link></Button>
-        window.addEventListener("scroll", setFixed);
-    }*/
-    return <AppBar position="fixed" >
+    
+    const [openProfile,setOpen] = useState(false);
+    const [openBasket,setOpenBasket] = useState(false);
+    function toggleProfile(){
+        return setOpen(!openProfile);
+        
+    }
+    function toggleBasket(){
+        return setOpenBasket(!openBasket);
+        
+    }
+    return  <>
+    <AppBar position="fixed" >
         <Toolbar>
-            <Typography>
-
-                <IconButton>
+            <Typography sx={{flexGrow:1}}>
                     <Link to='/'><img src="src/Images/logo2.png" className="logo" /></Link>
-                </IconButton>
-
             </Typography>
             <Box>
                 <Button><Link to="gallery">Galléria</Link></Button>
                 <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
                 <Button color="inherit"><Link to="menu">Étlap</Link></Button>
-                <Button color="inherit">
-                    <LoggedIn>
-                        <IconButton>
-                            <AccountCircleIcon />
+                <LoggedIn>
+                        <IconButton onClick={toggleProfile}>
+                        <DrawerSide isOpen={openProfile} onClose={()=>setOpen(false)} />
+                            <AccountCircleIcon/>
                         </IconButton>
-                        <IconButton>
+                        <IconButton onClick={toggleBasket} >
+                            <BasketDrawer isOpen={openBasket} onClose={()=>setOpenBasket(false)}/>
                             <ShoppingCartIcon />
                         </IconButton>
                     </LoggedIn>
+                <Button color="inherit">
                     <Guest>
                         <NavLink to="login" id="loginButton">Belépés</NavLink>
                     </Guest>
                 </Button>
+               
             </Box>
         </Toolbar>
+   
     </AppBar>
+         
+    </>
 }

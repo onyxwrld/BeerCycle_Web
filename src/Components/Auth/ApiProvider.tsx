@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { User } from "../../Interfaces/User";
+import { useNavigate } from 'react-router-dom';
 
 export const ApiContext = createContext({
     login: async (username: string, password: string): Promise<void> => {
@@ -9,8 +10,9 @@ export const ApiContext = createContext({
     currentUser: null as (User | null),
     register: async (username: string, passwod: string, email: string, last_name: string, first_name: string): Promise<void> => {
         throw new Error("nincs implementálva");
-    }
-})
+    },
+    drawerIsOpen: (isOpen:boolean) =>{
+    }})
 
 interface Props {
     children: React.ReactNode;
@@ -85,6 +87,7 @@ export function ApiProvider({ children }: Props) {
         logout: () => {
             setToken('');
             localStorage.removeItem('token');
+            window.location.reload();
         },
         register: async (username: string, password: string, email: string, last_name: string, first_name: string) => {
             const registerData = {
@@ -110,6 +113,10 @@ export function ApiProvider({ children }: Props) {
             } catch (error) {
                 console.error('Hiba történt a kérés során:', error);
             }
+        },
+        drawerIsOpen: (isOpen:boolean) => {
+            const [open,setOpen] = useState(false);
+                return setOpen(!open);
         }
     };
     return <ApiContext.Provider value={apiObj}>
