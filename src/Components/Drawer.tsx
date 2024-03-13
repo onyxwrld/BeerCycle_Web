@@ -6,6 +6,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { ApiContext } from "./Auth/ApiProvider";
+import { Link } from "react-router-dom";
 
 
 export default function DrawerSide({isOpen, onClose}:  
@@ -17,6 +18,7 @@ export default function DrawerSide({isOpen, onClose}:
         <Drawer anchor="right" open={isOpen} onClose={onClose} >
             <List>
                 <ListItem>
+                    <Link to='/profile'>
                     <ListItemButton>
                         <ListItemIcon>
                             <AccountCircleIcon/>
@@ -25,8 +27,10 @@ export default function DrawerSide({isOpen, onClose}:
                             Profilom
                         </ListItemText>
                         </ListItemButton>
+                        </Link>
                 </ListItem>
                 <ListItem>
+                    <Link to='/history'>
                     <ListItemButton>
                         <ListItemIcon>
                             <HistoryIcon/>
@@ -35,6 +39,7 @@ export default function DrawerSide({isOpen, onClose}:
                             Előzmények
                         </ListItemText>
                         </ListItemButton>
+                        </Link>
                 </ListItem>
                 <ListItem>
                     <ListItemButton onClick={api.logout}>

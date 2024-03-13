@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { User } from "../../Interfaces/User";
 import { useNavigate } from 'react-router-dom';
+import { Review } from "../../Interfaces/Review";
 
 export const ApiContext = createContext({
     login: async (username: string, password: string): Promise<void> => {
@@ -11,8 +12,11 @@ export const ApiContext = createContext({
     register: async (username: string, passwod: string, email: string, last_name: string, first_name: string): Promise<void> => {
         throw new Error("nincs implementálva");
     },
-    drawerIsOpen: (isOpen:boolean) =>{
-    }})
+    userReview: async(): Promise<Review[] | undefined> => {
+        throw new Error("nincs implementálva");
+    },
+
+})
 
 interface Props {
     children: React.ReactNode;
@@ -21,8 +25,8 @@ interface Props {
 export function ApiProvider({ children }: Props) {
     const [token, setToken] = useState('');
     const [loeggedIn, setLoggedIn] = useState(false);
-    const [user, setUser] = useState(null as User | null)
-    const [error, setError] = useState('')
+    const [user, setUser] = useState(null as User | null);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
@@ -53,12 +57,14 @@ export function ApiProvider({ children }: Props) {
             const userData = await response.json() as User;
             setUser(userData);
         }
-        if (token) {
+        if (token){
+            
             loadUserData();
         }
         else {
             setUser(null);
         }
+       
     }, [token])
 
     const apiObj = {
@@ -88,6 +94,7 @@ export function ApiProvider({ children }: Props) {
             setToken('');
             localStorage.removeItem('token');
             window.location.reload();
+            
         },
         register: async (username: string, password: string, email: string, last_name: string, first_name: string) => {
             const registerData = {
@@ -114,10 +121,26 @@ export function ApiProvider({ children }: Props) {
                 console.error('Hiba történt a kérés során:', error);
             }
         },
-        drawerIsOpen: (isOpen:boolean) => {
-            const [open,setOpen] = useState(false);
-                return setOpen(!open);
+        userReview: async () =>{
+           try{ const response = await fetch(`http://localhost:3000/review/userid/${user?.id}`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  },
+            })
+            if (!response.ok) {
+                throw new Error('Hiba történt a kérés során');
+            } 
+
+            const responseData = await response.json() as Review[];
+            return responseData;
         }
+        catch(error) {
+            console.error('Hiba történt a kérés során:', error);
+        }
+       
+        },
     };
     return <ApiContext.Provider value={apiObj}>
         {children}

@@ -12,6 +12,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import SignUp from './Pages/Register.tsx'
 import Menu from './Pages/Menu.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { History, MyReviews, ProfilePage, User_data } from './Pages/ProfilePage.tsx'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'menu',
-        element: <Menu/>
+        element: <Menu />
       },
       {
         path: 'gallery',
@@ -32,7 +33,9 @@ const router = createBrowserRouter([
       },
       {
         path: 'rules',
-        element: <RulesPage />
+        element:
+        <RulesPage />
+
       }
     ],
   },
@@ -44,10 +47,28 @@ const router = createBrowserRouter([
     path: 'register',
     element: <SignUp />
   },
+  {
+    path: 'profile',
+    element: <ProfilePage />,
+    children: [
+      {
+        path:'user_data',
+        element: <User_data/>
+      },
+      {
+        path:'history',
+        element:<History/>
+      },
+      {
+        path:'my_reviews',
+        element:<MyReviews/>
+      }
+    ]
+  }
 ])
 const theme = createTheme({
-  palette:{
-    primary:{
+  palette: {
+    primary: {
       main: '#F2C879',
     },
     secondary: {
