@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
+import { MenuContext } from "../Components/Auth/MenuProvider";
 
 interface Menu {
     name: string;
@@ -23,6 +24,8 @@ export default function Menu() {
     const [food, setFood] = useState([] as Menu[]);
     const [types, setType] = useState<string[]>([]);
     const [selectedFoods, setSelectedFoods] = useState<Menu[]>([]);
+    const api = useContext(MenuContext);
+
     const handleChange = (event: SelectChangeEvent<typeof types>) => {
         const {
             target: { value },
@@ -41,7 +44,6 @@ export default function Menu() {
             }
             else {
                 const errorOsbj = await response.json();
-
             }
         }
         LoadData();
@@ -113,8 +115,8 @@ export default function Menu() {
                                         {
                                             x.price + ' Ft'
                                         }
-                                        <IconButton>
-                                            <ShoppingBagIcon></ShoppingBagIcon>
+                                        <IconButton onClick={()=>api.basketFeltolt(x)}>
+                                            <ShoppingBagIcon/>
                                         </IconButton>
 
                                     </Grid>

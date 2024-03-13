@@ -13,6 +13,7 @@ import SignUp from './Pages/Register.tsx'
 import Menu from './Pages/Menu.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { History, MyReviews, ProfilePage, User_data } from './Pages/ProfilePage.tsx'
+import { MenuProvider } from './Components/Auth/MenuProvider.tsx'
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: 'rules',
         element:
-        <RulesPage />
+          <RulesPage />
 
       }
     ],
@@ -52,16 +53,16 @@ const router = createBrowserRouter([
     element: <ProfilePage />,
     children: [
       {
-        path:'user_data',
-        element: <User_data/>
+        path: 'user_data',
+        element: <User_data />
       },
       {
-        path:'history',
-        element:<History/>
+        path: 'history',
+        element: <History />
       },
       {
-        path:'my_reviews',
-        element:<MyReviews/>
+        path: 'my_reviews',
+        element: <MyReviews />
       }
     ]
   }
@@ -81,7 +82,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <ApiProvider>
-        <RouterProvider router={router} />
+        <MenuProvider>
+          <RouterProvider router={router} />
+        </MenuProvider>
       </ApiProvider>
     </ThemeProvider>
   </React.StrictMode>

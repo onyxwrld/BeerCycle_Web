@@ -19,6 +19,7 @@ export function ReviewComponent({ rate, content, username, id,isMainPage,onDelet
             minHeight={100}
             width={200}
             sx={{
+                backgroundColor: 'white',
                 boxShadow: 2,
                 borderRadius: 3,
                 m: 2

@@ -193,7 +193,6 @@ export function ReviewList() {
         setReviews(responseData);    
     }  
     useEffect(()=>{
-
         name();
     },[])
     const filteredReviews = review?.filter(item => item.rate > 3).slice(0, 3);

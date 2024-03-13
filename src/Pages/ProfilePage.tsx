@@ -14,9 +14,12 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { ReviewComponent } from "../Components/ReviewComp";
 import { Review } from "../Interfaces/Review";
 
-export function ProfilePage() {
+export function navigateTo({to}:{to:string})
+{
     const navigate = useNavigate();
-
+    return navigate(to);
+}
+export function ProfilePage() {
     return <>
         <LoggedIn>
             <Navbar />
@@ -71,7 +74,7 @@ export function ProfilePage() {
             </Box>
         </LoggedIn>
         <Guest>
-            <SignIn />
+            <SignIn/>
         </Guest>
     </>
 }

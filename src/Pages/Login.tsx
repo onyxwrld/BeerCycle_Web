@@ -31,7 +31,6 @@ export default function SignIn() {
     const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
     const api = useContext(ApiContext);
-
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserName(event.target.value);
     };
