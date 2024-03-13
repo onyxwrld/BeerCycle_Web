@@ -33,9 +33,9 @@ export function Navbar() {
                     <Link to='/'><img src="src/Images/logo2.png" className="logo" /></Link>
             </Typography>
             <Box>
-                <Button><Link to="gallery">Galléria</Link></Button>
-                <Button color="inherit"><Link to="rules">Szabályzat</Link></Button>
-                <Button color="inherit"><Link to="menu">Étlap</Link></Button>
+                <Button><Link to="/gallery">Galléria</Link></Button>
+                <Button color="inherit"><Link to="/rules">Szabályzat</Link></Button>
+                <Button color="inherit"><Link to="/menu">Étlap</Link></Button>
                 <LoggedIn>
                         <IconButton onClick={toggleProfile}>
                         <DrawerSide isOpen={openProfile} onClose={()=>setOpen(false)} />

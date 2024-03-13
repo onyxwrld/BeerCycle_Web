@@ -2,32 +2,18 @@ import { Box, Grid, IconButton, Rating, Typography } from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { DialogComp } from "./DialogComp";
 import { TurnLeft } from "@mui/icons-material";
+import { useState } from "react";
 
-async function deleteComment(id: number) {
-    <DialogComp open={true}/>
-    /*
-    const token = localStorage.getItem('token');
-    try {
-        const response = await fetch(`http://localhost:3000/review/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        });
 
-        if (response.ok) {
-            console.log('ok')
-        }
-        const responseData = await response.json();
-    } catch (error) {
-        console.error('Hiba történt a kérés során:', error);
-    }
-    window.location.reload();
-    */
-}
-export function ReviewComponent({ rate, content, username, id,isMainPage }: { rate: number, content: string, username: string, id: number,isMainPage:boolean }) {
-    return (
+export function ReviewComponent({ rate, content, username, id,isMainPage,onDelete }: { rate: number, content: string, username: string, id: number,isMainPage:boolean,onDelete: ()=>void }) {
+    const [open,setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    return <>
+        <DialogComp open={open} id={id} onClose={handleClose} onDelete={onDelete}/>
 
         <Box
             minHeight={100}
@@ -52,7 +38,7 @@ export function ReviewComponent({ rate, content, username, id,isMainPage }: { ra
                     {
                         (!isMainPage)
                             ? <Grid item>
-                                <IconButton onClick={() => deleteComment(id)}>
+                                <IconButton onClick={() => setOpen(true)}>
                                 <DeleteOutlineIcon />
                                 </IconButton>
                             </Grid>
@@ -66,5 +52,5 @@ export function ReviewComponent({ rate, content, username, id,isMainPage }: { ra
                 </Grid>
             </Grid>
         </Box>
-    );
+    </>;
 }

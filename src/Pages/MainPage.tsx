@@ -181,17 +181,19 @@ export function Fooldal() {
 }
 export function ReviewList() {
     const [review, setReviews] = useState<Review[] | undefined>();
+
+    async function name() {
+        const response = await fetch('http://localhost:3000/review', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const responseData = await response.json() as Review[];
+        setReviews(responseData);    
+    }  
     useEffect(()=>{
-        async function name() {
-            const response = await fetch('http://localhost:3000/review', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const responseData = await response.json() as Review[];
-            setReviews(responseData);    
-        }  
+
         name();
     },[])
     const filteredReviews = review?.filter(item => item.rate > 3).slice(0, 3);
@@ -202,7 +204,7 @@ export function ReviewList() {
         <Grid>
             {
                 filteredReviews && filteredReviews.map((item, index) => {
-                    return <ReviewComponent content={item.content} key={index} isMainPage={true} id={item.id} username={item.user.username} rate={item.rate} />;
+                    return <ReviewComponent content={item.content} key={index} isMainPage={true} id={item.id} username={item.user.username} rate={item.rate} onDelete={name} />;
                 })
             }
         </Grid>

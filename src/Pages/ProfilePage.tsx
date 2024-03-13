@@ -2,7 +2,7 @@ import Box from "@mui/material/Box"
 import { Navbar } from "../Components/Navbar"
 import { useContext, useEffect, useState } from "react"
 import { ApiContext } from "../Components/Auth/ApiProvider"
-import { Drawer, Grid, List, ListItemButton, ListItemIcon, ListItemText, TextField, Toolbar, Typography } from "@mui/material";
+import { Button, Drawer, Grid, List, ListItemButton, ListItemIcon, ListItemText, Rating, TextField, Toolbar, Typography } from "@mui/material";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Guest, LoggedIn } from "../Components/Auth/loginAuth";
 import SignIn from "./Login";
@@ -25,14 +25,14 @@ export function ProfilePage() {
                     <Grid item spacing={4}>
                         <List>
                             <Link to='user_data'>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AccountCircleIcon />
-                                </ListItemIcon>
-                                <ListItemText>
-                                    Felhasználói adatok
-                                </ListItemText>
-                            </ListItemButton>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <AccountCircleIcon />
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        Felhasználói adatok
+                                    </ListItemText>
+                                </ListItemButton>
                             </Link>
                             <Link to='history'>
                                 <ListItemButton>
@@ -91,19 +91,79 @@ export function History() {
     return <p>history</p>
 }
 
-export function MyReviews(){
+export function MyReviews() {
     const api = useContext(ApiContext);
-    const [review,setReviews] = useState<Review[] | undefined>();
-    useEffect(() => {
+    const [rate,setRate] = useState<number|null>(2);
+    const [review, setReviews] = useState<Review[] | undefined>();
+    const [content,setContent] = useState<string|null>();
+
+    function load() {
         api.userReview().then(reviews => setReviews(reviews))
-    }, []);
-    <Box>
-        <Textarea placeholder="Placeholder" minRows={2} />
-    </Box>
+    }
+
+    useEffect(() => {
+        load();
+    }, [review]);
+
+    const handleChange = () => {
+        
+        const token = localStorage.getItem('token');
+        const bodyReview = {
+            rate: rate,
+            content: content       
+        }
+        try{
+            async function post() {
+                const response = await fetch('http://localhost:3000/review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(bodyReview)
+                })
+                if(!response.ok)
+                {
+                    console.log(response);
+                }
+                else{
+                    setRate(2);
+                    setContent('');
+                }
+            }
+            post();
+        }
+        catch{
+
+        }
+       
+    }
+
     return <>
-    {review && review.map((rev, index) => (
-                    <ReviewComponent key={index} rate={rev.rate} content={rev.content} username={rev.user.username} id={rev.id} isMainPage={false}/>
-            ))}
+        <Grid>
+            <Grid>
+                <Rating
+                    name="simple-controlled"
+                    value={rate}
+                    onChange={(event, newValue) => {
+                        setRate(newValue);
+                    }}
+                />
+                <TextField id="outlined-basic" label="Vélemény" variant="outlined" value={content} onChange={(e) => {
+                    setContent(e.currentTarget.value)
+                }} />
+                <Button id="loginButton" onClick={()=>{
+                    handleChange(),
+                    load()
+                }}>Küldés </Button>
+            </Grid>
+            <Grid >
+
+                {review && review.map((rev, index) => (
+                    <ReviewComponent key={index} rate={rev.rate} content={rev.content} username={rev.user.username} id={rev.id} isMainPage={false} onDelete={load} />
+                ))}
+            </Grid>
+        </Grid>
     </>
-    
+
 }

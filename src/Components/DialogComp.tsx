@@ -6,17 +6,34 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 
-export function DialogComp({ open }: { open: boolean }) {
-    const [isOpen, setOpen] = useState(open);
+export function DialogComp({ open,id, onClose,onDelete }: { open: boolean,id:number, onClose: ()=> void , onDelete: ()=> void}) {
 
-    const handleClose = () => {
-        setOpen(false);
-    };
 
+    async function deleteComment(id:number){
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`http://localhost:3000/review/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            console.log('ok')
+        }
+        const responseData = await response.json();
+        onDelete();
+        onClose();
+    } catch (error) {
+        console.error('Hiba történt a kérés során:', error);
+    }
+    }
     return (
         <Dialog
-            open={isOpen} 
-            onClose={handleClose}
+            open={open} 
+            onClose={onClose}
         >
             <DialogTitle>{"Törlés"}</DialogTitle>
             <DialogContent>
@@ -25,8 +42,8 @@ export function DialogComp({ open }: { open: boolean }) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>Nem</Button>
-                <Button onClick={handleClose}>Igen</Button>
+                <Button onClick={onClose}>Nem</Button>
+                <Button onClick={()=> deleteComment(id)}>Igen</Button>
             </DialogActions>
         </Dialog>
     );
