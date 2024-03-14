@@ -12,19 +12,13 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { MenuContext } from "../Components/Auth/MenuProvider";
 
-interface Menu {
-    name: string;
-    type: string;
-    price: number;
-}
-
-
 
 export default function Menu() {
     const [food, setFood] = useState([] as Menu[]);
     const [types, setType] = useState<string[]>([]);
     const [selectedFoods, setSelectedFoods] = useState<Menu[]>([]);
     const api = useContext(MenuContext);
+    let menu = api.menuListaKiir();
 
     const handleChange = (event: SelectChangeEvent<typeof types>) => {
         const {
@@ -34,6 +28,8 @@ export default function Menu() {
             typeof value === 'string' ? value.split(',') : value,
         );
     }
+
+
 
     useEffect(() => {
         async function LoadData() {
@@ -97,7 +93,7 @@ export default function Menu() {
 
                     {
                         selectedFoods.map((x, index) => (
-                            <Box sx={{
+                            <Box key={index} sx={{
                                 borderRadius: 2,
                                 boxShadow: 3,
                                 p: 2,
@@ -115,10 +111,9 @@ export default function Menu() {
                                         {
                                             x.price + ' Ft'
                                         }
-                                        <IconButton onClick={()=>api.basketFeltolt(x)}>
+                                        <IconButton onClick={()=> api.basketFeltolt(x)}>
                                             <ShoppingBagIcon/>
                                         </IconButton>
-
                                     </Grid>
                                 </Grid>
                             </Box>
