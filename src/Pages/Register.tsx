@@ -75,7 +75,7 @@ export default function SignUp() {
 
             <Grid container spacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={8}>
-                    <img src='src/Images/cat.png'/>
+                <img src="/src/Images/SVG/Untitled.svg" alt="" style={{height:500,width:1000}}/>
                 </Grid>
                 <Grid item xs={4}>
                     <Box>

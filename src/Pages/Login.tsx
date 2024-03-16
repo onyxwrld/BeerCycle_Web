@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { CssBaseline } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -10,6 +9,7 @@ import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { ApiContext } from '../Components/Auth/ApiProvider';
+import MySvg from '../Images/SVG/Untitled.svg';
 
 function Copyright(props: any) {
     return (
@@ -60,7 +60,9 @@ export default function SignIn() {
 
             <Grid container spacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={8}>
-                    <img src='src/Images/cat.png'/>
+                    <div>
+                    <object type="image/svg+xml" data={MySvg}>svg-animation</object>
+                    </div>
                 </Grid>
                 <Grid item xs={4}>
                     <Box>

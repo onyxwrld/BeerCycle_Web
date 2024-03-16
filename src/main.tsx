@@ -14,11 +14,12 @@ import Menu from './Pages/Menu.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { History, MyReviews, ProfilePage, User_data } from './Pages/ProfilePage.tsx'
 import { MenuProvider } from './Components/Auth/MenuProvider.tsx'
+import { LoadingPage } from './Pages/LoadingPage.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <LoadingPage />,
     children: [
       {
         path: '',

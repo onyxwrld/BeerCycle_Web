@@ -1,6 +1,8 @@
 export function RulesPage()
 {
     return(
-        <h1>Rules Page</h1>
+        <object>
+            <img src="/src/Images/SVG/beerCycleSVG.svg" alt="" />
+        </object>
     )
 }
