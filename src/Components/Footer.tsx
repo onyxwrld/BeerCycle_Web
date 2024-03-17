@@ -90,7 +90,7 @@ export function Footer()
         return <p>Loading...</p>
     }
     return(
-        <footer>
+          <footer>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Typography variant="h6" align="center" gutterBottom>
@@ -112,6 +112,7 @@ export function Footer()
             </Typography>
           </Grid>
         </Grid>
-      </footer>
+        </footer>
+      
     )
 }

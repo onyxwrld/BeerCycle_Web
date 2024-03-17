@@ -21,11 +21,9 @@ function App() {
 
  return (
  <>
- <div id='fullPage'>
   <Navbar/>
    <Outlet/>
    <Footer/>
-   </div>
    </>
   )
  }

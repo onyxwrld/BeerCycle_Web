@@ -25,20 +25,22 @@ body {
   margin-bottom: 5vw;
 }
 .review-section{
-  background-color: rgb(88, 36, 36);
+  background-color: rgb(255, 255, 255);
 }
 .hero-section {
   background-color: rgb(163, 72, 255);
 }
 
 .second-section {
-  background-color: rgb(255, 52, 52);
-  height: 600px;
+  background-color: rgb(255, 255, 255);
 }
 .logo {
   width: 8%;padding: 0;margin: 0;
 }
+.shape object {
 
+  margin-top: 16vw;
+}
 .shape {
   position: absolute;
   top: 0;
@@ -56,7 +58,7 @@ body {
 }
 
 .shape .shape-fill {
-  fill: #B0ACA1;
+  fill: #fdbd0c;
 }
 
 p{
@@ -111,15 +113,13 @@ a{
   transform: rotate(180deg);
 }
 
-.svg{
-  z-index: -1;
-}
 
 .blob:hover {
   filter: drop-shadow(0 0 10px #00ff00); 
 }
 
 footer{
+  max-height: 500px;
   background-color: grey;
 }
 

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Review } from "../Interfaces/Review";
 import { ReviewComponent } from "../Components/ReviewComp";
 import ReactFullpage from "@fullpage/react-fullpage";
+import MySvg from '../Images/SVG/bottom.svg';
 
 const anchors = ["firstPage", "secondPage", "thirdPage"];
 export function Fooldal() {
@@ -27,6 +28,7 @@ export function Fooldal() {
                     </svg>
                 </div>
             </Grid>
+
             <div className="bulletPointContainer">
                 <div style={{ marginTop: '50px' }}>
                     <Container>
@@ -94,69 +96,75 @@ export function Fooldal() {
                         </Grid>
                     </Container>
                 </div>
+                <Grid sx={{ sx: 3, md: 3 }}>
+                    <div className="shape">
+                        <object type="image/svg+xml" data={MySvg}>svg-animation</object>
+                    </div>
+                </Grid>
+
             </div>
         </section>
-        <ReviewList/>
+        <ReviewList />
         <section className="faq-section">
             <h2>Gyakran ismételt kérdéseink</h2>
             <Container >
-                <Grid sx={{m:2}} rowGap={2}>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1-content"
-                                id="panel1-header"
-                            >
-                                <Typography>Hogyan mondhatom le a foglalásomat?</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    Bejelentkezéskor a profilod előzmények beállitásánal jelenik meg a foglalásod. Fontos, hogy ezt csak az általad beállított dátum előtt egy nappal lesz lehetőséged lemondani.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1-content"
-                                id="panel2-header"
-                            >
-                                <Typography>Hol vehető igénybe a BeerCycle<sup>TM</sup></Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                   Mikor leadtad a rendelésed a biciglit az általad kiválaszott a címre elszállítjuk, majd miután megtetted az utad egy általunk támogatott gépkocsi vissza szállítja telephelyünkre.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1-content"
-                                id="panel3-header"
-                            >
-                                <Typography>Hogyan működik a fizetés?</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    Foglalj egy általad választott biciglit minden tartozékvával. Majd ez a foglalás bekerül ügyintézőnkhöz. Munkatársunk gondoskodik a bicigli összeállitásával és szállitásával. Majd helyszinen átvételkor letétbe kell helyezni bármely iratát. Amit a bicigli leadásakor vissza kap. Ekkor kell a fizetést is lebonyolitani.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1-content"
-                                id="panel4-header"
-                            >
-                                <Typography>Megsérültem a bicigli haszálatakor, kihez forduljak?</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
+                <Grid sx={{ m: 2 }} rowGap={2}>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                        >
+                            <Typography>Hogyan mondhatom le a foglalásomat?</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                Bejelentkezéskor a profilod előzmények beállitásánal jelenik meg a foglalásod. Fontos, hogy ezt csak az általad beállított dátum előtt egy nappal lesz lehetőséged lemondani.
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel2-header"
+                        >
+                            <Typography>Hol vehető igénybe a BeerCycle<sup>TM</sup></Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                Mikor leadtad a rendelésed a biciglit az általad kiválaszott a címre elszállítjuk, majd miután megtetted az utad egy általunk támogatott gépkocsi vissza szállítja telephelyünkre.
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel3-header"
+                        >
+                            <Typography>Hogyan működik a fizetés?</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                Foglalj egy általad választott biciglit minden tartozékvával. Majd ez a foglalás bekerül ügyintézőnkhöz. Munkatársunk gondoskodik a bicigli összeállitásával és szállitásával. Majd helyszinen átvételkor letétbe kell helyezni bármely iratát. Amit a bicigli leadásakor vissza kap. Ekkor kell a fizetést is lebonyolitani.
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel4-header"
+                        >
+                            <Typography>Megsérültem a bicigli haszálatakor, kihez forduljak?</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
                                 Ha megsérült biciklizés közben, javasoljuk, hogy először forduljon orvoshoz és értesítse a rendőrséget, ha szükséges. Fontos megjegyezni, hogy cégünk nem vállal felelősséget személyi sérülésekért. Kérjük, vegyék figyelembe, hogy termékünk biztonságos használatára való felelősségteljes figyelemmel kell eljárni.
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
                 </Grid>
             </Container>
         </section>
@@ -191,27 +199,27 @@ export function ReviewList() {
             }
         });
         const responseData = await response.json() as Review[];
-        setReviews(responseData);    
-    }  
-    useEffect(()=>{
+        setReviews(responseData);
+    }
+    useEffect(() => {
         name();
-    },[])
+    }, [])
     const filteredReviews = review?.filter(item => item.rate > 3).slice(0, 3);
     const shuffledReviews = shuffleArray(filteredReviews);
     const selectedReviews = shuffledReviews!.slice(0, 3);
     return (
         <section className="review-section">
-        <Grid>
-            {
-                filteredReviews && filteredReviews.map((item, index) => {
-                    return <ReviewComponent content={item.content} key={index} isMainPage={true} id={item.id} username={item.user.username} rate={item.rate} onDelete={name} />;
-                })
-            }
-        </Grid>
+            <Grid>
+                {
+                    filteredReviews && filteredReviews.map((item, index) => {
+                        return <ReviewComponent content={item.content} key={index} isMainPage={true} id={item.id} username={item.user.username} rate={item.rate} onDelete={name} />;
+                    })
+                }
+            </Grid>
         </section>
     );
 }
-function shuffleArray(array: Review[]| undefined) {
+function shuffleArray(array: Review[] | undefined) {
     if (!array) return [];
     for (let i = array!.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
