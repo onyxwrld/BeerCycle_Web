@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@fullpage/react-fullpage": "^0.1.42",
     "@mui/icons-material": "^5.15.12",
     "@mui/joy": "^5.0.0-beta.30",
     "@mui/material": "^5.15.12",
@@ -37,14 +38,14 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
-    "plugins": [
-      {
-        "name": "preset-default",
-        "params": {
-          "overrides": {
-            "removeTitle": false
-          }
+  "plugins": [
+    {
+      "name": "preset-default",
+      "params": {
+        "overrides": {
+          "removeTitle": false
         }
       }
-    ]
-  }
+    }
+  ]
+}

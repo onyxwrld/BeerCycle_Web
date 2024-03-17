@@ -9,16 +9,17 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from "react";
 import { Review } from "../Interfaces/Review";
 import { ReviewComponent } from "../Components/ReviewComp";
+import ReactFullpage from "@fullpage/react-fullpage";
 
-
+const anchors = ["firstPage", "secondPage", "thirdPage"];
 export function Fooldal() {
     return <div className="container">
-        <div className="hero-section">
+        <section className="hero-section">
             <img src="src/Images/BeerCycleText.png" id="BeerCycleLogo" />
-            <img src="src/Images/heroSection.png" id="hero-sectionLogo" />
+            <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" />
             <AnimButton />
-        </div>
-        <div className="second-section">
+        </section>
+        <section className="second-section">
             <Grid sx={{ sx: 3, md: 3 }}>
                 <div className="shape">
                     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -94,9 +95,9 @@ export function Fooldal() {
                     </Container>
                 </div>
             </div>
-        </div>
+        </section>
         <ReviewList/>
-        <div className="faq-section">
+        <section className="faq-section">
             <h2>Gyakran ismételt kérdéseink</h2>
             <Container >
                 <Grid sx={{m:2}} rowGap={2}>
@@ -158,8 +159,8 @@ export function Fooldal() {
                         </Accordion>
                 </Grid>
             </Container>
-        </div>
-        <div className="mobil-section">
+        </section>
+        <section className="mobil-section">
 
             <Box
                 component="img"
@@ -176,7 +177,7 @@ export function Fooldal() {
             <Button sx={{ zIndex: 1, position: 'absolute' }}>
                 Letöltés
             </Button>
-        </div>
+        </section>
     </div>
 }
 export function ReviewList() {
@@ -199,7 +200,7 @@ export function ReviewList() {
     const shuffledReviews = shuffleArray(filteredReviews);
     const selectedReviews = shuffledReviews!.slice(0, 3);
     return (
-        <div className="review-section">
+        <section className="review-section">
         <Grid>
             {
                 filteredReviews && filteredReviews.map((item, index) => {
@@ -207,7 +208,7 @@ export function ReviewList() {
                 })
             }
         </Grid>
-        </div>
+        </section>
     );
 }
 function shuffleArray(array: Review[]| undefined) {

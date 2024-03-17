@@ -19,7 +19,7 @@ import { LoadingPage } from './Pages/LoadingPage.tsx'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LoadingPage />,
+    element: <App />,
     children: [
       {
         path: '',

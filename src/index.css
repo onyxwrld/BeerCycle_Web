@@ -8,10 +8,12 @@ body {
 }
 
 .hero-section,
+.faq-section,
 .second-section,
 .mobil-section,
 .review-section {
-  min-height: 350px;
+  min-height: 100vh;
+  max-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -20,18 +22,17 @@ body {
 }
 .bulletPointContainer{
   display: flex;
-  margin-top: 5vw;
+  margin-bottom: 5vw;
 }
 .review-section{
-  height: 500px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(88, 36, 36);
 }
 .hero-section {
-  background-color: rgb(15, 13, 17);
+  background-color: rgb(163, 72, 255);
 }
 
 .second-section {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 52, 52);
   height: 600px;
 }
 .logo {
@@ -84,7 +85,6 @@ a{
   position: absolute;
   z-index: 1;
   width: 65%;
-  padding-top: 10vw;
 }
 
 #hero-sectionLogo {
@@ -92,8 +92,7 @@ a{
   object-fit: cover;
   position: relative;
   width: 100%;
-  height: 750px;
-  padding: 0;
+  padding-bottom: 100;
 }
 
 
@@ -101,7 +100,7 @@ a{
   
   position: absolute;
   z-index: 1;
-  margin-top: 35vw;
+  margin-top: 15vw;
   font-family: "Source Code Pro";
   font-weight: 900;
   text-transform: uppercase;
@@ -113,7 +112,6 @@ a{
 }
 
 .svg{
-  transform: (-50%,-50%);
   z-index: -1;
 }
 
@@ -123,4 +121,17 @@ a{
 
 footer{
   background-color: grey;
+}
+
+.container{
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+section{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
 }

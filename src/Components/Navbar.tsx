@@ -38,7 +38,7 @@ export function Navbar() {
 
     }
     return <>
-        <AppBar position="fixed" >
+        <AppBar position="sticky">
             <Toolbar>
                 <Typography sx={{ flexGrow: 1 }}>
                     <Link to='/'><img src="src/Images/logo2.png" className="logo" /></Link>
