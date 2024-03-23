@@ -18,7 +18,6 @@ export default function Menu() {
     const [types, setType] = useState<string[]>([]);
     const [selectedFoods, setSelectedFoods] = useState<Menu[]>([]);
     const api = useContext(MenuContext);
-    let menu = api.menuListaKiir();
 
     const handleChange = (event: SelectChangeEvent<typeof types>) => {
         const {
@@ -29,13 +28,11 @@ export default function Menu() {
         );
     }
 
-
-
     useEffect(() => {
         async function LoadData() {
             const response = await fetch('http://localhost:3000/menu');
             if (response.ok) {
-                const data = await response.json() as Menu[];
+                const data = await response.json() as Menu[]; 
                 setFood(data);
             }
             else {
@@ -43,18 +40,7 @@ export default function Menu() {
             }
         }
         LoadData();
-       
     }, [])
-    useEffect(() => {
-        if (types.length > 0) {
-            const filteredFoods = food.filter(item => types.includes(item.type));
-            setSelectedFoods(filteredFoods);
-        } else {
-            setSelectedFoods(food);
-        }
-        const uniqueTypes = Array.from(new Set(food.map(item => item.type)));
-        setType(uniqueTypes);
-    }, [types])
 
     return (
         <>
@@ -69,9 +55,7 @@ export default function Menu() {
                             value={types}
                             onChange={handleChange}
                         >
-                            
-                            {
-                                
+                            {   
                             types.map((type, index) => (
                                 <MenuItem
                                     key={index}
@@ -90,9 +74,8 @@ export default function Menu() {
                     </Grid>
                 </Grid>
                 <Grid container spacing={{ xs: 3, md: 4 }} >
-
                     {
-                        selectedFoods.map((x, index) => (
+                        food.map((x, index) => (
                             <Box key={index} sx={{
                                 borderRadius: 2,
                                 boxShadow: 3,

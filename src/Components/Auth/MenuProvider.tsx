@@ -1,57 +1,48 @@
 import { ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { createContext, useEffect, useState } from "react";
+import { Basket } from "../../Interfaces/Basket";
 
 export const MenuContext = createContext({
-    menuListaKiir: () => {
-     const [menu, setMenu] = useState<Menu[]>([]);
-     return menu    
+    menuListaKiir: async () => {
     },
-    basketFeltolt: (menuItem: Menu) =>{
+    basketFeltolt: async (menuItem: Menu) => {
 
     },
-    basketChange: (isChange:boolean) => { }
+    basketChange: (isChange: boolean) => { }
 })
 interface Props {
     children: React.ReactNode;
 }
 export function MenuProvider({ children }: Props) {
-    const [menu, setMenu] = useState<Menu[]>([]);
+    const [basket,setBasket] = useState<Basket>();
+    const token = localStorage.getItem('token')
     const [basketChanged, setBasketChanged] = useState<boolean>(false);
-
-    useEffect(() => {
-        const storedMenu = localStorage.getItem('menu');
-        if (storedMenu) {
-            setMenu(JSON.parse(storedMenu));
-        }
-    }, []);
-    useEffect(()=>{
-        if(menu.length > 0){
-        localStorage.setItem('menu',JSON.stringify(menu));
-        localStorage.setItem('basketCount',JSON.stringify(menu.length))
-        setBasketChanged(true);
-    }
-    else{
-        localStorage.removeItem('menu');
-        localStorage.removeItem('basketCount');
-    }
-    },[menu])
     useEffect(() => {
         if (basketChanged) {
             const timeoutId = setTimeout(() => {
                 setBasketChanged(false);
-            }, 100); 
+            }, 100);
             return () => clearTimeout(timeoutId);
         }
     }, [basketChanged]);
     const menuObj = {
-        menuListaKiir: () =>{
-            return menu 
-        },
-        basketFeltolt: (menuItem: Menu) => {
-            setMenu(previtem =>[...previtem,menuItem]);    
+        menuListaKiir: async() => {
+            
             
         },
-        basketChange: (isChange:boolean)=>{
+        basketFeltolt: async (menuItem: Menu) => {
+            const post = JSON.stringify({ menu: menuItem.id });
+            const response = await fetch('http://localhost:3000/basket', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/json',
+                },
+                body: post,
+            })
+        },
+        basketChange: (isChange: boolean) => {
             setBasketChanged(isChange);
         }
     }
