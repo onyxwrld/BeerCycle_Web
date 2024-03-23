@@ -2,22 +2,20 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import { CssBaseline } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { ApiContext } from '../Components/Auth/ApiProvider';
+import MySvg from '../Images/SVG/Untitled.svg';
 
 function Copyright(props: any) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit">
-                BeerCycle
-            </Link>{' '}
+                BeerCycle{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -75,7 +73,7 @@ export default function SignUp() {
 
             <Grid container spacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={8}>
-                <img src="/src/Images/SVG/Untitled.svg" alt="" style={{height:500,width:1000}}/>
+                <object type="image/svg+xml" data={MySvg}>svg-animation</object>
                 </Grid>
                 <Grid item xs={4}>
                     <Box>
@@ -143,6 +141,7 @@ export default function SignUp() {
                                 value={pass}
                                 onChange={handlePasswordChange}
                             />
+                            <Link to='/login'>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -151,6 +150,7 @@ export default function SignUp() {
                             >
                                 Regisztráció
                             </Button>
+                            </Link>
                         </Box>
                     </Box>
                 </Grid>

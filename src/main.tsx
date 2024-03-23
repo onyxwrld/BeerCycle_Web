@@ -15,6 +15,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { History, MyReviews, ProfilePage, User_data } from './Pages/ProfilePage.tsx'
 import { MenuProvider } from './Components/Auth/MenuProvider.tsx'
 import { LoadingPage } from './Pages/LoadingPage.tsx'
+import { ErrorPage } from './Pages/ErrorPage.tsx'
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,9 @@ const router = createBrowserRouter([
         element: <MyReviews />
       }
     ]
+  },{
+    path: '*',
+    element: <ErrorPage/>
   }
 ])
 const theme = createTheme({

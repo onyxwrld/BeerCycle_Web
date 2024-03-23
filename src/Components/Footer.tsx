@@ -84,7 +84,6 @@ export function Footer()
         };
         
         fetchData();
-        console.log(adatok);
       }, []);
     if (!adatok[0]) {
         return <p>Loading...</p>

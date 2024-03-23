@@ -2,7 +2,7 @@
 
 body {
   color: rgb(25, 25, 50);
-  background-color: rgb(255, 255, 255);
+  background-color: beige;
   padding: 0;
   margin: 0;
 }
@@ -20,13 +20,16 @@ body {
   align-items: center;
 
 }
-.bulletPointContainer{
+
+.bulletPointContainer {
   display: flex;
   margin-bottom: 5vw;
 }
-.review-section{
+
+.review-section {
   background-color: rgb(255, 255, 255);
 }
+
 .hero-section {
   background-color: rgb(163, 72, 255);
 }
@@ -34,13 +37,18 @@ body {
 .second-section {
   background-color: rgb(255, 255, 255);
 }
+
 .logo {
-  width: 8%;padding: 0;margin: 0;
+  width: 8%;
+  padding: 0;
+  margin: 0;
 }
+
 .shape object {
 
   margin-top: 16vw;
 }
+
 .shape {
   position: absolute;
   top: 0;
@@ -48,6 +56,14 @@ body {
   width: 100%;
   overflow: hidden;
   line-height: 0;
+}
+
+.loadDiv {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin: 15vh;
+  
 }
 
 .shape svg {
@@ -61,13 +77,14 @@ body {
   fill: #fdbd0c;
 }
 
-p{
+p {
   flex: 2;
   margin: 5px;
   padding: 3px;
   color: rgb(75, 75, 75);
 }
-#loginButton{
+
+#loginButton {
   display: inline-block;
   padding: .75rem 1.25rem;
   border-radius: 10rem;
@@ -78,11 +95,13 @@ p{
   transition: all .3s;
   position: relative;
 }
-a{
+
+a {
   text-shadow: #0a0404;
   color: bisque;
   text-decoration: none;
 }
+
 #BeerCycleLogo {
   position: absolute;
   z-index: 1;
@@ -99,7 +118,7 @@ a{
 
 
 .foglaljButton {
-  
+
   position: absolute;
   z-index: 1;
   margin-top: 15vw;
@@ -109,26 +128,27 @@ a{
   font-size: 30px;
 }
 
-.flip{
+.flip {
   transform: rotate(180deg);
 }
 
 
 .blob:hover {
-  filter: drop-shadow(0 0 10px #00ff00); 
+  filter: drop-shadow(0 0 10px #00ff00);
 }
 
-footer{
+footer {
   max-height: 500px;
   background-color: grey;
 }
 
-.container{
+.container {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
 }
-section{
+
+section {
   height: 100vh;
   display: flex;
   justify-content: center;

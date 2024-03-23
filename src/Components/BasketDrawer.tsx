@@ -16,12 +16,10 @@ export default function DrawerSide({ isOpen, onClose }:
                 const response = await fetch('http://localhost:3000/basket', {
                     method: 'GET',
                     headers: {
-                        'Content-type': 'application/json',
                         'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/json',
                     }
                 })
-                const data = await response.json() as Basket[];
+                const data = await response.json();
                 setBasketData(data);
             } catch (error) {
                 console.error('Hiba a kosár adatok lekérése közben:', error);
@@ -29,8 +27,8 @@ export default function DrawerSide({ isOpen, onClose }:
         };
 
         fetchData();
-        console.log(basketData)
-    }, []);
+        kiir();
+    }, [isOpen]);
 
     function onDelete(id: number) {
         /*for (let index = 0; index < menu.length; index++) {
@@ -42,7 +40,12 @@ export default function DrawerSide({ isOpen, onClose }:
         localStorage.setItem('basketCount',JSON.stringify(menu.length));
                 basketChange(true);
 */
+    }
 
+    function kiir() {
+        basketData.map((x, index) => {
+            console.log(x.menu[index + 1].name);
+        })
     }
     return (
         <>
@@ -52,26 +55,34 @@ export default function DrawerSide({ isOpen, onClose }:
                         Kosarad
                     </Typography>
                     <List>
-                        {basketData.length > 0
-                            ?
-                            basketData.map((basket: Basket, index:number) => (
-                                <ListItem key={index}>
-                                    <ListItemButton>
-                                        <ListItemText>
-                                            {basket.menu.name}
-                                        </ListItemText>
-                                    </ListItemButton>
-                                    <IconButton onClick={() => onDelete(basket.menu.id)} >
-                                        <CloseIcon />
-                                    </IconButton>
-                                </ListItem>
-
+                        {basketData.length > 0 ? (
+                            basketData.map((basket: Basket, index: number) => (
+                                <div key={index}>
+                                    {basket.menu.length > 0 ? (
+                                        basket.menu.map((menuItem: Menu, menuIndex: number) => (
+                                            <ListItem key={menuIndex}>
+                                                <ListItemButton>
+                                                    <ListItemText>
+                                                        {menuItem.name}
+                                                    </ListItemText>
+                                                </ListItemButton>
+                                                <IconButton onClick={() => onDelete(menuItem.id)}>
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </ListItem>
+                                        ))
+                                    ) : (
+                                        <Typography variant="body2">
+                                            Kosarad tartalma üres.
+                                        </Typography>
+                                    )}
+                                </div>
                             ))
-                            :
+                        ) : (
                             <Typography>
                                 Kosarad még üres, vegyél fel az étlapról
                             </Typography>
-                        }
+                        )}
 
                     </List>
 

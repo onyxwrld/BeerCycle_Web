@@ -13,22 +13,13 @@ import { ApiContext } from "./Auth/ApiProvider";
 import DrawerSide from "./Drawer";
 import BasketDrawer from "./BasketDrawer";
 import { MenuContext } from "./Auth/MenuProvider";
+import { Basket } from "../Interfaces/Basket";
 
 export function Navbar() {
 
-    const api = useContext(MenuContext);
-    const menu = localStorage.getItem('menu');
     const [openProfile, setOpen] = useState(false);
     const [openBasket, setOpenBasket] = useState(false);
-    //let count = localStorage.getItem('basketCount');
-   // let basketCount = JSON.parse(count!);
-    const [basketCount, setBasketCount] = useState<number>(0);
 
-    useEffect(() => {
-        const count = localStorage.getItem('basketCount');
-        setBasketCount(count ? JSON.parse(count) : 0);
-    }, [api]);
-    
     function toggleProfile() {
         return setOpen(!openProfile);
 
@@ -37,6 +28,7 @@ export function Navbar() {
         return setOpenBasket(!openBasket);
 
     }
+    
     return <>
         <AppBar position="sticky">
             <Toolbar>
@@ -52,7 +44,7 @@ export function Navbar() {
                             <DrawerSide isOpen={openProfile} onClose={() => setOpen(false)} />
                             <AccountCircleIcon />
                         </IconButton>
-                        <Badge badgeContent={basketCount} color={'warning'}>
+                        <Badge badgeContent={2} color={'warning'}>
                             <IconButton onClick={toggleBasket} >
                                 <BasketDrawer isOpen={openBasket} onClose={() => setOpenBasket(false)} />
                                 <ShoppingCartIcon />

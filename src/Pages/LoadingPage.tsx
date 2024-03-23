@@ -13,7 +13,6 @@ export function LoadingPage(){
         justifyContent="center"
         sx={{ minHeight: '100vh' }}
       >
-        <img style={{width:340}} src="./src/Images/BeerCycleText.png" alt="" />;
         <object style={{width:340}}type="image/svg+xml" data={MySvg}>svg-animation</object>;
       </Grid>
     )
