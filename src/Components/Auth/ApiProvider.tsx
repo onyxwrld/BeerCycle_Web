@@ -14,8 +14,7 @@ export const ApiContext = createContext({
     },
     userReview: async(): Promise<Review[] | undefined> => {
         throw new Error("nincs implementálva");
-    },
-
+    }
 })
 
 interface Props {
@@ -99,10 +98,10 @@ export function ApiProvider({ children }: Props) {
         register: async (username: string, password: string, email: string, last_name: string, first_name: string) => {
             const registerData = {
                 username,
-                password,
                 email,
-                last_name,
-                first_name
+                password,
+                first_name,
+                last_name
             };
             try {
                 const response = await fetch('http://localhost:3000/user/register', {
@@ -112,11 +111,9 @@ export function ApiProvider({ children }: Props) {
                     },
                     body: JSON.stringify(registerData),
                 });
-
                 if (!response.ok) {
                     throw new Error('Hiba történt a kérés során');
                 }
-                const responseData = await response.json();
             } catch (error) {
                 console.error('Hiba történt a kérés során:', error);
             }
@@ -139,8 +136,7 @@ export function ApiProvider({ children }: Props) {
         catch(error) {
             console.error('Hiba történt a kérés során:', error);
         }
-       
-        },
+        }
     };
     return <ApiContext.Provider value={apiObj}>
         {children}

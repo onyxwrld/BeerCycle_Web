@@ -119,9 +119,8 @@ a {
 
 .foglaljButton {
 
-  position: absolute;
+  position: relative;
   z-index: 1;
-  margin-top: 15vw;
   font-family: "Source Code Pro";
   font-weight: 900;
   text-transform: uppercase;

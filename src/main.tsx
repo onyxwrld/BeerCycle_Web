@@ -14,8 +14,9 @@ import Menu from './Pages/Menu.tsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { History, MyReviews, ProfilePage, User_data } from './Pages/ProfilePage.tsx'
 import { MenuProvider } from './Components/Auth/MenuProvider.tsx'
-import { LoadingPage } from './Pages/LoadingPage.tsx'
+
 import { ErrorPage } from './Pages/ErrorPage.tsx'
+import { FoglalasComp } from './Pages/Foglaljform.tsx'
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: 'register',
     element: <SignUp />
+  },
+  {
+    path:'reservation',
+    element: <FoglalasComp/>
   },
   {
     path: 'profile',

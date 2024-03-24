@@ -27,7 +27,6 @@ export default function DrawerSide({ isOpen, onClose }:
         };
 
         fetchData();
-        kiir();
     }, [isOpen]);
 
     function onDelete(id: number) {
@@ -40,12 +39,6 @@ export default function DrawerSide({ isOpen, onClose }:
         localStorage.setItem('basketCount',JSON.stringify(menu.length));
                 basketChange(true);
 */
-    }
-
-    function kiir() {
-        basketData.map((x, index) => {
-            console.log(x.menu[index + 1].name);
-        })
     }
     return (
         <>

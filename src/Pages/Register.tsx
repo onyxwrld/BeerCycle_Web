@@ -141,7 +141,6 @@ export default function SignUp() {
                                 value={pass}
                                 onChange={handlePasswordChange}
                             />
-                            <Link to='/login'>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -150,7 +149,6 @@ export default function SignUp() {
                             >
                                 Regisztráció
                             </Button>
-                            </Link>
                         </Box>
                     </Box>
                 </Grid>

@@ -1,6 +1,5 @@
 import Card from "@mui/material/Card"
-import { AnimButton } from "../Components/anim_button"
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, CardActions, CardContent, CardHeader, CardMedia, Container, Grid, IconButton, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, CardActions, CardContent, CardMedia, Container, Grid, IconButton, Typography } from "@mui/material"
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import { Link } from "react-router-dom";
@@ -9,16 +8,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from "react";
 import { Review } from "../Interfaces/Review";
 import { ReviewComponent } from "../Components/ReviewComp";
-import ReactFullpage from "@fullpage/react-fullpage";
 import MySvg from '../Images/SVG/bottom.svg';
 
-const anchors = ["firstPage", "secondPage", "thirdPage"];
 export function Fooldal() {
     return <div className="container">
         <section className="hero-section">
             <img src="src/Images/BeerCycleText.png" id="BeerCycleLogo" />
             <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" />
-            <AnimButton />
+            <Link to='/reservation'><button className="foglaljButton">Foglalj</button></Link>
+            
         </section>
         <section className="second-section">
             <Grid sx={{ sx: 3, md: 3 }}>

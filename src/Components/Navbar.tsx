@@ -8,7 +8,7 @@ import { Guest, LoggedIn } from "./Auth/loginAuth";
 import { Badge, IconButton } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ApiContext } from "./Auth/ApiProvider";
 import DrawerSide from "./Drawer";
 import BasketDrawer from "./BasketDrawer";
@@ -19,7 +19,8 @@ export function Navbar() {
 
     const [openProfile, setOpen] = useState(false);
     const [openBasket, setOpenBasket] = useState(false);
-
+    const token = localStorage.getItem('token');
+    const [count,setCount] = useState<Basket[]>([]);
     function toggleProfile() {
         return setOpen(!openProfile);
 
@@ -28,7 +29,34 @@ export function Navbar() {
         return setOpenBasket(!openBasket);
 
     }
-    
+    function calcBasketCount(baskets: Basket[]): number {
+        let totalCount = 0;
+        baskets.forEach(basket => {
+            totalCount += basket.menu.length;
+        });
+        return totalCount;
+    }
+
+    useEffect(() => {
+       
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/basket', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                })
+                const data = await response.json();
+                setCount(data);
+            } catch (error) {
+               setCount([]);
+            }
+        };
+        
+        fetchData();
+    }, [count]);
+//calcBasketCount(count)
     return <>
         <AppBar position="sticky">
             <Toolbar>
