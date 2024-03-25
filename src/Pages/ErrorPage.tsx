@@ -9,7 +9,7 @@ export function ErrorPage(){
     }}>
         404
     </Typography>
-    <object style={{width:200}}type="image/svg+xml" data={MySvg}>svg-animation</object>
+    <img src='/src/Images/404beer.png' style={{borderRadius: '15px',height:'300px'}}/>
     <Typography sx={{
        fontSize: 25
     }}>

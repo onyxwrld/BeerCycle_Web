@@ -21,6 +21,8 @@ export function Navbar() {
     const [openBasket, setOpenBasket] = useState(false);
     const token = localStorage.getItem('token');
     const [count,setCount] = useState<Basket[]>([]);
+    let totalCount = 0;
+
     function toggleProfile() {
         return setOpen(!openProfile);
 
@@ -30,11 +32,16 @@ export function Navbar() {
 
     }
     function calcBasketCount(baskets: Basket[]): number {
-        let totalCount = 0;
+      if(baskets.length>0)
+      {
         baskets.forEach(basket => {
             totalCount += basket.menu.length;
         });
         return totalCount;
+    }
+    else{
+        return 0;
+    }
     }
 
     useEffect(() => {
@@ -56,7 +63,7 @@ export function Navbar() {
         
         fetchData();
     }, [count]);
-//calcBasketCount(count)
+
     return <>
         <AppBar position="sticky">
             <Toolbar>
@@ -72,7 +79,7 @@ export function Navbar() {
                             <DrawerSide isOpen={openProfile} onClose={() => setOpen(false)} />
                             <AccountCircleIcon />
                         </IconButton>
-                        <Badge badgeContent={2} color={'warning'}>
+                        <Badge badgeContent={calcBasketCount(count)} color={'warning'}>
                             <IconButton onClick={toggleBasket} >
                                 <BasketDrawer isOpen={openBasket} onClose={() => setOpenBasket(false)} />
                                 <ShoppingCartIcon />
