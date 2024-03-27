@@ -17,6 +17,7 @@ import { MenuProvider } from './Components/Auth/MenuProvider.tsx'
 
 import { ErrorPage } from './Pages/ErrorPage.tsx'
 import { FoglalasComp } from './Pages/Foglaljform.tsx'
+import { StyledEngineProvider } from '@mui/styled-engine-sc'
 
 const router = createBrowserRouter([
   {
@@ -83,19 +84,21 @@ const theme = createTheme({
       main: '#F2C879',
     },
     secondary: {
-      main: '#8A2A23'
+      main: '#840000'
     }
   }
 })
 ReactDOM.createRoot(document.getElementById('root')!).render(
 
   <React.StrictMode>
+    <StyledEngineProvider injectFirst>
     <ThemeProvider theme={theme}>
       <ApiProvider>
         <MenuProvider>
           <RouterProvider router={router} />
         </MenuProvider>
       </ApiProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+      </StyledEngineProvider> 
   </React.StrictMode>
 )

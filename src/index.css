@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 body {
   color: rgb(25, 25, 50);
   background-color: beige;
   padding: 0;
   margin: 0;
+  
 }
+
 
 .hero-section,
 .faq-section,
@@ -20,11 +26,11 @@ body {
   align-items: center;
 
 }
-
-.bulletPointContainer {
-  display: flex;
-  margin-bottom: 5vw;
+a {
+  color: rgb(44, 30, 3);
+  text-decoration: none;
 }
+
 
 .review-section {
   background-color: rgb(255, 255, 255);
@@ -89,17 +95,22 @@ p {
   padding: .75rem 1.25rem;
   border-radius: 10rem;
   background-color: #840000;
+  color: #f1daaf;
   text-transform: uppercase;
   font-size: 1rem;
   letter-spacing: .15rem;
   transition: all .3s;
   position: relative;
 }
+#loginButton:hover, button:hover{
+  transform: scale(1.1);
+  border-radius: 30px;
+  background-color: #840000;
+}
 
-a {
-  text-shadow: #0a0404;
-  color: bisque;
-  text-decoration: none;
+.loginNav:hover{
+
+  background-color: #840000;
 }
 
 #BeerCycleLogo {
@@ -118,7 +129,6 @@ a {
 
 
 .foglaljButton {
-
   position: relative;
   z-index: 1;
   font-family: "Source Code Pro";
@@ -145,7 +155,9 @@ footer {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
+  max-width: fit-content;
 }
+
 
 section {
   height: 100vh;

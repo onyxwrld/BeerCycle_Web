@@ -12,22 +12,27 @@ export default function DrawerSide({ isOpen, onClose }:
     const token = localStorage.getItem('token');
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/basket', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-                })
-                const data = await response.json();
-                setBasketData(data);
-            } catch (error) {
-                console.error('Hiba a kosár adatok lekérése közben:', error);
+            if(token !=null){
+                try {
+                    const response = await fetch('http://localhost:3000/basket', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        }
+                    })
+                    const data = await response.json();
+                    setBasketData(data);
+                } catch (error) {
+                    console.error('Hiba a kosár adatok lekérése közben:', error);
+                }
             }
+          else{
+            setBasketData([]);
+          }
         };
 
         fetchData();
-    }, [isOpen]);
+    }, [basketData]);
 
     function onDelete(id: number) {
         /*for (let index = 0; index < menu.length; index++) {
