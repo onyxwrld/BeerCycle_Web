@@ -65,21 +65,21 @@ export function Navbar() {
         <AppBar position="sticky">
             <Toolbar>
                 <Typography sx={{ flexGrow: 1 }}>
-                    <Link to='/'><img src="src/Images/logo2.png" className="logo" /></Link>
+                    <Link to='/'><img src="src/Images/logo2.png" className="w-1/12 hover:scale-110 ease-in-out transition" /></Link>
                 </Typography>
                 <Box>
                     <LoggedIn>
-                        <Button ><Link to="/gallery" className="transition duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-lg rounded-lg text-black hover:text-amber">Galléria</Link></Button>
-                        <Button ><Link to="/rules" className="transition duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-lg rounded-lg text-black hover:text-amber">Szabályzat</Link></Button>
-                        <Button ><Link to="/menu" className="transition duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-lg rounded-lg text-black hover:text-amber">Étlap</Link></Button>
+                        <Button ><Link to="/gallery" className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber py-2 px-2">Galléria</Link></Button>
+                        <Button ><Link to="/rules" className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber py-2 px-2">Szabályzat</Link></Button>
+                        <Button ><Link to="/menu" className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber py-2 px-2">Étlap</Link></Button>
                         <IconButton onClick={toggleProfile}>
                             <DrawerSide isOpen={openProfile} onClose={() => setOpen(false)} />
-                            <AccountCircleIcon className="transition duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-lg rounded-lg text-black hover:text-amber"/>
+                            <AccountCircleIcon className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber"/>
                         </IconButton>
                         <Badge badgeContent={calcBasketCount(count)} color={'warning'}>
                             <IconButton onClick={toggleBasket} >
                                 <BasketDrawer isOpen={openBasket} onClose={() => setOpenBasket(false)} />
-                                <ShoppingCartIcon className="transition duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-lg rounded-lg text-black hover:text-amber"/>
+                                <ShoppingCartIcon className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber"/>
                             </IconButton>
                         </Badge>
                     </LoggedIn>

@@ -13,9 +13,13 @@ import MySvg from '../Images/SVG/bottom.svg';
 export function Fooldal() {
     return <div className="container">
         <section className="hero-section">
-            <img src="src/Images/BeerCycleText.png" id="BeerCycleLogo" />
-            <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" />
-            <Link to='/reservation'><button className="foglaljButton">Foglalj</button></Link>
+        <div className="relative">
+      <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 w-full h-full object-cover" />
+      <img src="src/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-1/12 sm:w-auto transition ease-in-out hover:scale-110" />
+      <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 z-10">
+        <Link to='/reservation'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold py-2 px-4 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
+      </div>
+    </div>
             
         </section>
         <section className="second-section">
