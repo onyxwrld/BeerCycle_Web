@@ -9,7 +9,8 @@ export default {
     colors:{
       'amber': '#fef3c7',
       'bloodRed':'#7f1d1d',
-      'black': '#09090b'
+      'black': '#09090b',
+      'white' : '#FFFFFF'
     }
   },
   plugins: [],

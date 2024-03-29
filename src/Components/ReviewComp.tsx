@@ -24,6 +24,7 @@ export function ReviewComponent({ rate, content, username, id,isMainPage,onDelet
                 borderRadius: 3,
                 m: 2
             }}
+            className="hover:scale-110 transition ease-out z-10"
         >
             <Grid height="100%" item spacing={3}>
                 <Grid item>

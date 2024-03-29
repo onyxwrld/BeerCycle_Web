@@ -13,7 +13,7 @@ export function LoadingPage(){
         justifyContent="center"
         sx={{ minHeight: '100vh' }}
       >
-        <object style={{width:340}}type="image/svg+xml" data={MySvg}>svg-animation</object>;
+        <object style={{width:340}}type="image/svg+xml" data={MySvg}>svg-animation</object>
       </Grid>
     )
 }

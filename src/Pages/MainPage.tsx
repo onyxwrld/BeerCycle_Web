@@ -1,5 +1,6 @@
 import Card from "@mui/material/Card"
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, CardActions, CardContent, CardMedia, Container, Grid, IconButton, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, CardContent, CardMedia, Container, Grid, IconButton, Typography } from "@mui/material"
+import CardActions from '@mui/material/CardActions';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import { Link } from "react-router-dom";
@@ -13,14 +14,14 @@ import MySvg from '../Images/SVG/bottom.svg';
 export function Fooldal() {
     return <div className="container">
         <section className="hero-section">
-        <div className="relative">
-      <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 w-full h-full object-cover" />
-      <img src="src/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-1/12 sm:w-auto transition ease-in-out hover:scale-110" />
-      <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 z-10">
-        <Link to='/reservation'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold py-2 px-4 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
-      </div>
-    </div>
-            
+            <div className="relative">
+                <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 w-full h-full object-cover" />
+                <img src="src/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sm:w-3/4 transition ease-in-out hover:scale-110" />
+                <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 z-10">
+                    <Link to='/reservation'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
+                </div>
+            </div>
+
         </section>
         <section className="second-section">
             <Grid sx={{ sx: 3, md: 3 }}>
@@ -35,7 +36,7 @@ export function Fooldal() {
                 <div style={{ marginTop: '50px' }}>
                     <Container>
                         <Grid container spacing={1}>
-                            <Card sx={{ maxWidth: 345, mx: 2 }}>
+                            <Card sx={{ maxWidth: 345, mx: 2 }} className="hover:scale-110 transition ease-out">
                                 <CardMedia
                                     sx={{ height: 140 }}
                                     image="src/Images/ham.png"
@@ -211,13 +212,19 @@ export function ReviewList() {
     const selectedReviews = shuffledReviews!.slice(0, 3);
     return (
         <section className="review-section">
-            <Grid>
-                {
-                    filteredReviews && filteredReviews.map((item, index) => {
-                        return <ReviewComponent content={item.content} key={index} isMainPage={true} id={item.id} username={item.user.username} rate={item.rate} onDelete={name} />;
-                    })
-                }
+            <Grid container spacing={2}>
+                <Grid item xs={6} alignItems="center" container justifyContent="center" >
+                    {
+                        filteredReviews && filteredReviews.map((item, index) => {
+                            return <ReviewComponent content={item.content} key={index} isMainPage={true} id={item.id} username={item.user.username} rate={item.rate} onDelete={name} />;
+                        })
+                    }
+                </Grid>
+                <Grid item xs={6}>
+                    <img className="top-2/3 w-full flex items-center justify-center overflow-hidden" src="src/Images/peopleComment.png" alt="People commenting" />
+                </Grid>
             </Grid>
+
         </section>
     );
 }
