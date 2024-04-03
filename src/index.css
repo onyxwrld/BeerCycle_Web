@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 body {
   color: rgb(25, 25, 50);
@@ -81,7 +82,6 @@ p {
   flex: 2;
   margin: 5px;
   padding: 3px;
-  color: rgb(75, 75, 75);
 }
 
 #loginButton {
@@ -140,10 +140,6 @@ p {
   filter: drop-shadow(0 0 10px #00ff00);
 }
 
-footer {
-  max-height: 500px;
-  background-color: grey;
-}
 
 .container {
   scroll-snap-type: y mandatory;

@@ -16,7 +16,7 @@ import { History, MyReviews, ProfilePage, User_data } from './Pages/ProfilePage.
 import { MenuProvider } from './Components/Auth/MenuProvider.tsx'
 
 import { ErrorPage } from './Pages/ErrorPage.tsx'
-import { FoglalasComp } from './Pages/Foglaljform.tsx'
+import ReservationForm from './Pages/Foglaljform.tsx'
 import { StyledEngineProvider } from '@mui/styled-engine-sc'
 
 const router = createBrowserRouter([
@@ -53,8 +53,8 @@ const router = createBrowserRouter([
     element: <SignUp />
   },
   {
-    path:'reservation',
-    element: <FoglalasComp/>
+    path: 'reservation',
+    element: <ReservationForm/>
   },
   {
     path: 'profile',
@@ -73,9 +73,9 @@ const router = createBrowserRouter([
         element: <MyReviews />
       }
     ]
-  },{
+  }, {
     path: '*',
-    element: <ErrorPage/>
+    element: <ErrorPage />
   }
 ])
 const theme = createTheme({
@@ -92,13 +92,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-    <ThemeProvider theme={theme}>
-      <ApiProvider>
-        <MenuProvider>
-          <RouterProvider router={router} />
-        </MenuProvider>
-      </ApiProvider>
-      </ThemeProvider>
-      </StyledEngineProvider> 
-  </React.StrictMode>
-)
+      <ThemeProvider theme={theme}>
+              <ApiProvider>
+                <MenuProvider>
+                  <RouterProvider router={router} />
+                </MenuProvider>
+              </ApiProvider>
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </React.StrictMode>
+        )
