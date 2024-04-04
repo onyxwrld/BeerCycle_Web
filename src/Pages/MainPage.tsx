@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Review } from "../Interfaces/Review";
 import { ReviewComponent } from "../Components/ReviewComp";
 import MySvg from '../Images/SVG/bottom.svg';
+import { Guest, LoggedIn } from "../Components/Auth/loginAuth";
 
 export function Fooldal() {
     return <div className="container">
@@ -18,7 +19,13 @@ export function Fooldal() {
                 <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 w-full h-full object-cover" />
                 <img src="src/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sm:w-3/4 transition ease-in-out hover:scale-110" />
                 <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 z-10">
+                    <LoggedIn>
                     <Link to='/reservation'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
+                    </LoggedIn>
+                    <Guest>
+                    <Link to='/login'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
+                    </Guest>
+                    
                 </div>
             </div>
 

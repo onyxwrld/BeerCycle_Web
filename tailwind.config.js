@@ -12,7 +12,8 @@ export default {
       'black': '#09090b',
       'white' : '#FFFFFF',
       'ink': '#5D28BE',
-      "darkOrange":'#0B1726'
+      "darkOrange":'#0B1726',
+      'navYellow':'#F2C879'
     }
   },
     
