@@ -9,6 +9,7 @@ import { Basket } from "../Interfaces/Basket";
 export default function DrawerSide({ isOpen, onClose }:
     { isOpen: boolean, onClose: () => void }) {
     const [basketData, setBasketData] = useState<Basket[]>([]);
+    let basketId = 0;
     const token = localStorage.getItem('token');
     useEffect(() => {
         const fetchData = async () => {
@@ -25,6 +26,7 @@ export default function DrawerSide({ isOpen, onClose }:
                 } catch (error) {
                     console.error('Hiba a kosár adatok lekérése közben:', error);
                 }
+                
             }
           else{
             setBasketData([]);
@@ -34,16 +36,24 @@ export default function DrawerSide({ isOpen, onClose }:
         fetchData();
     }, [basketData]);
 
-    function onDelete(id: number) {
-        /*for (let index = 0; index < menu.length; index++) {
-           if(menu[index].id== id){
-            menu.splice(index,1);
-           }
+    async function onDelete(id: number) {
+        basketId = basketData[0].id
+        try {
+            const response = await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    menu: id 
+                  })
+            })
+            const data = await response.json();
+            setBasketData(data);
+        } catch (error) {
+            console.error('Hiba a kosár adatok lekérése közben:', error);
         }
-        localStorage.setItem('menu',JSON.stringify(menu));
-        localStorage.setItem('basketCount',JSON.stringify(menu.length));
-                basketChange(true);
-*/
     }
     return (
         <>

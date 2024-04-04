@@ -2,16 +2,26 @@ import { useEffect, useState } from 'react';
 import { Button, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Grid, Typography } from '@mui/material';
 import MapComponent from '../Components/FoglaljForm/Map';
 import { Step1 } from '../Components/FoglaljForm/page_1';
+import { DatePickerWithHour } from '../Components/FoglaljForm/Page_3';
+import Step_4 from '../Components/FoglaljForm/Page_4';
+import { useNavigate } from 'react-router-dom';
+
 
 function ReservationForm() {
     const [step, setStep] = useState(1);
-    
+    const token = localStorage.getItem('token');
+    const navigate = useNavigate();
+
     const [size, setSize] = useState('');
+    const [startDate, setStartDate] = useState(new Date());
     const [address, setAddress] = useState<string>('');
+    const [enumHour, setEnumHour] = useState<string>('');
 
     const handleNext = () => {
         if (step < 5) {
             setStep((prevStep) => prevStep + 1);
+        } else if (step === 5) {
+            ReservationPost();
         }
     };
     const handleBack = () => {
@@ -19,7 +29,42 @@ function ReservationForm() {
             setStep((prevStep) => prevStep - 1);
         }
     };
+    const ReservationPost = async () => {
+        const reservation = {
+            user_id: 1,
+            bicycle_id: 1,
+            start_time: startDate,
+            reservation_time: enumHour,
+            location: address,
+        };
 
+        try {
+            const response = await fetch('http://localhost:3000/reservation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(reservation),
+            });
+
+            if (!response.ok) {
+                throw new Error('Something went wrong with the reservation request');
+            }
+
+            const result = await response.json();
+            if(response.ok){
+                setSize('');
+                setAddress('');
+                setEnumHour('');
+                navigate('/');
+            }
+
+          
+        } catch (error) {
+            console.error('Error making reservation:', error);
+        }
+    };
     return (
         <div className="bg-white h-screen flex justify-center items-center">
             <div className="bg-navYellow p-10 rounded-3xl" style={{ width: '800px', height: '800px' }}>
@@ -43,7 +88,7 @@ function ReservationForm() {
                     </Grid>
                     <Grid item xs={12} sm={8} md={9}>
                         {step === 1 && (
-                            <Step1 size={size} setSize={setSize}/>
+                            <Step1 size={size} setSize={setSize} />
                         )}
                         {step === 2 && (
                             <>
@@ -53,6 +98,18 @@ function ReservationForm() {
                                 </Typography>
                             </>
                         )}
+                        {step === 3 && (
+                            <><Typography>
+                                Válasszd ki a neked megfelelő időpontot!
+                            </Typography>
+                                <DatePickerWithHour startDate={startDate} setStartDate={setStartDate} setEnumHour={setEnumHour} enumHour={enumHour} />
+                            </>
+                        )}
+                        {step === 4 && (
+                            <>
+                                <Step_4 />
+                            </>
+                        )}
                     </Grid>
                     <Grid container justifyContent="flex-end" alignItems="flex-end">
                         {step !== 1 && (
@@ -60,9 +117,19 @@ function ReservationForm() {
                                 Vissza
                             </Button>
                         )}
-                        <Button onClick={handleNext} id="loginButton" className='mt-10'>
-                            tovább
-                        </Button>
+                        {step !== 5 && (
+                            <Button onClick={handleNext} id="loginButton" className='mt-10'>
+                                tovább
+                            </Button>
+                        )}
+                        {
+                            step === 5 && (
+                                <Button onClick={handleNext} id="loginButton" className='mt-10'>
+                                    Véglegesités
+                                </Button>
+                            )
+                        }
+
                     </Grid>
                 </Grid>
 
