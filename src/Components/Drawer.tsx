@@ -30,7 +30,7 @@ export default function DrawerSide({isOpen, onClose}:
                         </Link>
                 </ListItem>
                 <ListItem>
-                    <Link to='/history'>
+                    <Link to='/profile/history'>
                     <ListItemButton>
                         <ListItemIcon>
                             <HistoryIcon/>

@@ -85,14 +85,16 @@ export function ApiProvider({ children }: Props) {
             setToken(tokenObj.token);
             setLoggedIn(true);
             localStorage.setItem('token', tokenObj.token);
+            localStorage.setItem('ID',user!.id.toString());
         },
         isLoggedIn: () => {
             return loeggedIn;
         },
         logout: () => {
+            const navigate = useNavigate();
             setToken('');
             localStorage.removeItem('token');
-            window.location.reload();
+            navigate('/')
             
         },
         register: async (username: string, password: string, email: string, last_name: string, first_name: string) => {

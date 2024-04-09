@@ -9,35 +9,35 @@ import { Basket } from "../Interfaces/Basket";
 export default function DrawerSide({ isOpen, onClose }:
     { isOpen: boolean, onClose: () => void }) {
     const [basketData, setBasketData] = useState<Basket[]>([]);
-    let basketId = 0;
     const token = localStorage.getItem('token');
-    useEffect(() => {
-        const fetchData = async () => {
-            if(token !=null){
-                try {
-                    const response = await fetch('http://localhost:3000/basket', {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                        }
-                    })
-                    const data = await response.json();
-                    setBasketData(data);
-                } catch (error) {
-                    console.error('Hiba a kosár adatok lekérése közben:', error);
-                }
+    let basketId = 0;
+    const fetchData = async () => {
+        if(token !=null){
+            try {
+                const response = await fetch('http://localhost:3000/basket', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                })
+                const data = await response.json();
+                setBasketData(data);
+                localStorage.setItem('basketId',basketData[0].id.toString());
                 
+            } catch (error) {
+                console.error('Hiba a kosár adatok lekérése közben:', error);
             }
-          else{
-            setBasketData([]);
-          }
-        };
-
+        }
+      else{
+        setBasketData([]);
+      }
+    };
+    useEffect(() => {
         fetchData();
-    }, [basketData]);
+    }, [isOpen]);
 
     async function onDelete(id: number) {
-        basketId = basketData[0].id
+
         try {
             const response = await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
                 method: 'PATCH',
@@ -49,8 +49,8 @@ export default function DrawerSide({ isOpen, onClose }:
                     menu: id 
                   })
             })
-            const data = await response.json();
-            setBasketData(data);
+            //const data = await response.json();
+            await fetchData();
         } catch (error) {
             console.error('Hiba a kosár adatok lekérése közben:', error);
         }

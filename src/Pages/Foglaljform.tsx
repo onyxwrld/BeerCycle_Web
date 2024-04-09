@@ -10,13 +10,13 @@ import { useNavigate } from 'react-router-dom';
 function ReservationForm() {
     const [step, setStep] = useState(1);
     const token = localStorage.getItem('token');
+    const basketId = localStorage.getItem('basketId'); 
     const navigate = useNavigate();
-
     const [size, setSize] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [address, setAddress] = useState<string>('');
     const [enumHour, setEnumHour] = useState<string>('');
-
+    const userId = localStorage.getItem('ID');
     const handleNext = () => {
         if (step < 5) {
             setStep((prevStep) => prevStep + 1);
@@ -29,13 +29,53 @@ function ReservationForm() {
             setStep((prevStep) => prevStep - 1);
         }
     };
+    
+
+    const fetchData = async () => {
+        if (token) {
+            try {
+                const response = await fetch('http://localhost:3000/basket', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                if (data.length > 0) {
+                    localStorage.setItem('basketId', data[0].id.toString());
+                }
+                else{
+                    localStorage.setItem('basketId', '');
+                }
+            } catch (error) {
+                console.error('Error fetching basket data:', error);
+            }
+        } else {
+            console.error('Error fetching basket data:');
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []); 
     const ReservationPost = async () => {
+        if (userId == null) {
+            console.log("Üres a UserId");
+            navigate('/login');
+            return
+        }
+        if(basketId == null){
+            console.log("üres a basketId");
+            navigate('/login');
+            return
+        }
         const reservation = {
-            user_id: 1,
-            bicycle_id: 1,
+            user_id: parseInt(userId),
+            bicycle_id: parseInt(size),
             start_time: startDate,
             reservation_time: enumHour,
             location: address,
+            basket_id: parseInt(basketId)
         };
 
         try {
@@ -52,15 +92,14 @@ function ReservationForm() {
                 throw new Error('Something went wrong with the reservation request');
             }
 
-            const result = await response.json();
-            if(response.ok){
+            if (response.ok) {
                 setSize('');
                 setAddress('');
                 setEnumHour('');
                 navigate('/');
             }
 
-          
+
         } catch (error) {
             console.error('Error making reservation:', error);
         }

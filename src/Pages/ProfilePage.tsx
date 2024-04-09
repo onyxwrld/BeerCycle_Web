@@ -13,12 +13,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import { ReviewComponent } from "../Components/ReviewComp";
 import { Review } from "../Interfaces/Review";
+import ReservationCard from "../Components/historyFoglalas";
+import { Reservation } from "../Interfaces/Reservation";
 
-export function navigateTo({to}:{to:string})
-{
+export function navigateTo({ to }: { to: string }) {
     const navigate = useNavigate();
     return navigate(to);
 }
+const token = localStorage.getItem('token');
 export function ProfilePage() {
     return <>
         <LoggedIn>
@@ -74,7 +76,7 @@ export function ProfilePage() {
             </Box>
         </LoggedIn>
         <Guest>
-            <SignIn/>
+            <SignIn />
         </Guest>
     </>
 }
@@ -91,14 +93,38 @@ export function User_data() {
 }
 
 export function History() {
-    return <p>history</p>
+    const [reservations, setReservations] = useState<Reservation[]>([]);
+
+    useEffect(() => {
+        const fetchReservations = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/reservation', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data: Reservation[] = await response.json();
+                setReservations(data);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        };
+
+        fetchReservations();
+    }, []);
+    return <ReservationCard foglalas={reservations} />
 }
 
 export function MyReviews() {
     const api = useContext(ApiContext);
-    const [rate,setRate] = useState<number|null>(2);
+    const [rate, setRate] = useState<number | null>(2);
     const [review, setReviews] = useState<Review[] | undefined>();
-    const [content,setContent] = useState<string|null>();
+    const [content, setContent] = useState<string | null>();
 
     function load() {
         api.userReview().then(reviews => setReviews(reviews))
@@ -109,13 +135,13 @@ export function MyReviews() {
     }, [review]);
 
     const handleChange = () => {
-        
+
         const token = localStorage.getItem('token');
         const bodyReview = {
             rate: rate,
-            content: content       
+            content: content
         }
-        try{
+        try {
             async function post() {
                 const response = await fetch('http://localhost:3000/review', {
                     method: 'POST',
@@ -125,21 +151,20 @@ export function MyReviews() {
                     },
                     body: JSON.stringify(bodyReview)
                 })
-                if(!response.ok)
-                {
+                if (!response.ok) {
                     console.log(response);
                 }
-                else{
+                else {
                     setRate(2);
                     setContent('');
                 }
             }
             post();
         }
-        catch{
+        catch {
 
         }
-       
+
     }
 
     return <>
@@ -155,9 +180,9 @@ export function MyReviews() {
                 <TextField id="outlined-basic" label="Vélemény" variant="outlined" value={content} onChange={(e) => {
                     setContent(e.currentTarget.value)
                 }} />
-                <Button id="loginButton" onClick={()=>{
+                <Button id="loginButton" onClick={() => {
                     handleChange(),
-                    load()
+                        load()
                 }}>Küldés </Button>
             </Grid>
             <Grid >

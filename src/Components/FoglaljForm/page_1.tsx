@@ -13,7 +13,11 @@ export const Step1: React.FC<Step1Props> = ({size,setSize}) => {
     };
     return ( <>
         <div className="flex justify-start mb-4">
-            <img src="src/Images/small.png" alt="Sticky Image" className="w-4/6 rounded-xl" />
+        <img src={
+              size === '1' ? 'src/Images/small.png' :
+              size=== '2' ? 'src/Images/mediumBike.png' :
+                  'src/Images/largeBike.png'
+            } className="w-4/6 rounded-xl" />
         </div>
         <FormControl className="mb-4 ">
             <InputLabel id="size-select-label">Size</InputLabel>
@@ -24,9 +28,9 @@ export const Step1: React.FC<Step1Props> = ({size,setSize}) => {
                 label="Size"
                 onChange={handleSizeChange}
             >
-                <MenuItem value="small">Small</MenuItem>
-                <MenuItem value="medium">Medium</MenuItem>
-                <MenuItem value="large">Large</MenuItem>
+                <MenuItem value="1">Kicsi</MenuItem>
+                <MenuItem value="2">Közepes</MenuItem>
+                <MenuItem value="3">Nagy</MenuItem>
             </Select>
         </FormControl>
         <Typography>

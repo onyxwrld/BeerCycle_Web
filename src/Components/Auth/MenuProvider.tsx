@@ -15,7 +15,7 @@ interface Props {
 }
 export function MenuProvider({ children }: Props) {
     const [basket,setBasket] = useState<Basket>();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const [basketChanged, setBasketChanged] = useState<boolean>(false);
     useEffect(() => {
         if (basketChanged) {
@@ -28,11 +28,10 @@ export function MenuProvider({ children }: Props) {
     const menuObj = {
         menuListaKiir: async() => {
             
-            
         },
         basketFeltolt: async (menuItem: Menu) => {
             const post = JSON.stringify({ menu: menuItem.id });
-            const response = await fetch('http://localhost:3000/basket', {
+            await fetch('http://localhost:3000/basket', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
