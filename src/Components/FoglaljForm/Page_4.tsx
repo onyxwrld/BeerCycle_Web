@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { Basket } from '../../Interfaces/Basket';
+import { Menu } from '../../Interfaces/Menu';
 
 const columns = [
   { field: 'name', headerName: 'Name', width: 150 },

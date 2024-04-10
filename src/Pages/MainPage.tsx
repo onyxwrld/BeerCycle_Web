@@ -16,8 +16,8 @@ export function Fooldal() {
     return <div className="container">
         <section className="hero-section">
             <div className="relative">
-                <img src="src/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 w-full h-full object-cover" />
-                <img src="src/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sm:w-3/4 transition ease-in-out hover:scale-110" />
+                <img src="/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 w-full h-full object-cover" />
+                <img src="/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sm:w-3/4 transition ease-in-out hover:scale-110" />
                 <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 z-10">
                     <LoggedIn>
                     <Link to='/reservation'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
@@ -46,7 +46,7 @@ export function Fooldal() {
                             <Card sx={{ maxWidth: 345, mx: 2 }} className="hover:scale-110 transition ease-out">
                                 <CardMedia
                                     sx={{ height: 140 }}
-                                    image="src/Images/ham.png"
+                                    image="/Images/ham.png"
                                     title="Étlap"
                                 />
                                 <CardContent>
@@ -69,7 +69,7 @@ export function Fooldal() {
                                 <CardMedia
                                     sx={{ height: 140 }}
                                     title="Biciglik"
-                                    image="src/Images/bicycle.png"
+                                    image="/Images/bicycle.png"
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
@@ -88,7 +88,7 @@ export function Fooldal() {
                             <Card sx={{ maxWidth: 345, mx: 2 }}>
                                 <CardMedia
                                     sx={{ height: 140 }}
-                                    image="src/Images/beer1.png"
+                                    image="/Images/beer1.png"
                                     title="galleryPromo"
                                 />
                                 <CardContent>
@@ -190,7 +190,7 @@ export function Fooldal() {
 
                 }}
                 alt="The house from the offer."
-                src="src/Images/mobilDownload.png"
+                src="/Images/mobilDownload.png"
             />
             <Button sx={{ zIndex: 1, position: 'absolute' }}>
                 Letöltés
@@ -228,7 +228,7 @@ export function ReviewList() {
                     }
                 </Grid>
                 <Grid item xs={6}>
-                    <img className="top-2/3 w-full flex items-center justify-center overflow-hidden" src="src/Images/peopleComment.png" alt="People commenting" />
+                    <img className="top-2/3 w-full flex items-center justify-center overflow-hidden" src="/Images/peopleComment.png" alt="People commenting" />
                 </Grid>
             </Grid>
 

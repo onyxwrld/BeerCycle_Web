@@ -14,8 +14,8 @@ export const Step1: React.FC<Step1Props> = ({size,setSize}) => {
     return ( <>
         <div className="flex justify-start mb-4">
         <img src={
-              size === '1' ? 'src/Images/small.png' :
-              size=== '2' ? 'src/Images/mediumBike.png' :
+              size === '1' ? '/Images/small.png' :
+              size=== '2' ? '/Images/mediumBike.png' :
                   'src/Images/largeBike.png'
             } className="w-4/6 rounded-xl" />
         </div>

@@ -93,7 +93,7 @@ export function Footer()
       <footer className="bg-darkOrange text-white py-8">
   <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
     <div>
-      <img src="src/Images/BeerCycleText.png" alt="" className="mx-auto mb-4" />
+      <img src="/Images/BeerCycleText.png" alt="" className="mx-auto mb-4" />
     </div>
 
     {/* Contact */}

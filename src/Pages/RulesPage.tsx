@@ -80,10 +80,10 @@ export function RulesPage() {
                 {getStickyContent()}
             </div>
         </Modal>
-        <img src="/src/Images/sticky2.png" alt="" id="sticky3" className="z-20 absolute w-2/12 hover:scale-110 ease-in-out transition right-96 top-32 -rotate-12" onClick={(e) => { handleOpen(e.currentTarget.id) }} />
-        <img src="/src/Images/sticky2.png" alt="" id="sticky2" className="z-20 absolute w-2/12 hover:scale-110 ease-in-out transition right-32 bottom-32 rotate-12" onClick={(e) => { handleOpen(e.currentTarget.id) }} />
-        <img src="/src/Images/sitkcy1.png" alt="" id="sticky1" className="z-20 absolute w-2/12 hover:scale-110 ease-in-out transition left-64 bottom-12" onClick={(e) => { handleOpen(e.currentTarget.id) }} />
-        <img src="/src/Images/parafatabla.png" alt="" className="z-10 relative" />
+        <img src="/Images/sticky2.png" alt="" id="sticky3" className="z-20 absolute w-2/12 hover:scale-110 ease-in-out transition right-96 top-32 -rotate-12" onClick={(e) => { handleOpen(e.currentTarget.id) }} />
+        <img src="/Images/sticky2.png" alt="" id="sticky2" className="z-20 absolute w-2/12 hover:scale-110 ease-in-out transition right-32 bottom-32 rotate-12" onClick={(e) => { handleOpen(e.currentTarget.id) }} />
+        <img src="/Images/sitkcy1.png" alt="" id="sticky1" className="z-20 absolute w-2/12 hover:scale-110 ease-in-out transition left-64 bottom-12" onClick={(e) => { handleOpen(e.currentTarget.id) }} />
+        <img src="/Images/parafatabla.png" alt="" className="z-10 relative" />
     </>
     )
 }

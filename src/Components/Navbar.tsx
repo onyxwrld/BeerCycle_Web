@@ -65,7 +65,7 @@ export function Navbar() {
         <AppBar position="sticky">
             <Toolbar>
                 <Typography sx={{ flexGrow: 1 }}>
-                    <Link to='/'><img src="src/Images/logo2.png" className="w-1/12 hover:scale-110 ease-in-out transition" /></Link>
+                    <Link to='/'><img src="/Images/logo2.png" className="w-1/12 hover:scale-110 ease-in-out transition" /></Link>
                 </Typography>
                 <Box>
                     <LoggedIn>

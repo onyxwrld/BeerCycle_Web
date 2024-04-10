@@ -1,3 +1,4 @@
+import { Basket } from "./Basket";
 import { User } from "./User";
 
 export enum ReservationState {
@@ -5,8 +6,12 @@ export enum ReservationState {
   Done = 'Done',
   Pending = 'Pending',
 }
-
-enum ReservationTime {
+export enum BicycleType{
+  Small = "Small",
+  Medium = "Medium",
+  Large = "Large"
+}
+export enum ReservationTime {
   One,
   Three,
   Five,
@@ -16,16 +21,18 @@ export interface Reservation {
   id: number;
   user: User;
   basket_id: number,
-  bicycle_id: Bicycle;
+  basket: Basket
+  bicycle_id: number;
+  bicycle: Bicycle;
   start_time: string;
   location: string;
   reservation_time: ReservationTime;
   state: ReservationState;
   total_amount: number;
 }
-interface Bicycle {
+export interface Bicycle {
   id: number;
-  type: string;
+  type: BicycleType;
   price: number;
   reservationId: Reservation[];
 }

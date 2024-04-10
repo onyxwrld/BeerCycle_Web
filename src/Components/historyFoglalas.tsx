@@ -1,40 +1,81 @@
-
-import { Reservation, ReservationState } from "../Interfaces/Reservation";
-import { Box } from '@mui/system';
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material';
-import { AccessTime, CheckCircleOutline, ErrorOutline } from "@mui/icons-material";
+import { BicycleType, Reservation, ReservationState } from "../Interfaces/Reservation";
+import { Button, Card, CardActions, CardContent, CardMedia, Typography, Modal, Grid } from '@mui/material';
+import { useState } from "react";
 
 interface Props {
   foglalas: Reservation[]
 }
-export const StatusChip = (status: string) => {
-  const color = status === 'canceled' ? 'red' : status === 'pending' ? 'yellow' : 'green';
-  const Icon = status === 'canceled' ? ErrorOutline : status === 'pending' ? AccessTime : CheckCircleOutline;
 
-  return (
-    <Box className={`flex items-center p-2 ${status}`}>
-      <Icon style={{ color: color }} />
-      <Typography variant="body2" className="ml-2">
-        {status}
-      </Typography>
-    </Box>
-  );
-};
+
 const ReservationCard = ({ foglalas }: Props) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const [open, setOpen] = useState(false);
+  const [reservationId, setReservationId] = useState(0);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const getReservationContent = (reservationItem: Reservation) => {
+    return <>
+      {
+        <Modal open={open} onClose={handleClose} keepMounted>
+          <div className="rounded-xl flex justify-center items-center h-full mx-auto max-w-3xl bg-amber m-5 p-5 overflow-y-scroll overflow-y-visible">
+          {
+            
+          }
+          </div>
+        </Modal>
+
+      }
+    </>
+  }
+  const isDisabled = (x: Reservation) => {
+    const startTimeDate = new Date(x.start_time);
+    return startTimeDate.getTime() <= today.getTime() || x.state === ReservationState.Cancelled;
+  };
+  const handleCancelReservation = async (reservtionId: number) => {
+    const token = localStorage.getItem('token')
+    await fetch(`http://localhost:3000/reservation/stateme/${reservtionId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+  }
+
+  const handleCancelClick = (start_time: string, reservtionId: number) => {
+
+    const startTimeDate = new Date(start_time);
+    if (startTimeDate.toDateString() < today.toDateString()) {
+      handleCancelReservation(reservtionId);
+    }
+    else {
+      console.log('XD');
+    }
+  };
   return (
     <>
-      {foglalas.map((x) => (
+    <Grid container spacing={3}>
+      {foglalas.map((x) => { 
+        console.log(x)
+        return (
+          <Grid item spacing={4}>
         <Card className="p-4 m-5 hover:scale-110 transition ease-out" sx={{
           borderRadius: '15px',
         }}>
           <CardMedia
             component="img"
             alt="bike"
-            height="140"
+            sx={{
+              height: '150px',
+              borderRadius: '15px'
+            }}
             image={
-              x.bicycle_id.type === 'small' ? './Images/small.png' :
-                x.bicycle_id.type === 'medium' ? './Images/mediumBike.png' :
-                  './Images/largeBike.png'
+              x.bicycle.type === BicycleType.Small ? '/Images/small.png' :
+                x.bicycle.type === BicycleType.Medium ? '/Images/mediumBike.png' :
+                  '/Images/largeBike.png'
             }
           />
           <CardContent>
@@ -42,33 +83,44 @@ const ReservationCard = ({ foglalas }: Props) => {
               x.state === ReservationState.Cancelled ? 'text-red-500' :
                 x.state === ReservationState.Done ? 'text-green-500' :
                   'text-yellow-500'}>
-                    <div className={
-                      x.state === ReservationState.Cancelled ? 'rounded-full w-2 h-2 bg-red-500' :
-                      x.state === ReservationState.Done ? 'rounded-full w-2 h-2 bg-green-500' :
-                      'rounded-full w-2 h-2 bg-yellow-500'}
-                    ></div>
+              <div className={
+                x.state === ReservationState.Cancelled ? 'rounded-full w-2 h-2 bg-red-500' :
+                  x.state === ReservationState.Done ? 'rounded-full w-2 h-2 bg-green-500' :
+                    'rounded-full w-2 h-2 bg-yellow-500'}
+              ></div>
               {
                 x.state === ReservationState.Cancelled ? 'Canceled' :
-                  x.state === ReservationState.Done ? 'Done' : 
-                  'Pending'
+                  x.state === ReservationState.Done ? 'Done' :
+                    'Pending'
               }
             </Typography>
             <Typography>
-            
-              {x.start_time}
+              {new Date(x.start_time).toLocaleString()}
             </Typography>
-            <Typography variant="body1">
-              {x.total_amount} Ft
+            <Typography sx={{
+
+            }}>
+              {x.total_amount.toLocaleString('hu-HU')} Ft
             </Typography>
           </CardContent>
           <CardActions>
-
+            <Button
+              sx={{ borderRadius: '15px', backgroundColor: isDisabled(x) ? 'grey' : 'red' }}
+              onClick={() => handleCancelClick(x.start_time, x.id)}
+              disabled={isDisabled(x)}
+            >
+              Lemondom
+            </Button>
+            <Button
+              onClick={() => getReservationContent(x)}
+            >
+              Kosár
+            </Button>
           </CardActions>
         </Card>
-
-      ))}
-
-
+        </Grid>
+      )})}
+      </Grid>
     </>
   );
 }

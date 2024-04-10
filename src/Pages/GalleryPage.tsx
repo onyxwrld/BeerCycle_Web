@@ -33,7 +33,7 @@ export function GalleryPage() {
                                 maxWidth: '100%',
                                 height: 'auto',
                                 display: 'block',
-                            }} src={`src/Images/beerselfi/${selfiImage}`} alt={`Selfi ${index}`} onClick={() => handleOpen(selfiImage)} />
+                            }} src={`/Images/beerselfi/${selfiImage}`} alt={`Selfi ${index}`} onClick={() => handleOpen(selfiImage)} />
                         </Grid>
                     ))}
                 </Grid>
@@ -48,7 +48,7 @@ export function GalleryPage() {
                             }}
                         />
                     </IconButton>
-                    <img src={`src/Images/beerselfi/${selectedImage}`} alt="Nagyított kép" />
+                    <img src={`/Images/beerselfi/${selectedImage}`} alt="Nagyított kép" />
 
                 </div>
             </Modal>
