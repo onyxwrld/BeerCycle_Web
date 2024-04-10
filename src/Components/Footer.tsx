@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Link, Typography, makeStyles } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-/*
-const useStyles = makeStyles(theme => ({
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-}));*/
+import { Grid, Typography, makeStyles } from '@mui/material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { Link } from 'react-router-dom';
+
 interface OpeningHours {
-    Monday: string;
-    Tuesday: string;
-    Wednesday: string;
-    Thursday: string;
-    Friday: string;
-    Saturday: string;
-    Sunday: string;
+    monday: string;
+    tuesday: string;
+    wednesday: string;
+    thursday: string;
+    friday: string;
+    saturday: string;
+    sunday: string;
   }
   interface Worker{
     username: string;
@@ -37,28 +35,28 @@ interface OpeningHours {
   }
   const formatOpeningHours = (opening: OpeningHours) => {
     return(
-        <div>
+        <div className=' flex justify-center'>
             <ul>
                 <li>
-                    {opening.Monday}
+                    {opening.monday}
                 </li>
                 <li>
-                    {opening.Tuesday}
+                    {opening.thursday}
                 </li>
                 <li>
-                    {opening.Wednesday}
+                    {opening.wednesday}
                 </li>
                 <li>
-                    {opening.Tuesday}
+                    {opening.tuesday}
                 </li>
                 <li>
-                    {opening.Friday}
+                    {opening.friday}
                 </li>
                 <li>
-                    {opening.Saturday}
+                    {opening.saturday}
                 </li>
                 <li>
-                    {opening.Sunday}
+                    {opening.sunday}
                 </li>
             </ul>
         </div>  
@@ -75,7 +73,6 @@ export function Footer()
               throw new Error('Network response was not ok');
             }
             const jsonData = await response.json() as DataStructure[];
-            //localStorage.setItem('torzs-adat',jsonData)
             setData(jsonData)
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -95,28 +92,25 @@ export function Footer()
     <div>
       <img src="/Images/BeerCycleText.png" alt="" className="mx-auto mb-4" />
     </div>
-
-    {/* Contact */}
-    <div>
-      <h3 className="mb-2 items-center font-bold">Contact</h3>
-      <p className="mb-2">{adatok[0].email}</p>
+    <div className='items-center'> 
+      <h3 className=" font-bold flex justify-center">Kapcsolatok</h3>
+      <p className="">{adatok[0].email}</p>
       <p>{adatok[0].location}</p>
-      <p>{adatok[0].phone_number}</p>
+      <p>+{adatok[0].phone_number}</p>
     </div>
 
-    {/* Opening Time */}
     <div>
-      <h3 className="mb-2 items-center">Opening</h3>
+      <h3 className="flex justify-center font-bold">Nyitvatartás</h3>
       {formatOpeningHours(adatok[0].opening)}
     </div>
 
-    {/* Social Media Icons */}
     <div>
-      <h3 className="mb-2 items-center">Social Media</h3>
+      <h3 className="flex justify-center font-bold">Social Media</h3>
       <div className="flex justify-center">
-        <AccountCircleIcon className="mr-4" />
-        <AccountCircleIcon className="mr-4" />
-        <AccountCircleIcon className="mr-4" />
+        <Link to='nincsfacebooksadsad'><FacebookIcon className='m-2 hover:scale-110'/></Link>
+        <a href='https://github.com/onyxwrld?tab=repositories' target='blank'> <GitHubIcon  className='m-2 hover:scale-110'/></a>
+        <a href='mailto:ugyintezo@beercycle.com' target='blank'><EmailIcon  className='m-2 hover:scale-110'/></a>
+        <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' target='blank'><YouTubeIcon  className='m-2 hover:scale-110'/></a>
       </div>
     </div>
 
@@ -133,9 +127,9 @@ export function Footer()
       return (
           <Typography className="text-white ">
               {'Copyright © '}
-              <Link >
+              
                   BeerCycle
-              </Link>{' '}
+              {' '}
               {new Date().getFullYear()}
               {'.'}
           </Typography>

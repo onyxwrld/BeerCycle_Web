@@ -9,7 +9,7 @@ export function ErrorPage(){
     }}>
         404
     </Typography>
-    <img src='/src/Images/404beer.png' style={{borderRadius: '15px',height:'300px'}}/>
+    <img src='/Images/404beer.png' style={{borderRadius: '15px',height:'300px'}}/>
     <Typography sx={{
        fontSize: 25
     }}>
@@ -20,7 +20,7 @@ export function ErrorPage(){
     }}>
         Nézz körül főoldalunkon!
     </Typography>
-    <Link to='/'><Button>Szopdki</Button></Link>
+    <Link to='/'><Button>Vissza</Button></Link>
     </div>
    
     </>

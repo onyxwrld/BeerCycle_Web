@@ -20,12 +20,12 @@ export function Fooldal() {
                 <img src="/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sm:w-3/4 transition ease-in-out hover:scale-110" />
                 <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 z-10">
                     <LoggedIn>
-                    <Link to='/reservation'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
+                        <Link to='/reservation'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
                     </LoggedIn>
                     <Guest>
-                    <Link to='/login'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
+                        <Link to='/login'><button className="bg-bloodRed hover:bg-bloodRed hover:text-amber font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-150 ease-in-out">Foglalj</button></Link>
                     </Guest>
-                    
+
                 </div>
             </div>
 
@@ -39,84 +39,75 @@ export function Fooldal() {
                 </div>
             </Grid>
 
-            <div className="bulletPointContainer">
-                <div style={{ marginTop: '50px' }}>
-                    <Container>
-                        <Grid container spacing={1}>
-                            <Card sx={{ maxWidth: 345, mx: 2 }} className="hover:scale-110 transition ease-out">
-                                <CardMedia
-                                    sx={{ height: 140 }}
-                                    image="/Images/ham.png"
-                                    title="Étlap"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        Fogyassz korlátok nélkül<IconButton><SportsBarIcon></SportsBarIcon></IconButton>
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Az általad kiválaszott biciglire korátlan mennyiségű ételt és italt szállitunk izlésed szerint!
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Link to="menu">
-                                        <Button size="small">Válogass étlapunkból</Button>
-                                    </Link>
+            <div>
+                <Grid container spacing={1}>
+                    <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            image="/Images/ham.png"
+                            title="Étlap"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Fogyassz korlátok nélkül
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Az általad kiválaszott biciglire korátlan mennyiségű ételt és italt szállitunk izlésed szerint!
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Link to="menu">
+                                <Button size="small">Válogass étlapunkból</Button>
+                            </Link>
+                        </CardActions>
+                    </Card>
+                    <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
 
-                                </CardActions>
-                            </Card>
-                            <Card sx={{ maxWidth: 345, mx: 2 }}>
-
-                                <CardMedia
-                                    sx={{ height: 140 }}
-                                    title="Biciglik"
-                                    image="/Images/bicycle.png"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        Több méretű bicikli<IconButton>
-                                            <DirectionsBikeIcon></DirectionsBikeIcon>
-                                        </IconButton>
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Válassz személyre szabott, saját ízlésednek megfelelő biciklit.
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Link to='rolunk'><Button size="small">Fedezd fel BeerCycle-t</Button></Link>
-                                </CardActions>
-                            </Card>
-                            <Card sx={{ maxWidth: 345, mx: 2 }}>
-                                <CardMedia
-                                    sx={{ height: 140 }}
-                                    image="/Images/beer1.png"
-                                    title="galleryPromo"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
-                                        Látogass el gallériánkba<IconButton><CameraAltIcon></CameraAltIcon></IconButton>
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Több tucat vendégünk készitett élmény fotót nagyszerű menetükről.
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Link to="gallery"> <Button size="small">Irány a galléria</Button></Link>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    </Container>
-                </div>
-                <Grid sx={{ sx: 3, md: 3 }}>
-                    <div className="shape">
-                        <object type="image/svg+xml" data={MySvg}>svg-animation</object>
-                    </div>
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            title="Biciglik"
+                            image="/Images/bicycle.png"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Több méretű bicikli<IconButton>
+                                    <DirectionsBikeIcon></DirectionsBikeIcon>
+                                </IconButton>
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Válassz személyre szabott, saját ízlésednek megfelelő biciklit.
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Link to='rolunk'><Button size="small">Fedezd fel BeerCycle-t</Button></Link>
+                        </CardActions>
+                    </Card>
+                    <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            image="/Images/beer1.png"
+                            title="galleryPromo"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Látogass el gallériánkba<IconButton><CameraAltIcon></CameraAltIcon></IconButton>
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Több tucat vendégünk készitett élmény fotót nagyszerű menetükről.
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Link to="gallery"> <Button size="small">Irány a galléria</Button></Link>
+                        </CardActions>
+                    </Card>
                 </Grid>
-
             </div>
         </section>
         <ReviewList />
         <section className="faq-section">
-            <h2>Gyakran ismételt kérdéseink</h2>
+            <img src="/Images/faqIcon.png" className="absolute top-32 -rotate-12 z-20 hover:scale-110 ease-in-out" />
+            <img src="/Images/faqIcon.png" className="absolute left-14 bottom-48 -rotate-12 z-20 hover:scale-110 ease-in-out"/>
+            <img src="/Images/faqIcon.png" className="absolute right-10 rotate-12 z-20 hover:scale-110 ease-in-out"/>
             <Container >
                 <Grid sx={{ m: 2 }} rowGap={2}>
                     <Accordion>
@@ -219,7 +210,12 @@ export function ReviewList() {
     const selectedReviews = shuffledReviews!.slice(0, 3);
     return (
         <section className="review-section">
-            <Grid container spacing={2}>
+            <Grid item spacing={12}>
+                <Typography variant="h1" className="font-extrabold">
+                    <img src='/Images/velemenyekLogo.png'/>
+                </Typography>
+            </Grid>
+            <Grid container spacing={2} className="mt-5">
                 <Grid item xs={6} alignItems="center" container justifyContent="center" >
                     {
                         filteredReviews && filteredReviews.map((item, index) => {
@@ -228,10 +224,14 @@ export function ReviewList() {
                     }
                 </Grid>
                 <Grid item xs={6}>
-                    <img className="top-2/3 w-full flex items-center justify-center overflow-hidden" src="/Images/peopleComment.png" alt="People commenting" />
+                    <img className="top-2/3 w-full flex items-center justify-center overflow-hidden rounded-2xl" src="/Images/peopleComment.png" alt="People commenting" />
                 </Grid>
             </Grid>
-
+            <Grid sx={{ sx: 3, md: 3 }}>
+                    <div className="shape">
+                        <object type="image/svg+xml" data={MySvg}>svg-animation</object>
+                    </div>
+                </Grid>
         </section>
     );
 }

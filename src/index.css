@@ -27,10 +27,7 @@ body {
   align-items: center;
 
 }
-a {
-  color: rgb(44, 30, 3);
-  text-decoration: none;
-}
+
 
 
 .review-section {
@@ -155,4 +152,16 @@ section {
   justify-content: center;
   align-items: center;
   scroll-snap-align: start;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+.hover:spin {
+  animation: spin 1s linear infinite;
 }
