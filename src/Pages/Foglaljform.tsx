@@ -1,27 +1,43 @@
 import { useEffect, useState } from 'react';
-import { Button, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import MapComponent from '../Components/FoglaljForm/Map';
 import { Step1 } from '../Components/FoglaljForm/page_1';
 import { DatePickerWithHour } from '../Components/FoglaljForm/Page_3';
 import Step_4 from '../Components/FoglaljForm/Page_4';
 import { useNavigate } from 'react-router-dom';
+import SnackBarAlert from '../Components/SnackBar';
 
 
 function ReservationForm() {
     const [step, setStep] = useState(1);
     const token = localStorage.getItem('token');
-    const basketId = localStorage.getItem('basketId'); 
+    const basketId = localStorage.getItem('basketId');
     const navigate = useNavigate();
     const [size, setSize] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [address, setAddress] = useState<string>('');
     const [enumHour, setEnumHour] = useState<string>('');
     const userId = localStorage.getItem('ID');
+
+    const [open, setOpen] = useState(false);
+
+    const handelOpen = () => {
+        setOpen(true)
+    }
     const handleNext = () => {
         if (step < 5) {
             setStep((prevStep) => prevStep + 1);
         } else if (step === 5) {
-            ReservationPost();
+            try {
+                ReservationPost();
+                return <SnackBarAlert alertMessage="sikeres" error={false} open={open} setOpen={setOpen} />       
+            }
+            catch {
+                return <SnackBarAlert alertMessage="hibás" error={true} open={open} setOpen={setOpen} />
+            }
+            finally{
+                handelOpen();
+            }
         }
     };
     const handleBack = () => {
@@ -29,7 +45,7 @@ function ReservationForm() {
             setStep((prevStep) => prevStep - 1);
         }
     };
-    
+
 
     const fetchData = async () => {
         if (token) {
@@ -44,7 +60,7 @@ function ReservationForm() {
                 if (data.length > 0) {
                     localStorage.setItem('basketId', data[0].id.toString());
                 }
-                else{
+                else {
                     localStorage.setItem('basketId', '');
                 }
             } catch (error) {
@@ -57,14 +73,14 @@ function ReservationForm() {
 
     useEffect(() => {
         fetchData();
-    }, []); 
+    }, []);
     const ReservationPost = async () => {
         if (userId == null) {
             console.log("Üres a UserId");
             navigate('/login');
             return
         }
-        if(basketId == null){
+        if (basketId == null) {
             console.log("üres a basketId");
             navigate('/login');
             return
@@ -88,15 +104,17 @@ function ReservationForm() {
                 body: JSON.stringify(reservation),
             });
 
-            if (!response.ok) {
-                throw new Error('Something went wrong with the reservation request');
-            }
-
             if (response.ok) {
                 setSize('');
                 setAddress('');
                 setEnumHour('');
                 navigate('/');
+                
+               return <SnackBarAlert alertMessage="sikeres" error={false} open={open} setOpen={setOpen} />     
+            }
+            else{
+                console.log('asd');
+                return <SnackBarAlert alertMessage="sikertelen" error={true} open={open} setOpen={setOpen} />     
             }
 
 
@@ -108,7 +126,7 @@ function ReservationForm() {
         <div className="bg-white h-screen flex justify-center items-center">
             <div className="bg-navYellow p-10 rounded-3xl" style={{ width: '800px', height: '800px' }}>
                 <div className="flex justify-center">
-                    <img src="src/Images/BeerCycleText.png" alt="BEERCYCLE Logo" className="w-3/5" />
+                    <img src="/Images/BeerCycleText.png" alt="BEERCYCLE Logo" className="w-3/5" />
                 </div>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={4} md={3}>

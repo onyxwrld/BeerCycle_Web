@@ -91,9 +91,13 @@ export function ApiProvider({ children }: Props) {
             return loeggedIn;
         },
         logout: () => {
-            const navigate = useNavigate();
+            
             setToken('');
             localStorage.removeItem('token');
+            localStorage.removeItem('ID');
+            localStorage.removeItem('basketCount');
+            localStorage.removeItem('basketId');
+            const navigate = useNavigate();
             navigate('/')
             
         },

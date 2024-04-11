@@ -16,7 +16,7 @@ export const Step1: React.FC<Step1Props> = ({size,setSize}) => {
         <img src={
               size === '1' ? '/Images/small.png' :
               size=== '2' ? '/Images/mediumBike.png' :
-                  'src/Images/largeBike.png'
+                  '/Images/largeBike.png'
             } className="w-4/6 rounded-xl" />
         </div>
         <FormControl className="mb-4 ">

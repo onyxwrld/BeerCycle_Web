@@ -18,6 +18,7 @@ import { MenuProvider } from './Components/Auth/MenuProvider.tsx'
 import { ErrorPage } from './Pages/ErrorPage.tsx'
 import ReservationForm from './Pages/Foglaljform.tsx'
 import { StyledEngineProvider } from '@mui/styled-engine-sc'
+import { TestPage } from './Pages/testSnack.tsx'
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: 'reservation',
     element: <ReservationForm/>
+  },
+  {
+    path: 'test',
+    element: <TestPage/>
   },
   {
     path: 'profile',

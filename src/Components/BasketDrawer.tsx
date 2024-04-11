@@ -5,12 +5,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { DialogComp } from "./DialogComp";
 import { FunctionsOutlined } from "@mui/icons-material";
 import { Basket } from "../Interfaces/Basket";
+import { Menu } from "../Interfaces/Menu";
 
 export default function DrawerSide({ isOpen, onClose }:
     { isOpen: boolean, onClose: () => void }) {
     const [basketData, setBasketData] = useState<Basket[]>([]);
     const token = localStorage.getItem('token');
-    let basketId = 0;
+    let basketId = localStorage.getItem('basketId');
     const fetchData = async () => {
         if(token !=null){
             try {
@@ -39,7 +40,7 @@ export default function DrawerSide({ isOpen, onClose }:
     async function onDelete(id: number) {
 
         try {
-            const response = await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
+            await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,

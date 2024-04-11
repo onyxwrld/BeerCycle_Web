@@ -27,7 +27,7 @@ export function ProfilePage() {
             <Navbar />
             <Box sx={{ m: 15, borderRadius: 2, boxShadow: 4 }}>
                 <Grid container spacing={2}>
-                    <Grid item spacing={4}>
+                    <Grid item xs={3}>
                         <List>
                             <Link to='user_data'>
                                 <ListItemButton>
@@ -69,7 +69,7 @@ export function ProfilePage() {
                             </ListItemButton>
                         </List>
                     </Grid>
-                    <Grid>
+                    <Grid item xs={9}>
                         <Outlet />
                     </Grid>
                 </Grid>
@@ -117,7 +117,9 @@ export function History() {
 
         fetchReservations();
     }, []);
-    return <ReservationCard foglalas={reservations} />
+    return <Grid container spacing={3}>
+    <ReservationCard foglalas={reservations} />
+    </Grid>
 }
 
 export function MyReviews() {

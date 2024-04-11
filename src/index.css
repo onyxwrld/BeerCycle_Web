@@ -7,7 +7,7 @@
 
 body {
   color: rgb(25, 25, 50);
-  background-color: beige;
+  background-color: #f5f5dc;
   padding: 0;
   margin: 0;
   
@@ -28,7 +28,9 @@ body {
 
 }
 
-
+a{
+  color: black;
+}
 
 .review-section {
   background-color: rgb(255, 255, 255);
