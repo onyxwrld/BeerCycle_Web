@@ -10,8 +10,9 @@ body {
   background-color: #ffffff;
   padding: 0;
   margin: 0;
-  
+
 }
+
 .hero-section,
 .faq-section,
 .second-section,
@@ -25,20 +26,22 @@ body {
   align-items: center;
 
 }
-#menuPage{
+
+#menuPage {
   background-image: url('/Images/pubBeercycle.png');
   background-size: cover;
   background-position: center;
-  height: 100vh; 
-  width: 100vw; 
+  height: 100vh;
+  width: 100vw;
 
 }
-a{
+
+a {
   color: black;
 }
 
 .review-section {
-  background-color: rgb(255, 255, 255);
+  background: linear-gradient(to bottom, #FFFFFF 50%, #FDBD0C 100%);
 }
 
 .hero-section {
@@ -48,7 +51,12 @@ a{
 .second-section {
   background-color: rgb(255, 255, 255);
 }
-
+.faq-section{
+  background: linear-gradient(to bottom, #FDBD0C 100%, #FFFFFF 50%);
+}
+.mobil-section{
+  background: linear-gradient(to bottom, #FDBD0C 0%, #FFFFFF 50%);
+}
 .shape object {
 
   margin-top: 16vw;
@@ -63,14 +71,6 @@ a{
   line-height: 0;
 }
 
-.loadDiv {
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  margin: 15vh;
-  
-}
-
 .shape svg {
   position: relative;
   display: block;
@@ -82,12 +82,23 @@ a{
   fill: #fdbd0c;
 }
 
+.loadDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15vh;
+
+}
+
+
+
 p {
   flex: 2;
   margin: 5px;
   padding: 3px;
 }
-#backButton{
+
+#backButton {
   display: inline-block;
   padding: .75rem 1.25rem;
   border-radius: 10rem;
@@ -98,8 +109,9 @@ p {
   letter-spacing: .15rem;
   transition: all .3s;
   position: relative;
-  margin-right: '10px' 
+  margin-right: '10px'
 }
+
 #loginButton {
   display: inline-block;
   padding: .75rem 1.25rem;
@@ -112,13 +124,15 @@ p {
   transition: all .3s;
   position: relative;
 }
-#loginButton:hover, button:hover{
+
+#loginButton:hover,
+button:hover {
   transform: scale(1.1);
   border-radius: 30px;
   background-color: #840000;
 }
 
-.loginNav:hover{
+.loginNav:hover {
 
   background-color: #840000;
 }
@@ -158,9 +172,12 @@ p {
 
 
 .container {
+  /*
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
+  */
+
   max-width: fit-content;
 }
 

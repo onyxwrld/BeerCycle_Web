@@ -105,9 +105,8 @@ export function Fooldal() {
         </section>
         <ReviewList />
         <section className="faq-section">
-            <img src="/Images/faqIcon.png" className="absolute top-32 -rotate-12 z-20 hover:scale-110 ease-in-out" />
-            <img src="/Images/faqIcon.png" className="absolute left-14 bottom-48 -rotate-12 z-20 hover:scale-110 ease-in-out"/>
-            <img src="/Images/faqIcon.png" className="absolute right-10 rotate-12 z-20 hover:scale-110 ease-in-out"/>
+            <img src="/Images/faqIcon.png" className="absolute left-14 bottom-48 -rotate-12 z-20 hover:scale-110 ease-in-out" />
+            <img src="/Images/faqIcon.png" className="absolute right-10 rotate-12 z-20 hover:scale-110 ease-in-out" />
             <Container >
                 <Grid sx={{ m: 2 }} rowGap={2}>
                     <Accordion>
@@ -170,7 +169,6 @@ export function Fooldal() {
             </Container>
         </section>
         <section className="mobil-section">
-
             <Box
                 component="img"
                 sx={{
@@ -186,6 +184,7 @@ export function Fooldal() {
             <Button sx={{ zIndex: 1, position: 'absolute' }}>
                 Letöltés
             </Button>
+        
         </section>
     </div>
 }
@@ -212,7 +211,7 @@ export function ReviewList() {
         <section className="review-section">
             <Grid item spacing={12}>
                 <Typography variant="h1" className="font-extrabold">
-                    <img src='/Images/velemenyekLogo.png'/>
+                    <img src='/Images/velemenyekLogo.png' />
                 </Typography>
             </Grid>
             <Grid container spacing={2} className="mt-5">
@@ -227,11 +226,6 @@ export function ReviewList() {
                     <img className="top-2/3 w-full flex items-center justify-center overflow-hidden rounded-2xl" src="/Images/peopleComment.png" alt="People commenting" />
                 </Grid>
             </Grid>
-            <Grid sx={{ sx: 3, md: 3 }}>
-                    <div className="shape">
-                        <object type="image/svg+xml" data={MySvg}>svg-animation</object>
-                    </div>
-                </Grid>
         </section>
     );
 }
