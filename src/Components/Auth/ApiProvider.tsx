@@ -100,8 +100,7 @@ export function ApiProvider({ children }: Props) {
         isLoggedIn: () => {
             return loeggedIn;
         },
-        logout: () => {
-            
+        logout: () => { 
             setToken('');
             localStorage.removeItem('token');
             localStorage.removeItem('ID');

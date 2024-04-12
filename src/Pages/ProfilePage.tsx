@@ -22,6 +22,7 @@ export function navigateTo({ to }: { to: string }) {
 }
 const token = localStorage.getItem('token');
 export function ProfilePage() {
+    const api = useContext(ApiContext)
     return <>
         <LoggedIn>
             <Navbar />
@@ -59,7 +60,7 @@ export function ProfilePage() {
                                     </ListItemText>
                                 </ListItemButton>
                             </Link>
-                            <ListItemButton>
+                            <ListItemButton onClick={api.logout}>
                                 <ListItemIcon>
                                     <LogoutIcon />
                                 </ListItemIcon>
