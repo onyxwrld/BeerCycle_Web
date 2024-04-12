@@ -9,6 +9,6 @@ export const TestPage = () =>{
     }
     return<>
     <Button onClick={handelOpen}>Katt</Button>
-    <SnackBarAlert alertMessage="Sikers" error={false} open={open} setOpen={setOpen}/>
+    <SnackBarAlert alertMessage="Hibás karakter lánc" error={true} open={open} setOpen={setOpen}/>
     </>
 }

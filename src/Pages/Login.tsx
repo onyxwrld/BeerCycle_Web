@@ -46,10 +46,13 @@ export default function SignIn() {
                 setLoginError('');
                 setUserName('');
                 setPass('');
+                api.snackBarFunction('Sikeres bejelentkezés',false)
                 navigate('/');
+                
             })
             .catch((e: Error) => {
                 setLoginError(e.message);
+                api.snackBarFunction('Sikertlen bejelentkezés',true)
             })
     };
 

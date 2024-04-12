@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { MenuContext } from "../Components/Auth/MenuProvider";
+import { Card, CardMedia } from "@mui/material";
 
 
 export default function Menu() {
@@ -30,80 +31,70 @@ export default function Menu() {
 
     useEffect(() => {
         async function LoadData() {
-            const response = await fetch('http://localhost:3000/menu');
-            if (response.ok) {
-                const data = await response.json() as Menu[]; 
+            try {
+                const response = await fetch('http://localhost:3000/menu');
+                const data = await response.json() as Menu[];
                 setFood(data);
             }
-            else {
-                const errorOsbj = await response.json();
+            catch {
+                console.log("error")
             }
+
         }
         LoadData();
     }, [])
 
     return (
-        <>
-            <Container fixed sx={{ mt: 15,mb:100 }}>
-                <Grid container spacing={{sx:3}}>
+        <section id="menuPage">
+            <Container>
+                <Grid container spacing={2} className="m-10">
                     <Grid item xs={6}>
-                    <FormControl sx={{ width: "10vw" }}>
-                        <InputLabel id="demo-simple-select-label">Kategória</InputLabel>
-                        <Select
-                            labelId="lable"
-                            id="asd"
-                            value={types}
-                            onChange={handleChange}
-                        >
-                            {   
-                            types.map((type, index) => (
-                                <MenuItem
-                                    key={index}
-                                    value={type}
-                                >
-                                    {type}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-              </Grid>
-              <Grid item xs={6}>
-                    <Typography>
-                        Válasszon sokszín kinálatunkból igényeinek megfelelően! Majd kattintson a termék csomag ikonjára, hogy terméke a kosárba kerülhessen.
-                    </Typography>
+                        <Typography className="bg-white rounded-xl">
+                            Válasszon sokszín kinálatunkból igényeinek megfelelően! Majd kattintson a termék csomag ikonjára, hogy terméke a kosárba kerülhessen.
+                        </Typography>
                     </Grid>
                 </Grid>
                 <Grid container spacing={{ xs: 3, md: 4 }} >
                     {
                         food.map((x, index) => (
-                            <Box key={index} sx={{
-                                borderRadius: 2,
-                                boxShadow: 3,
-                                p: 2,
-                                m: 2,
-                                height: "8em",
-                                width: "8em"
-                            }} flexGrow={1}>
-                                <Grid >
-                                    <Grid>
-                                        <Typography sx={{ fontStyle: 'oblique', top: 0, left: 0 }}>
+                            <Card key={index} className="m-5 p-5 hover:scale-110 transition ease-in-out"
+                                sx={{
+                                    borderRadius: '15px',
+                                }}>
+                                <CardMedia
+                                    component="img"
+                                    alt="drink"
+                                    image={`/Images/sorKepek/${x.name}.png`}
+                                    sx={{
+                                        height: '150px',
+                                        borderRadius: '15px'
+                                    }}
+                                >
+                                </CardMedia>
+                                <Grid item spacing={12}>
+                                        <Typography sx={{fontWeight:'300px',mt:2 }}>
                                             {
                                                 x.name
                                             }
                                         </Typography>
+                                    </Grid>
+                                <Grid container spacing={2}>
+                                    <Grid item spacing={6}>
                                         {
-                                            x.price + ' Ft'
+                                            x.price.toLocaleString('hu-HU') + ' Ft'
                                         }
-                                        <IconButton onClick={()=> api.basketFeltolt(x)}>
-                                            <ShoppingBagIcon/>
+                                    </Grid>
+                                    <Grid  item spacing={6}>
+                                        <IconButton onClick={() => api.basketFeltolt(x)} className="hover:text-orange-500 "> 
+                                            <ShoppingBagIcon />
                                         </IconButton>
                                     </Grid>
                                 </Grid>
-                            </Box>
+                            </Card>
                         ))
                     }
                 </Grid>
             </Container>
-        </>
+        </section >
     )
 }

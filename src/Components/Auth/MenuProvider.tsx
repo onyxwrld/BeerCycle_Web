@@ -1,7 +1,8 @@
 import { ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { Basket } from "../../Interfaces/Basket";
-import { Menu } from "../../Interfaces/Menu";
+import { ApiContext } from "./ApiProvider";
+
 
 export const MenuContext = createContext({
     menuListaKiir: async () => {
@@ -15,8 +16,9 @@ interface Props {
     children: React.ReactNode;
 }
 export function MenuProvider({ children }: Props) {
-    const [basket,setBasket] = useState<Basket>();
+    const [basket, setBasket] = useState<Basket>();
     const token = localStorage.getItem('token');
+    const api = useContext(ApiContext);
     const [basketChanged, setBasketChanged] = useState<boolean>(false);
     useEffect(() => {
         if (basketChanged) {
@@ -27,12 +29,12 @@ export function MenuProvider({ children }: Props) {
         }
     }, [basketChanged]);
     const menuObj = {
-        menuListaKiir: async() => {
-            
+        menuListaKiir: async () => {
+
         },
         basketFeltolt: async (menuItem: Menu) => {
             const post = JSON.stringify({ menu: menuItem.id });
-            await fetch('http://localhost:3000/basket', {
+            const response = await fetch('http://localhost:3000/basket', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
@@ -41,6 +43,13 @@ export function MenuProvider({ children }: Props) {
                 },
                 body: post,
             })
+            if (response.ok) {
+                api.snackBarFunction(`${menuItem.name} hozzá adva a kosárhoz!`, false)
+            }
+            else{
+                api.snackBarFunction(`Nem sikerült hozzáadni a kosárhoz`, true)
+            }
+            
         },
         basketChange: (isChange: boolean) => {
             setBasketChanged(isChange);

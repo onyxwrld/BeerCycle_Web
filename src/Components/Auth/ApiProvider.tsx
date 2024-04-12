@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { User } from "../../Interfaces/User";
 import { useNavigate } from 'react-router-dom';
 import { Review } from "../../Interfaces/Review";
+import SnackBarAlert from "../SnackBar";
 
 export const ApiContext = createContext({
     login: async (username: string, password: string): Promise<void> => {
@@ -14,6 +15,9 @@ export const ApiContext = createContext({
     },
     userReview: async(): Promise<Review[] | undefined> => {
         throw new Error("nincs implementálva");
+    },
+    snackBarFunction: (alertMessage:string,error:boolean) =>{
+        
     }
 })
 
@@ -25,7 +29,12 @@ export function ApiProvider({ children }: Props) {
     const [token, setToken] = useState('');
     const [loeggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null as User | null);
-    const [error, setError] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
+    const [open,setOpen] = useState(false);
+    const [error,setError] = useState(false);
+    const handelOpen = ()=>{
+        setOpen(true)
+    }
 
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
@@ -46,11 +55,11 @@ export function ApiProvider({ children }: Props) {
             if (response.status === 401) {
                 setToken('');
                 localStorage.removeItem('token');
-                setError('Please login again');
+                setAlertMessage('Please login again');
                 return;
             }
             if (!response.ok) {
-                setError('An error occured, try again later');
+                setAlertMessage('An error occured, try again later');
                 return;
             }
             const userData = await response.json() as User;
@@ -72,7 +81,8 @@ export function ApiProvider({ children }: Props) {
             const loginData = {
                 username, password,
             }
-            const response = await fetch('http://localhost:3000/auth/login', {
+            
+                const response = await fetch('http://localhost:3000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
@@ -118,10 +128,10 @@ export function ApiProvider({ children }: Props) {
                     body: JSON.stringify(registerData),
                 });
                 if (!response.ok) {
-                    throw new Error('Hiba történt a kérés során');
+                    setAlertMessage('Hiba történt a kérés során');
                 }
             } catch (error) {
-                console.error('Hiba történt a kérés során:', error);
+                setAlertMessage(`Hiba történt a kérés során: ${error}`);
             }
         },
         userReview: async () =>{
@@ -133,18 +143,25 @@ export function ApiProvider({ children }: Props) {
                   },
             })
             if (!response.ok) {
-                throw new Error('Hiba történt a kérés során');
+                setAlertMessage('Hiba történt a kérés során');
             } 
 
             const responseData = await response.json() as Review[];
             return responseData;
         }
         catch(error) {
-            console.error('Hiba történt a kérés során:', error);
+            setAlertMessage(`Hiba történt a kérés során: ${error}`);
         }
+        },
+        snackBarFunction: (alertMessage:string,error:boolean) => {
+            setOpen(true)
+            setAlertMessage(alertMessage)
+            setError(error)
         }
+
     };
     return <ApiContext.Provider value={apiObj}>
         {children}
+        <SnackBarAlert alertMessage={alertMessage} error={error} open={open} setOpen={setOpen}/>
     </ApiContext.Provider>
 };

@@ -4,11 +4,14 @@ import { MenuContext } from "./Auth/MenuProvider";
 import CloseIcon from '@mui/icons-material/Close';
 import { DialogComp } from "./DialogComp";
 import { FunctionsOutlined } from "@mui/icons-material";
+import SportsBarIcon from '@mui/icons-material/SportsBar';
+import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import { Basket } from "../Interfaces/Basket";
-import { Menu } from "../Interfaces/Menu";
+import { ApiContext } from "./Auth/ApiProvider";
 
 export default function DrawerSide({ isOpen, onClose }:
     { isOpen: boolean, onClose: () => void }) {
+    const api = useContext(ApiContext);
     const [basketData, setBasketData] = useState<Basket[]>([]);
     const token = localStorage.getItem('token');
     let basketId = localStorage.getItem('basketId');
@@ -38,9 +41,7 @@ export default function DrawerSide({ isOpen, onClose }:
     }, [isOpen]);
 
     async function onDelete(id: number) {
-
-        try {
-            await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
+            const res = await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -51,14 +52,17 @@ export default function DrawerSide({ isOpen, onClose }:
                   })
             })
             //const data = await response.json();
-            await fetchData();
-        } catch (error) {
-            console.error('Hiba a kosár adatok lekérése közben:', error);
-        }
+             fetchData();
+            if(res.ok){
+                api.snackBarFunction('Elem törlése sikeres',false)
+            }
+            else{
+                api.snackBarFunction('Elem törlése sikertelen',true)
+            }
     }
     return (
         <>
-            <Drawer anchor="right" open={isOpen} onClose={onClose} >
+            <Drawer anchor="right" open={isOpen} onClose={onClose} keepMounted >
                 <Box p={2}>
                     <Typography>
                         Kosarad
@@ -70,6 +74,9 @@ export default function DrawerSide({ isOpen, onClose }:
                                     {basket.menu.length > 0 ? (
                                         basket.menu.map((menuItem: Menu, menuIndex: number) => (
                                             <ListItem key={menuIndex}>
+                                                {
+                                                    menuItem.type === 'drink' ?<LunchDiningIcon/> : <SportsBarIcon/>
+                                                }
                                                 <ListItemButton>
                                                     <ListItemText>
                                                         {menuItem.name}

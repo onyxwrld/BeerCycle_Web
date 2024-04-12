@@ -35,7 +35,7 @@ interface OpeningHours {
   }
   const formatOpeningHours = (opening: OpeningHours) => {
     return(
-        <div className=' flex justify-center'>
+        <div className=' flex justify-center text-amber'>
             <ul>
                 <li>
                     {opening.monday}
@@ -93,24 +93,26 @@ export function Footer()
       <img src="/Images/BeerCycleText.png" alt="" className="mx-auto mb-4" />
     </div>
     <div className='items-center'> 
-      <h3 className=" font-bold flex justify-center">Kapcsolatok</h3>
+      <h3 className=" font-bold flex justify-center text-orange-500">Kapcsolatok</h3>
+      <div className='text-amber'>
       <p className="">{adatok[0].email}</p>
       <p>{adatok[0].location}</p>
       <p>+{adatok[0].phone_number}</p>
+      </div>
     </div>
 
     <div>
-      <h3 className="flex justify-center font-bold">Nyitvatartás</h3>
+      <h3 className="flex justify-center font-bold text-orange-500">Nyitvatartás</h3>
       {formatOpeningHours(adatok[0].opening)}
     </div>
 
     <div>
-      <h3 className="flex justify-center font-bold">Social Media</h3>
-      <div className="flex justify-center">
-        <Link to='nincsfacebooksadsad'><FacebookIcon className='m-2 hover:scale-110'/></Link>
-        <a href='https://github.com/onyxwrld?tab=repositories' target='blank'> <GitHubIcon  className='m-2 hover:scale-110'/></a>
-        <a href='mailto:ugyintezo@beercycle.com' target='blank'><EmailIcon  className='m-2 hover:scale-110'/></a>
-        <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' target='blank'><YouTubeIcon  className='m-2 hover:scale-110'/></a>
+      <h3 className="flex justify-center font-bold text-orange-500">Social Media</h3>
+      <div className="flex justify-center ">
+        <Link to='nincsfacebooksadsad'><FacebookIcon className='m-2 hover:scale-110 text-amber '/></Link>
+        <a href='https://github.com/onyxwrld?tab=repositories' target='blank'> <GitHubIcon  className='text-amber m-2 hover:scale-110'/></a>
+        <a href='mailto:ugyintezo@beercycle.com' target='blank'><EmailIcon  className='text-amber m-2 hover:scale-110'/></a>
+        <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ' target='blank'><YouTubeIcon  className='text-amber m-2 hover:scale-110'/></a>
       </div>
     </div>
 

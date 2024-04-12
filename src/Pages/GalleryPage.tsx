@@ -36,7 +36,7 @@ export function GalleryPage() {
     return (
         <>
             <Container >
-                <Grid className="justify-center items-center">
+                <Grid className="justify-center items-center flex mt-2">
                     <img src="/Images/galleryLogo.png" alt="" className="w-1/2 mt-2 "/>
                 </Grid>
                 <Grid container justifyContent="center" spacing={4} sx={{mt:8, mb: 15 }}>

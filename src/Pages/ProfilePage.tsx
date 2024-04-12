@@ -27,7 +27,7 @@ export function ProfilePage() {
             <Navbar />
             <Box sx={{ m: 15, borderRadius: 2, boxShadow: 4 }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={3}>
+                    <Grid item xs={3} className="overflow-auto ">
                         <List>
                             <Link to='user_data'>
                                 <ListItemButton>

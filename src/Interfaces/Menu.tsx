@@ -1,4 +1,4 @@
-export interface Menu {
+interface Menu {
     id:number;
     name: string;
     type: string;

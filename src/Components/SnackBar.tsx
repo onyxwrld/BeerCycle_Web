@@ -23,7 +23,6 @@ const SnackBarAlert: React.FC<SnackBarAlertProps> = ({ alertMessage, error, open
             autoHideDuration={6000}
         >
             <SnackbarContent
-                
                 message={
                     <span className={error ? "text-red-600" : "text-green-600"} style={{ display: 'flex', alignItems: 'center' }}>
                     {error ? <ErrorIcon style={{ marginRight: '10px' }} /> : <CheckCircleOutlineIcon style={{ marginRight: '10px' }} />}

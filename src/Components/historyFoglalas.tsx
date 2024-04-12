@@ -1,5 +1,5 @@
 import { BicycleType, Reservation, ReservationState } from "../Interfaces/Reservation";
-import { Button, Card, CardActions, CardContent, CardMedia, Typography, Modal, Grid } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardMedia, Typography, Modal, Grid, Divider } from '@mui/material';
 import { useState } from "react";
 
 interface Props {
@@ -71,29 +71,36 @@ const ReservationCard = ({ foglalas }: Props) => {
                 }
               />
               <CardContent>
-                <Typography className={
-                  x.state === ReservationState.Cancelled ? 'text-red-500' :
-                    x.state === ReservationState.Done ? 'text-green-500' :
-                      'text-yellow-500'}>
-                  <div className={
-                    x.state === ReservationState.Cancelled ? 'rounded-full w-2 h-2 bg-red-500' :
-                      x.state === ReservationState.Done ? 'rounded-full w-2 h-2 bg-green-500' :
-                        'rounded-full w-2 h-2 bg-yellow-500'}
-                  ></div>
-                  {
-                    x.state === ReservationState.Cancelled ? 'Canceled' :
-                      x.state === ReservationState.Done ? 'Done' :
-                        'Pending'
+                <Grid>
+                  <Typography>
+                    {new Date(x.start_time).toLocaleString()}
+                  </Typography>
+                </Grid>
+                <Grid container spacing={2}>
+                  <Grid item spacing={6}>
+                    <Typography >
+                      <div className={
+                        x.state === ReservationState.Cancelled ? 'rounded-full w-2 h-2 m-2 bg-red-500' :
+                          x.state === ReservationState.Done ? 'rounded-full w-2 h-2 m-2 bg-green-500' :
+                            'rounded-full w-2 h-2 bg-yellow-500 m-2'}
+                      ></div>
+                    </Typography>
+                  </Grid>
+                  <Grid item spacing={6} className={
+                    x.state === ReservationState.Cancelled ? 'text-red-500' :
+                      x.state === ReservationState.Done ? 'text-green-500' :
+                        'text-yellow-500'
                   }
-                </Typography>
-                <Typography>
-                  {new Date(x.start_time).toLocaleString()}
-                </Typography>
-                <Typography sx={{
-
-                }}>
-                  {x.total_amount.toLocaleString('hu-HU')} Ft
-                </Typography>
+                  >
+                    <Typography>
+                      {
+                        x.state === ReservationState.Cancelled ? 'Canceled' :
+                          x.state === ReservationState.Done ? 'Done' :
+                            'Pending'
+                      }
+                    </Typography>
+                  </Grid>
+                </Grid>
               </CardContent>
               <CardActions>
                 <Button
@@ -117,9 +124,20 @@ const ReservationCard = ({ foglalas }: Props) => {
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '20px', borderRadius: '10px' }}>
           {selectedReservation?.basket?.menu.map((menuItem) => (
             <Typography key={menuItem.id} variant="body1" component="p">
-              {menuItem.name}: {menuItem.price.toLocaleString('hu-HU')} Ft
+              <Grid container spacing={2}>
+                <Grid item spacing={6} className=" flex justify-start">
+                  {menuItem.name}
+                </Grid>
+                <Grid item spacing={6} className=" flex justify-end">
+                  {menuItem.price.toLocaleString('hu-HU')} Ft
+                </Grid>
+              </Grid>
             </Typography>
           ))}
+          <Divider />
+          <Grid className="font-bold justify-end flex">
+            {selectedReservation?.total_amount.toLocaleString('hu-HU')} Ft
+          </Grid>
         </div>
       </Modal>
     </>
