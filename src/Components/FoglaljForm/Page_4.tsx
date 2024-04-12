@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { Basket } from '../../Interfaces/Basket';
-import { Menu } from '../../Interfaces/Menu';
+
 
 const columns = [
-  { field: 'name', headerName: 'Name', width: 150 },
-  { field: 'type', headerName: 'Type', width: 150 },
-  { field: 'price', headerName: 'Price', width: 110 },
+  { field: 'name', headerName: 'Termék neve', width: 150 },
+  { field: 'type', headerName: 'Tipus', width: 150 },
+  { field: 'price', headerName: 'Ár', width: 110 },
 ];
 
 export default function Step_4() {
@@ -40,9 +40,9 @@ export default function Step_4() {
   }, []);
 
   return (
-    <Box>
+    <Box className='mt-20'>
       <DataGrid
-        className='bg-white '
+        className='bg-orange-200'
         rows={menuData}
         columns={columns}
         getRowId={(row) => row.id}

@@ -1,7 +1,7 @@
 import React from 'react';
 import  DatePicker from 'react-datepicker'; 
 import 'react-datepicker/dist/react-datepicker.css'; 
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material'; 
+import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material'; 
 
 interface Step3Props {
     enumHour: string;
@@ -23,7 +23,7 @@ export const DatePickerWithHour: React.FC<Step3Props> = ({ startDate, setStartDa
     };
 
     return (
-        <>
+        <><Grid className='mt-2'>
             <DatePicker
                 selected={startDate}
                 onChange={handleChange}
@@ -38,12 +38,14 @@ export const DatePickerWithHour: React.FC<Step3Props> = ({ startDate, setStartDa
                     value={enumHour}
                     label="Hour"
                     onChange={handleDateChange}
+                    required 
                 >
                     <MenuItem value="One">One</MenuItem>
                     <MenuItem value="Three">Three</MenuItem>
                     <MenuItem value="Five">Five</MenuItem>
                 </Select>
             </FormControl>
+            </Grid>
         </>
     );
 };

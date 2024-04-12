@@ -1,16 +1,19 @@
 import { BicycleType, Reservation, ReservationState } from "../Interfaces/Reservation";
 import { Button, Card, CardActions, CardContent, CardMedia, Typography, Modal, Grid, Divider } from '@mui/material';
 import { useState } from "react";
+import { DialogCompLemondas } from "./DialogCompLemondas";
 
 interface Props {
   foglalas: Reservation[]
+  refreshReservations: () => void
 }
 
 
-const ReservationCard = ({ foglalas }: Props) => {
+const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const [open, setOpen] = useState(false);
+  const [openDialog, setOpneDialog] = useState(false);
   const [reservationId, setReservationId] = useState(0);
   const [selectedReservation, setSelectedReservation] = useState<Reservation | null>(null);
   const handleClose = () => {
@@ -27,33 +30,20 @@ const ReservationCard = ({ foglalas }: Props) => {
     const startTimeDate = new Date(x.start_time);
     return startTimeDate.getTime() <= today.getTime() || x.state === ReservationState.Cancelled;
   };
-  const handleCancelReservation = async (reservtionId: number) => {
-    const token = localStorage.getItem('token')
-    await fetch(`http://localhost:3000/reservation/stateme/${reservtionId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-    })
-  }
 
-  const handleCancelClick = (start_time: string, reservtionId: number) => {
 
-    const startTimeDate = new Date(start_time);
-    if (startTimeDate.toDateString() < today.toDateString()) {
-      handleCancelReservation(reservtionId);
-    }
-    else {
-      console.log('XD');
-    }
+  const handleCancelClick = (id: number) => {
+    setOpneDialog(true);
+    setReservationId(id);
+
   };
   return (
     <>
-      {foglalas.map((x) => {
+      <DialogCompLemondas open={openDialog} setOpen={setOpneDialog} reservtionId={reservationId} refreshReservations={refreshReservations} />
+      {foglalas.map((x,index) => {
         return (
           <Grid item spacing={4}>
-            <Card className="p-4 m-5 hover:scale-110 transition ease-out" sx={{
+            <Card  key={index} className="p-4 m-5 hover:scale-110 transition ease-out bg-orange-200" sx={{
               borderRadius: '15px',
             }}>
               <CardMedia
@@ -105,10 +95,12 @@ const ReservationCard = ({ foglalas }: Props) => {
               <CardActions>
                 <Button
                   sx={{ borderRadius: '15px', backgroundColor: isDisabled(x) ? 'grey' : 'red' }}
-                  onClick={() => handleCancelClick(x.start_time, x.id)}
+                  onClick={() => handleCancelClick(x.id)}
                   disabled={isDisabled(x)}
                 >
-                  Lemondom
+                  {
+                    x.state === ReservationState.Cancelled ? 'Lemondva' : 'Lemondom'
+                  }
                 </Button>
                 <Button
                   onClick={() => getReservationContent(x)}

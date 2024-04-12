@@ -39,7 +39,6 @@ export default function Menu() {
             catch {
                 console.log("error")
             }
-
         }
         LoadData();
     }, [])
@@ -54,7 +53,7 @@ export default function Menu() {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container spacing={{ xs: 3, md: 4 }} >
+                <Grid container spacing={3}>
                     {
                         food.map((x, index) => (
                             <Card key={index} className="m-5 p-5 hover:scale-110 transition ease-in-out"

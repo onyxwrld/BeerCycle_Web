@@ -94,31 +94,32 @@ export function User_data() {
 
 export function History() {
     const [reservations, setReservations] = useState<Reservation[]>([]);
-
-    useEffect(() => {
-        const fetchReservations = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/reservation', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+    const fetchReservations = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/reservation', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
-                const data: Reservation[] = await response.json();
-                setReservations(data);
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        };
-
+            const data: Reservation[] = await response.json();
+            setReservations(data);
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    };
+    const refreshReservations = () => {
+        fetchReservations();
+    };
+    useEffect(() => {
         fetchReservations();
     }, []);
     return <Grid container spacing={3}>
-    <ReservationCard foglalas={reservations} />
+    <ReservationCard foglalas={reservations} refreshReservations={refreshReservations} />
     </Grid>
 }
 

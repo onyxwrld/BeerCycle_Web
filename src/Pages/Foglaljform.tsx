@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button, Grid, Typography } from '@mui/material';
 import MapComponent from '../Components/FoglaljForm/Map';
 import { Step1 } from '../Components/FoglaljForm/page_1';
@@ -6,6 +6,8 @@ import { DatePickerWithHour } from '../Components/FoglaljForm/Page_3';
 import Step_4 from '../Components/FoglaljForm/Page_4';
 import { useNavigate } from 'react-router-dom';
 import SnackBarAlert from '../Components/SnackBar';
+import { ApiContext } from '../Components/Auth/ApiProvider';
+import { MenuContext } from '../Components/Auth/MenuProvider';
 
 
 function ReservationForm() {
@@ -18,7 +20,8 @@ function ReservationForm() {
     const [address, setAddress] = useState<string>('');
     const [enumHour, setEnumHour] = useState<string>('');
     const userId = localStorage.getItem('ID');
-
+    const api = useContext(ApiContext);
+    const menuApi = useContext(MenuContext);
     const [open, setOpen] = useState(false);
 
     const handelOpen = () => {
@@ -30,12 +33,12 @@ function ReservationForm() {
         } else if (step === 5) {
             try {
                 ReservationPost();
-                return <SnackBarAlert alertMessage="sikeres" error={false} open={open} setOpen={setOpen} />       
+                return <SnackBarAlert alertMessage="sikeres" error={false} open={open} setOpen={setOpen} />
             }
             catch {
                 return <SnackBarAlert alertMessage="hibás" error={true} open={open} setOpen={setOpen} />
             }
-            finally{
+            finally {
                 handelOpen();
             }
         }
@@ -61,7 +64,8 @@ function ReservationForm() {
                     localStorage.setItem('basketId', data[0].id.toString());
                 }
                 else {
-                    localStorage.setItem('basketId', '');
+                    const menuItems: Menu = { id: 11, name: "", type: "", price: 0 }
+                    menuApi.basketFeltolt(menuItems);
                 }
             } catch (error) {
                 console.error('Error fetching basket data:', error);
@@ -105,16 +109,15 @@ function ReservationForm() {
             });
 
             if (response.ok) {
+                api.snackBarFunction('Sikeres foglalás',false)
                 setSize('');
                 setAddress('');
                 setEnumHour('');
                 navigate('/');
                 
-               return <SnackBarAlert alertMessage="sikeres" error={false} open={open} setOpen={setOpen} />     
             }
-            else{
-                console.log('asd');
-                return <SnackBarAlert alertMessage="sikertelen" error={true} open={open} setOpen={setOpen} />     
+            else {
+                api.snackBarFunction('Sikertelen foglalás',true)
             }
 
 
@@ -129,16 +132,16 @@ function ReservationForm() {
                     <img src="/Images/BeerCycleText.png" alt="BEERCYCLE Logo" className="w-3/5" />
                 </div>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={4} md={3}>
+                    <Grid item xs={12} sm={4} md={3} spacing={6}>
                         <div className="flex flex-col items-center justify-center h-full">
                             {[...Array(5)].map((e, i) => (
                                 <div key={i} className="flex flex-col items-center justify-center">
-                                    <div className={`w-16 h-16 rounded-full flex items-center justify-center text-white ${step === i + 1 ? 'bg-orange-500 transition-colors duration-300' : 'bg-white'}`}>
+                                    <div className={`w-16 h-16 rounded-full flex items-center justify-center text-white ${step === i + 1 ? 'bg-orange-500 transition-colors duration-300' : 'border-4 border-orange-500'}`}>
                                         <div className='text-lg text-black'>
                                             {i + 1}
                                         </div>
                                     </div>
-                                    {i < 4 && <div className="bg-orange-500 w-1 h-10" />}
+                                    {i < 4 && <div className="bg-orange-500 w-2 h-10" />}
                                 </div>
                             ))}
                         </div>
@@ -150,16 +153,34 @@ function ReservationForm() {
                         {step === 2 && (
                             <>
                                 <MapComponent setAddress={setAddress} />
-                                <Typography>
-                                    Kattints a térképen arra a helyre ahova szeretnéd, hogy a biciglit szállitsuk neked! {address}
-                                </Typography>
+                                <Grid container spacing={2} sx={{ mt: 2 }}>
+                                    <Grid item spacing={6}>
+                                        <Typography>
+                                            Kattints a térképen arra a helyre ahova szeretnéd, hogy a biciglit szállitsuk neked!
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item spacing={6} className='font-bold'>
+                                        {address}
+                                    </Grid>
+                                </Grid>
                             </>
                         )}
                         {step === 3 && (
-                            <><Typography>
-                                Válasszd ki a neked megfelelő időpontot!
-                            </Typography>
-                                <DatePickerWithHour startDate={startDate} setStartDate={setStartDate} setEnumHour={setEnumHour} enumHour={enumHour} />
+                            <>
+                                <Grid>
+                                    <Typography>
+                                        Válasszd ki a neked megfelelő időpontot!
+                                    </Typography>
+                                </Grid>
+                                <Grid className='items-center justify-center'>
+                                    <img src='/Images/beerCalendar.png' className='w-3/5' />
+                                </Grid>
+                                <Grid>
+                                    <DatePickerWithHour startDate={startDate} setStartDate={setStartDate} setEnumHour={setEnumHour} enumHour={enumHour} />
+                                    <Typography>
+                                        Vegye figylembe, hogy lemondás a válaszott nap előtt 24 órával lehetséges csak, ha nem teszi ezt meg már nem élhet a vissza mondással!
+                                    </Typography>
+                                </Grid>
                             </>
                         )}
                         {step === 4 && (
@@ -167,10 +188,15 @@ function ReservationForm() {
                                 <Step_4 />
                             </>
                         )}
+                        {step === 5 && (
+                            <>
+                                
+                            </>
+                        )}
                     </Grid>
                     <Grid container justifyContent="flex-end" alignItems="flex-end">
                         {step !== 1 && (
-                            <Button variant="outlined" onClick={handleBack} id="loginButton">
+                            <Button onClick={handleBack} id='backButton'>
                                 Vissza
                             </Button>
                         )}
@@ -186,7 +212,6 @@ function ReservationForm() {
                                 </Button>
                             )
                         }
-
                     </Grid>
                 </Grid>
 

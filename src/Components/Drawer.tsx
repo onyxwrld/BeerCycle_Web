@@ -13,6 +13,11 @@ export default function DrawerSide({isOpen, onClose}:
     {isOpen: boolean, onClose: ()=>void})
 {
     const api = useContext(ApiContext);
+    const logout = () => {
+        api.snackBarFunction('Sikeres kijelentkezés!',false)
+        api.logout();
+        
+    }
     return(
         <>
         <Drawer anchor="right" open={isOpen} onClose={onClose} >
@@ -42,7 +47,7 @@ export default function DrawerSide({isOpen, onClose}:
                         </Link>
                 </ListItem>
                 <ListItem>
-                    <ListItemButton onClick={api.logout}>
+                    <ListItemButton onClick={logout}>
                         <ListItemIcon>
                             <LogoutIcon/>
                         </ListItemIcon>
