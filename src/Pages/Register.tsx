@@ -49,26 +49,33 @@ export default function SignUp() {
     const handleEmailAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
     };
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        api.register(userName, pass,email,firstName,lastName)
-            .then(() => {
+        if(await api.register(userName, pass, email, firstName, lastName))
+            {
+                api.snackBarFunction('Sikeres regisztáció',false)
                 setLoginError('');
                 setUserName('');
                 setPass('');
                 setEmail('');
                 setLastName('');
                 setFirstName('');
-                navigate('/login');
-            })
-            .catch((e: Error) => {
-                setLoginError(e.message);
-            })
+                navigate('/login')
+            }
+        else{
+            api.snackBarFunction('Sikertlen regisztáció',true)
+        }
+         
     };
 
     return (
         <Container component="main" sx={{
-            marginTop: 2
+            display: 'flex',        
+            flexDirection: 'column', 
+            minHeight: '100vh',     
+            alignItems: 'center',    
+            justifyContent: 'center',
+            mt: 20 
         }}>
 
             <Grid container spacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>

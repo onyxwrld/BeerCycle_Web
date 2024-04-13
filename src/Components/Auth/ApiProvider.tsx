@@ -10,8 +10,8 @@ export const ApiContext = createContext({
     },
     logout: () => { },
     currentUser: null as (User | null),
-    register: async (username: string, passwod: string, email: string, last_name: string, first_name: string): Promise<void> => {
-        throw new Error("nincs implementálva");
+    register: async (username: string, passwod: string, email: string, last_name: string, first_name: string): Promise<boolean> => {
+        return false
     },
     userReview: async(): Promise<Review[] | undefined> => {
         throw new Error("nincs implementálva");
@@ -127,10 +127,13 @@ export function ApiProvider({ children }: Props) {
                     body: JSON.stringify(registerData),
                 });
                 if (!response.ok) {
-                    setAlertMessage('Hiba történt a kérés során');
+                    return false
+                }
+                else{
+                    return true
                 }
             } catch (error) {
-                setAlertMessage(`Hiba történt a kérés során: ${error}`);
+                return false
             }
         },
         userReview: async () =>{
