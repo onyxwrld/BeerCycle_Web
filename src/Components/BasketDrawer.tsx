@@ -75,7 +75,7 @@ export default function DrawerSide({ isOpen, onClose }:
                                         basket.menu.map((menuItem: Menu, menuIndex: number) => (
                                             <ListItem key={menuIndex}>
                                                 {
-                                                    menuItem.type === 'drink' ?<LunchDiningIcon className="text-stone-800-500"/> : <SportsBarIcon className="text-yellow-500"/>
+                                                    menuItem.type === 'Snack' ? <LunchDiningIcon className="text-orange-950"/> : <SportsBarIcon className="text-yellow-500"/>
                                                 }
                                                 <ListItemButton>
                                                     <ListItemText>

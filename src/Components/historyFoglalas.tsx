@@ -28,7 +28,7 @@ const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
   }
   const isDisabled = (x: Reservation) => {
     const startTimeDate = new Date(x.start_time);
-    return startTimeDate.getTime() <= today.getTime() || x.state === ReservationState.Cancelled;
+    return startTimeDate.getTime() <= today.getTime() || x.state === ReservationState.Cancelled || x.state === ReservationState.Done;
   };
 
 
@@ -99,7 +99,9 @@ const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
                   disabled={isDisabled(x)}
                 >
                   {
-                    x.state === ReservationState.Cancelled ? 'Lemondva' : 'Lemondom'
+                    x.state === ReservationState.Cancelled ? 'Lemondva' : 
+                    x.state === ReservationState.Done ? 'Kifizetve' : 
+                    'Lemondom'
                   }
                 </Button>
                 <Button
@@ -126,6 +128,22 @@ const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
               </Grid>
             </Typography>
           ))}
+          <Typography>
+            {
+              <Grid container spacing={2}>
+              <Grid item spacing={6} className=" flex justify-start">
+                {
+                selectedReservation?.bicycle.type === BicycleType.Large ? 'Nagy bicikli' : 
+                selectedReservation?.bicycle.type === BicycleType.Medium ? 'Közepes bicikli' : 
+                'Kicsi bicikli'
+                }
+              </Grid>
+              <Grid item spacing={6} className=" flex justify-end">
+                {selectedReservation?.bicycle.price.toLocaleString('hu-HU')} Ft
+              </Grid>
+            </Grid>
+            }
+          </Typography>
           <Divider />
           <Grid className="font-bold justify-end flex">
             {selectedReservation?.total_amount.toLocaleString('hu-HU')} Ft
