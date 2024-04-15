@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Divider, Grid, Typography } from '@mui/material';
 import MapComponent from '../Components/FoglaljForm/Map';
 import { Step1 } from '../Components/FoglaljForm/page_1';
 import { DatePickerWithHour } from '../Components/FoglaljForm/Page_3';
@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import SnackBarAlert from '../Components/SnackBar';
 import { ApiContext } from '../Components/Auth/ApiProvider';
 import { MenuContext } from '../Components/Auth/MenuProvider';
+import { format } from 'date-fns';
+import { Basket } from '../Interfaces/Basket';
+import { Bicycle } from '../Interfaces/Reservation';
 
 
 function ReservationForm() {
@@ -16,7 +19,10 @@ function ReservationForm() {
     const basketId = localStorage.getItem('basketId');
     const navigate = useNavigate();
     const [size, setSize] = useState('');
+    const [bicycle, setBicycle] = useState<Bicycle[]>([]);
     const [startDate, setStartDate] = useState(new Date());
+    let total = 0;
+    const [basket, setBasketData] = useState<Basket[]>([])
     const [address, setAddress] = useState<string>('');
     const [enumHour, setEnumHour] = useState<string>('');
     const userId = localStorage.getItem('ID');
@@ -49,7 +55,16 @@ function ReservationForm() {
         }
     };
 
-
+    const vegOsszegSzamolas = (data: Basket[]) => {
+        for (let index = 0; index < data.length; index++) {
+            total += data[index].menu[index].price;
+            console.log(data[index].menu[index].name)
+        }
+        size === '1' ? total+=bicycle[0].price:
+        size === '2' ? total+=bicycle[1].price:
+        total+=bicycle[2].price
+        return total 
+    }
     const fetchData = async () => {
         if (token) {
             try {
@@ -59,9 +74,10 @@ function ReservationForm() {
                         'Authorization': `Bearer ${token}`,
                     },
                 });
-                const data = await response.json();
+                const data = await response.json() as Basket[];
                 if (data.length > 0) {
                     localStorage.setItem('basketId', data[0].id.toString());
+                    setBasketData(data)
                 }
                 else {
                     const menuItems: Menu = { id: 11, name: "", type: "", price: 0 }
@@ -75,9 +91,21 @@ function ReservationForm() {
         }
     };
 
+    const fetchBike = async () => {
+       const response= await fetch('http://localhost:3000/bicycle', {
+            method: 'GET',
+        });
+        const data = await response.json() as Bicycle[];
+        if (data.length > 0) {
+            setBicycle(data)
+        }
+    }
+
     useEffect(() => {
         fetchData();
+        fetchBike();
     }, []);
+
     const ReservationPost = async () => {
         if (userId == null) {
             console.log("Üres a UserId");
@@ -109,15 +137,15 @@ function ReservationForm() {
             });
 
             if (response.ok) {
-                api.snackBarFunction('Sikeres foglalás',false)
+                api.snackBarFunction('Sikeres foglalás', false)
                 setSize('');
                 setAddress('');
                 setEnumHour('');
                 navigate('/');
-                
+
             }
             else {
-                api.snackBarFunction('Sikertelen foglalás',true)
+                api.snackBarFunction('Sikertelen foglalás', true)
             }
 
 
@@ -126,8 +154,8 @@ function ReservationForm() {
         }
     };
     return (
-        <div className="bg-white h-screen flex justify-center items-center">
-            <div className="bg-navYellow p-10 rounded-3xl" style={{ width: '800px', height: '800px' }}>
+        <div className="bg-white flex justify-center items-center">
+            <div className="bg-navYellow p-3 rounded-3xl" style={{ width: '800px', margin: '20px' }}>
                 <div className="flex justify-center">
                     <img src="/Images/BeerCycleText.png" alt="BEERCYCLE Logo" className="w-3/5" />
                 </div>
@@ -190,7 +218,37 @@ function ReservationForm() {
                         )}
                         {step === 5 && (
                             <>
-                                
+                                <Grid className='bg-white rounded-xl'>
+                                    <Grid className='mb-56'> 
+                                <Typography>
+                                    Foglalási idő:  {
+                                        enumHour === 'Five' ? '5 óra' :
+                                            enumHour === 'Three' ? '3 óra' :
+                                                '1 óra'
+                                    }
+                                </Typography>
+                                <Typography>
+                                    Szállitási cim: {
+                                        address
+                                    }
+                                </Typography>
+                                <Typography>
+                                    Bicikli mérte: {
+                                        size === '1' ? 'Kicsi' :
+                                            size === '2' ? 'Közepes' :
+                                                'Nagy'
+                                    }
+                                </Typography>
+                                </Grid>
+                                <Divider/>
+                                <Typography>
+                                    Végösszeg: {
+                                        vegOsszegSzamolas(basket).toLocaleString('hu-Hu')
+                                    } 
+                                     Ft
+                                </Typography>
+
+                                </Grid>
                             </>
                         )}
                     </Grid>

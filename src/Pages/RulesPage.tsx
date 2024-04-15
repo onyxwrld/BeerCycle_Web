@@ -1,4 +1,4 @@
-import { IconButton, Modal, Typography } from "@mui/material"
+import { Grid, IconButton, Modal, Typography } from "@mui/material"
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -99,7 +99,25 @@ export function RulesPage() {
                     </div>
                 </Typography>;
             case 'sticky2':
-                return <Typography>Sticky 3 tartalma</Typography>;
+                return  <>
+                <Grid container spacing={3}>
+                <Grid item md={4}>
+                  <img src="/Images/small.png" className="rounded-xl" alt="Small Bike" />
+                  <Typography>Kis mértű bicikli</Typography>
+                  <Typography variant="caption">A bicikli méret kapacitása 6 fő (5 utas + 1 sofőr) 299 990 Ft </Typography>
+                </Grid>
+                <Grid item md={4}>
+                  <img src="/Images/mediumBike.png" className="rounded-xl" alt="Medium Bike" />
+                  <Typography>Közepes bicikli</Typography>
+                  <Typography variant="caption"> A bicikli méret kapacitása 8 fő (7 utas + 1 sofőr) 320 990 Ft</Typography>
+                </Grid>
+                <Grid item md={4}>
+                  <img src="/Images/largeBike.png" className="rounded-xl" alt="Large Bike" />
+                  <Typography>Nagy mértű bicikli</Typography>
+                  <Typography variant="caption">Large Bike A bicikli méret kapacitása 12 fő (11 utas + 1 sofőr) 380 990 Ft</Typography>
+                </Grid>
+              </Grid>
+              </>   
             default:
                 return null;
         }

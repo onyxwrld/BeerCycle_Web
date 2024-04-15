@@ -63,9 +63,9 @@ export default function DrawerSide({ isOpen, onClose }:
     return (
         <>
             <Drawer anchor="right" open={isOpen} onClose={onClose} keepMounted >
-                <Box p={2}>
-                    <Typography>
-                        Kosarad
+                <Box>
+                    <Typography className="bg-orange-700 h-12 text-white p-3">
+                        Kosár
                     </Typography>
                     <List>
                         {basketData.length > 0 ? (

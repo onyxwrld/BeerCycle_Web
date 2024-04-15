@@ -45,10 +45,12 @@ export default function Menu() {
 
     return (
         <section id="menuPage">
-            <Container>
-                <Grid container spacing={2} className="m-10">
+            <Container className="">
+                <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <Typography className="bg-white rounded-xl">
+                        <Typography className="bg-white rounded-xl" sx={{
+                            m: 5
+                        }}>
                             Válasszon sokszín kinálatunkból igényeinek megfelelően! Majd kattintson a termék csomag ikonjára, hogy terméke a kosárba kerülhessen.
                         </Typography>
                     </Grid>
@@ -56,8 +58,10 @@ export default function Menu() {
                 <Grid container spacing={3}>
                     {
                         food.map((x, index) => (
-                            <Card key={index} className="m-5 p-5 hover:scale-110 transition ease-in-out"
+                            <Card key={index} className="relative m-5 p-5 hover:scale-110 transition ease-in-out"
                                 sx={{
+                                    height:'270px',
+                                    width: '180px',
                                     borderRadius: '15px',
                                 }}>
                                 <CardMedia

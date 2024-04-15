@@ -1,5 +1,4 @@
-import { ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Basket } from "../../Interfaces/Basket";
 import { ApiContext } from "./ApiProvider";
 
