@@ -3,12 +3,23 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography, Modal, G
 import { useState } from "react";
 import { DialogCompLemondas } from "./DialogCompLemondas";
 
+/*
+*A foglalást megjelenítő kártyához szükséges egy Reservestion tipusú adat, ezt a props interface szolgáltatja
+*/
 interface Props {
   foglalas: Reservation[]
   refreshReservations: () => void
 }
 
-
+/**
+ * 
+ * @param foglalas Az összes foglalást tartalmazza.
+ * @param refreshReservations Egy függvény ami frissiti a komponenst lemondás esetén.
+ * @returns 
+ * A komponens bejárja a foglalás tömböt és minden a userhez tartozó foglalást egy Material ui által biztosított kártyában behelyettesíti az adatokat. 
+ * A foglalás képét a hozzátartozó bicikli alapján dönti el.
+ * Két komponens figyeli a user interakciót,
+ */
 const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
   const today = new Date();
   today.setHours(0, 0, 0, 0);

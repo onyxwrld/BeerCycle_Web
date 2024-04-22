@@ -7,10 +7,10 @@
     "exclude": [
         "**/*.spec.tsx"
     ],
-    "excludeExternals": true,
+    "excludeExternals": false,
     "out": "./docs",
     "tsconfig": "tsconfig.json",
-    "excludePrivate": true,
-    "excludeProtected": true,
+    "excludePrivate": false,
+    "excludeProtected": false,
     "name": "BeerCycle documentation"
 }

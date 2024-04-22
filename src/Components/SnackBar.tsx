@@ -4,12 +4,27 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CloseIcon from '@mui/icons-material/Close';
 
+/**
+ * Interface a SnackBarAlert komponens props-jainak definíciójához.
+ */
 interface SnackBarAlertProps {
-    alertMessage: string;
-    error: boolean;
-    open: boolean;
-    setOpen: (open: boolean) => void;
+    alertMessage: string;  // Az alert üzenet szövege.
+    error: boolean;        // Meghatározza, hogy az alert hibaüzenet-e.
+    open: boolean;         // A snackbar láthatóságát szabályozza.
+    setOpen: (open: boolean) => void;  // Funkció a snackbar állapotának változtatására.
 }
+/**
+ * SnackBarAlert komponens, ami egy Snackbar-t jelenít meg, amely lehet hiba vagy siker üzenet.
+ * 
+ * Props:
+ * - `alertMessage`: A megjelenítendő szöveges üzenet.
+ * - `error`: Logikai érték, amely meghatározza, hogy az üzenet hiba jellegű-e.
+ * - `open`: Logikai érték, ami a Snackbar megjelenítését szabályozza.
+ * - `setOpen`: Funkció az `open` állapotának módosítására.
+ * 
+ * A komponens a `Snackbar` és `SnackbarContent` elemeket használja a Material-UI könyvtárból.
+ * Hiba esetén az `ErrorIcon`-t, siker esetén a `CheckCircleOutlineIcon`-t jeleníti meg, hozzá tartozó szinnel.
+ */
 const SnackBarAlert: React.FC<SnackBarAlertProps> = ({ alertMessage, error, open, setOpen }) => {
     
     const HandleClose = () => {

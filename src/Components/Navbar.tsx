@@ -8,22 +8,31 @@ import { Guest, LoggedIn } from "./Auth/loginAuth";
 import { Badge, IconButton } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useContext, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import DrawerSide from "./Drawer";
-import { Basket } from "../Interfaces/Basket";
 import { useBasket } from "./Auth/BasketContext";
 import BasketDrawer from "./BasketDrawer";
-
+/**
+ * Navbar - A fő navigációs komponens, amely integrálja a felhasználói interakciókat és navigációt.
+ * 
+ * A komponens felhasználói autentikációtól függően különböző linkeket és vezérlőket jelenít meg.
+ * Használja a `useBasket` hookot a kosár állapotának kezelésére.
+ */
 export function Navbar() {
 
-    const [openProfile, setOpen] = useState(false);
-    const [openBasket, setOpenBasket] = useState(false);
-    const { itemCount,updateBasketContent } = useBasket();
-
+    const [openProfile, setOpen] = useState(false);  // Profil fiók ablak állapotának kezelése.
+    const [openBasket, setOpenBasket] = useState(false);  // Kosár ablak állapotának kezelése.
+    const { itemCount, updateBasketContent } = useBasket();  // Kosár tartalmának és elemek számának lekérdezése.
+    /**
+        * toggleProfile - Kapcsolja a profil fiók ablak megjelenítését.
+        */
     function toggleProfile() {
         return setOpen(!openProfile);
 
     }
+    /**
+     * toggleBasket - Kapcsolja a kosár ablak megjelenítését.
+     */
     function toggleBasket() {
         return setOpenBasket(!openBasket);
 
@@ -42,12 +51,12 @@ export function Navbar() {
                         <Button ><Link to="/menu" className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber py-2 px-2">Étlap</Link></Button>
                         <IconButton onClick={toggleProfile}>
                             <DrawerSide isOpen={openProfile} onClose={() => setOpen(false)} />
-                            <AccountCircleIcon className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber"/>
+                            <AccountCircleIcon className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber" />
                         </IconButton>
                         <Badge badgeContent={itemCount} color={'warning'}>
                             <IconButton onClick={toggleBasket} >
                                 <BasketDrawer isOpen={openBasket} onClose={() => setOpenBasket(false)} />
-                                <ShoppingCartIcon className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber"/>
+                                <ShoppingCartIcon className="transition ease-in-out duration-300 transform hover:scale-300 hover:bg-bloodRed hover:border-bloodRed hover:rounded-2xl rounded-2xl text-black hover:text-amber" />
                             </IconButton>
                         </Badge>
                     </LoggedIn>

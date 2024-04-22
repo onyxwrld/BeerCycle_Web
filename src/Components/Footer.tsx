@@ -6,33 +6,38 @@ import EmailIcon from '@mui/icons-material/Email';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link } from 'react-router-dom';
 
+/**
+ * Nyitvatartási időket tároló interfész.
+ * Minden napra egy string típusú értéket tárol, ami az adott nap nyitvatartási idejét jelzi.
+ */
 export interface OpeningHours {
-    monday: string;
-    tuesday: string;
-    wednesday: string;
-    thursday: string;
-    friday: string;
-    saturday: string;
-    sunday: string;
-  }
-  export  interface Worker{
-    username: string;
-    email: string;
-    passowrd: string;
-    first_name: string;
-    last_name: string;
-    role: string;
-  }
-  
-export  interface DataStructure {
-    phone_number: number;
-    email: string;
-    opening_hours_id: number;
-    location: string;
-    company_id: number;
-    worker: Worker;
-    opening: OpeningHours;
-  }
+  monday: string;    // Hétfői nyitvatartási idő.
+  tuesday: string;   // Keddi nyitvatartási idő.
+  wednesday: string; // Szerdai nyitvatartási idő.
+  thursday: string;  // Csütörtöki nyitvatartási idő.
+  friday: string;    // Pénteki nyitvatartási idő.
+  saturday: string;  // Szombati nyitvatartási idő.
+  sunday: string;    // Vasárnapi nyitvatartási idő.
+}
+/**
+* Adatszerkezet, ami egy cég adatait és kapcsolódó információkat tárol.
+* Tartalmazza a cég telefonszámát, email címét, helyszínét és egyéb adatait.
+*/
+export interface DataStructure {
+  phone_number: number;      // Telefonszám.
+  email: string;             // E-mail cím.
+  opening_hours_id: number;  // A nyitvatartási idő azonosítója.
+  location: string;          // Helyszín (cím).
+  opening: OpeningHours;     // A cég nyitvatartási ideje.
+}
+
+/**
+ * 
+ * @param opening A formatOpeningHours egy nyitvatartási időpontokat tartalmazó adatszerkezet
+ * @returns 
+ * 
+ * A footer függvény lekéri a http://localhost:3000/torzs-adatok url-ről az adatok és ezt használja fel megjelnítéskor. Igy csak az admin tudja változatni az adatokat, és mikor erre sor kerül a frontend oldalon is változnak.
+ */
   const formatOpeningHours = (opening: OpeningHours) => {
     return(
         <div className=' flex justify-center text-amber'>
@@ -84,7 +89,7 @@ export function Footer()
       }, []);
       if(!adatok[0])
       {
-        return "asd"
+        return "Betöltés"
       }
     return(
       <footer className="bg-darkOrange text-white py-8">

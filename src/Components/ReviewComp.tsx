@@ -1,19 +1,27 @@
 import { Box, Grid, IconButton, Rating, Typography } from "@mui/material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { DialogComp } from "./DialogComp";
-import { TurnLeft } from "@mui/icons-material";
 import { useState } from "react";
 
+/**
+ * ReviewComponent props interface.
+ * 
+ * @param rate A felhasználó által adott értékelés, értékként 1-től 5-ig.
+ * @param content A felhasználó által írt értékelés szövege.
+ * @param username A felhasználó neve, aki az értékelést írta.
+ * @param id Az értékelés egyedi azonosítója.
+ * @param isMainPage Meghatározza, hogy a főoldalon jelenik-e meg az értékelés.
+ * @param onDelete A törlési művelet callback függvénye, amit a törlés gomb aktivál.
+ */
+export function ReviewComponent({ rate, content, username, id, isMainPage, onDelete }: { rate: number, content: string, username: string, id: number, isMainPage: boolean, onDelete: () => void }) {
+    const [open, setOpen] = useState(false);  // Dialógus ablak állapotának kezelése.
 
-export function ReviewComponent({ rate, content, username, id,isMainPage,onDelete }: { rate: number, content: string, username: string, id: number,isMainPage:boolean,onDelete: ()=>void }) {
-    const [open,setOpen] = useState(false);
-    const handleClose = () => {
+    const handleClose = () => {  // Dialógus ablak bezárását kezelő függvény.
         setOpen(false);
     };
 
-
     return <>
-        <DialogComp open={open} id={id} onClose={handleClose} onDelete={onDelete}/>
+        <DialogComp open={open} id={id} onClose={handleClose} onDelete={onDelete} />
 
         <Box
             minHeight={100}
@@ -29,16 +37,16 @@ export function ReviewComponent({ rate, content, username, id,isMainPage,onDelet
             <Grid height="100%" item spacing={3}>
                 <Grid item>
                     <Typography>
-                        {username}
+                        {username}  
                     </Typography>
                 </Grid>
                 <Grid container alignItems={"center"}>
-                    <Grid item sx={{flexGrow:1}}>
-                        <Rating value={rate} readOnly sx={{ p: 0 }} />
+                    <Grid item sx={{ flexGrow: 1 }}>
+                        <Rating value={rate} readOnly sx={{ p: 0 }} />  
                     </Grid>
                     
                     {
-                        (!isMainPage)
+                        (!isMainPage)  // Ha nem a főoldalon van, megjeleníti a törlés ikont.
                             ? <Grid item>
                                 <IconButton onClick={() => setOpen(true)}>
                                 <DeleteOutlineIcon />
@@ -48,8 +56,8 @@ export function ReviewComponent({ rate, content, username, id,isMainPage,onDelet
                     }
                 </Grid>
                 <Grid item>
-                    <Typography>
-                        {content}
+                    <Typography> 
+                        {content}  
                     </Typography>
                 </Grid>
             </Grid>

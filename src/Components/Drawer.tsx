@@ -1,5 +1,4 @@
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
-import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import { useContext, useEffect, useState } from "react";
 import HistoryIcon from '@mui/icons-material/History';
