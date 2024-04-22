@@ -1,0 +1,16 @@
+{
+    "entryPoints": [
+        "src/Components/**/*.{ts,tsx}",
+        "src/Interfaces/**/*.{ts,tsx}",
+        "src/Pages/**/*.{ts,tsx}"
+    ],
+    "exclude": [
+        "**/*.spec.tsx"
+    ],
+    "excludeExternals": true,
+    "out": "./docs",
+    "tsconfig": "tsconfig.json",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "name": "BeerCycle documentation"
+}

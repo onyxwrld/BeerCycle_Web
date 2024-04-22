@@ -39,7 +39,7 @@ const MapClickHandler: React.FC<{ setPosition: (pos: Position) => void,setAddres
 const MapComponent: React.FC<{ setAddress: (address: string) => void }>= ({ setAddress }) => {
   const [position, setPosition] = useState<Position>({ lat: 47.4871480514, lng:  19.0570914383 });
   return (
-    <div className="h-[400px] w-full">
+    <div className="h-[300px] w-full">
       <MapContainer center={position} zoom={13} scrollWheelZoom={true} className="h-full">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

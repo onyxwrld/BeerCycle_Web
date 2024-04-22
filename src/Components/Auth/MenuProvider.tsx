@@ -15,9 +15,10 @@ interface Props {
     children: React.ReactNode;
 }
 export function MenuProvider({ children }: Props) {
-    const [basket, setBasket] = useState<Basket>();
+    const [basket, setBasket] = useState<Basket[]>([]);
     const token = localStorage.getItem('token');
     const api = useContext(ApiContext);
+    
     const [basketChanged, setBasketChanged] = useState<boolean>(false);
     useEffect(() => {
         if (basketChanged) {

@@ -56,14 +56,15 @@ function ReservationForm() {
     };
 
     const vegOsszegSzamolas = (data: Basket[]) => {
+        console.log(data);
         for (let index = 0; index < data.length; index++) {
             total += data[index].menu[index].price;
             console.log(data[index].menu[index].name)
         }
-        size === '1' ? total+=bicycle[0].price:
-        size === '2' ? total+=bicycle[1].price:
-        total+=bicycle[2].price
-        return total 
+        size === '1' ? total += bicycle[0].price :
+            size === '2' ? total += bicycle[1].price :
+                total += bicycle[2].price
+        return total
     }
     const fetchData = async () => {
         if (token) {
@@ -77,12 +78,9 @@ function ReservationForm() {
                 const data = await response.json() as Basket[];
                 if (data.length > 0) {
                     localStorage.setItem('basketId', data[0].id.toString());
-                    setBasketData(data)
+                    setBasketData(data);
                 }
-                else {
-                    const menuItems: Menu = { id: 11, name: "", type: "", price: 0 }
-                    menuApi.basketFeltolt(menuItems);
-                }
+
             } catch (error) {
                 console.error('Error fetching basket data:', error);
             }
@@ -92,7 +90,7 @@ function ReservationForm() {
     };
 
     const fetchBike = async () => {
-       const response= await fetch('http://localhost:3000/bicycle', {
+        const response = await fetch('http://localhost:3000/bicycle', {
             method: 'GET',
         });
         const data = await response.json() as Bicycle[];
@@ -117,6 +115,7 @@ function ReservationForm() {
             navigate('/login');
             return
         }
+        
         const reservation = {
             user_id: parseInt(userId),
             bicycle_id: parseInt(size),
@@ -181,25 +180,22 @@ function ReservationForm() {
                         {step === 2 && (
                             <>
                                 <MapComponent setAddress={setAddress} />
-                                <Grid container spacing={2} sx={{ mt: 2 }}>
+                                <Grid container spacing={2} sx={{ mt: 0 }}>
                                     <Grid item spacing={6}>
                                         <Typography>
                                             Kattints a térképen arra a helyre ahova szeretnéd, hogy a biciglit szállitsuk neked!
+                                            
+                                        </Typography>
+                                        <Typography>
+                                        {address}
                                         </Typography>
                                     </Grid>
-                                    <Grid item spacing={6} className='font-bold'>
-                                        {address}
-                                    </Grid>
+                                  
                                 </Grid>
                             </>
                         )}
                         {step === 3 && (
                             <>
-                                <Grid>
-                                    <Typography>
-                                        Válasszd ki a neked megfelelő időpontot!
-                                    </Typography>
-                                </Grid>
                                 <Grid className='items-center justify-center'>
                                     <img src='/Images/beerCalendar.png' className='w-3/5' />
                                 </Grid>
@@ -218,36 +214,42 @@ function ReservationForm() {
                         )}
                         {step === 5 && (
                             <>
-                                <Grid className='bg-white rounded-xl'>
-                                    <Grid className='mb-56'> 
-                                <Typography>
-                                    Foglalási idő:  {
-                                        enumHour === 'Five' ? '5 óra' :
-                                            enumHour === 'Three' ? '3 óra' :
-                                                '1 óra'
-                                    }
-                                </Typography>
-                                <Typography>
-                                    Szállitási cim: {
-                                        address
-                                    }
-                                </Typography>
-                                <Typography>
-                                    Bicikli mérte: {
-                                        size === '1' ? 'Kicsi' :
-                                            size === '2' ? 'Közepes' :
-                                                'Nagy'
-                                    }
-                                </Typography>
-                                </Grid>
-                                <Divider/>
-                                <Typography>
-                                    Végösszeg: {
-                                        vegOsszegSzamolas(basket).toLocaleString('hu-Hu')
-                                    } 
-                                     Ft
-                                </Typography>
-
+                                <Grid container className="bg-white rounded-xl mt-10" spacing={2}>
+                                    <Grid item xs={6} container direction="column" >
+                                        <Typography>
+                                            Foglalási idő:
+                                        </Typography>
+                                        <Typography>
+                                            Szállítási cím:
+                                        </Typography>
+                                        <Typography >
+                                            Bicikli mérete:
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={6} container direction="column" alignItems="flex-start">
+                                        <Typography variant="h6">
+                                            {enumHour === 'Five' ? '5 óra' : enumHour === 'Three' ? '3 óra' : '1 óra'}
+                                        </Typography>
+                                        <Typography variant="h6">
+                                            {address}
+                                        </Typography>
+                                        <Typography variant="h6">
+                                            {size === '1' ? 'Kicsi' : size === '2' ? 'Közepes' : 'Nagy'}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Divider />
+                                    </Grid>
+                                    <Grid item xs={9}>
+                                        <Typography variant="h6">
+                                            Végösszeg:
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <Typography variant="h6">
+                                            {vegOsszegSzamolas(basket).toLocaleString('hu-HU')} Ft
+                                        </Typography>
+                                    </Grid>
                                 </Grid>
                             </>
                         )}

@@ -15,7 +15,7 @@ function Copyright(props: any) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-                BeerCycle{' '}
+            BeerCycle{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -31,56 +31,115 @@ export default function SignUp() {
     const [pass, setPass] = useState('');
     const [loginError, setLoginError] = useState('');
     const navigate = useNavigate();
+    const [error, setErrorUserName] = useState(false);
+    const [errorEmail, setEmailError] = useState(false);
+    const [errorVez, setVezError] = useState(false);
+    const [errorKer, setKerError] = useState(false);
+    const [errorPass, setPassError] = useState(false);
     const api = useContext(ApiContext);
 
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserName(event.target.value);
+        if (event.target.value.trim() === '') {
+            setErrorUserName(true);
+        } else {
+            setErrorUserName(false);
+        }
     };
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPass(event.target.value);
+        if (event.target.value.includes(' ')) {
+            return
+        }
+        else {
+            setPass(event.target.value);
+        }
+        if (event.target.value.trim() === '' || (pass.length < 6)) {
+            setPassError(true);
+        } else {
+            setPassError(false);
+        }
     };
     const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLastName(event.target.value);
+        if (event.target.value.trim() === '') {
+            setVezError(true);
+        } else {
+            setVezError(false);
+        }
     };
     const handlelFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFirstName(event.target.value);
+        if (event.target.value.trim() === '') {
+            setKerError(true);
+        } else {
+            setKerError(false);
+        }
     };
     const handleEmailAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
-    };
-    const handleSubmit =  async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if(await api.register(userName, pass, email, firstName, lastName))
-            {
-                api.snackBarFunction('Sikeres regisztáció',false)
-                setLoginError('');
-                setUserName('');
-                setPass('');
-                setEmail('');
-                setLastName('');
-                setFirstName('');
-                navigate('/login')
-            }
-        else{
-            api.snackBarFunction('Sikertlen regisztáció',true)
+        if (event.target.value.trim() === '') {
+            setEmailError(true);
+        } else {
+            setEmailError(false);
         }
-         
+    };
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (await api.register(userName, pass, email, firstName, lastName)) {
+            api.snackBarFunction('Sikeres regisztáció', false)
+            setLoginError('');
+            setUserName('');
+            setPass('');
+            setEmail('');
+            setLastName('');
+            setFirstName('');
+            navigate('/login')
+        }
+        else {
+            if (userName.trim() === '') {
+                setErrorUserName(true);
+            } else {
+                setErrorUserName(false);
+            }
+            if (pass.trim() === '') {
+                setPassError(true);
+            } else {
+                setPassError(false);
+            }
+            if (firstName.trim() === '') {
+                setKerError(true);
+            } else {
+                setKerError(false);
+            }
+            if (lastName.trim() === '') {
+                setVezError(true);
+            } else {
+                setVezError(false);
+            }
+            if (email.trim() === '') {
+                setEmailError(true);
+            } else {
+                setEmailError(false);
+            }
+            api.snackBarFunction('Sikertlen regisztáció', true)
+        }
+
     };
 
     return (
         <Container component="main" sx={{
-            display: 'flex',        
-            flexDirection: 'column', 
-            minHeight: '100vh',     
-            alignItems: 'center',    
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+            alignItems: 'center',
             justifyContent: 'center',
-            mt: 20 
+            mt: 20
         }}>
 
             <Grid container spacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={8}>
-                <object type="image/svg+xml" data={MySvg}>svg-animation</object>
+                    <object type="image/svg+xml" data={MySvg}>svg-animation</object>
                 </Grid>
                 <Grid item xs={4}>
                     <Box>
@@ -89,6 +148,7 @@ export default function SignUp() {
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                             <TextField
+                                error={error}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -100,7 +160,8 @@ export default function SignUp() {
                                 value={userName}
                                 onChange={handleUsernameChange}
                             />
-                             <TextField
+                            <TextField
+                                error={errorEmail}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -113,6 +174,7 @@ export default function SignUp() {
                                 onChange={handleEmailAddress}
                             />
                             <TextField
+                                error={errorVez}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -125,6 +187,7 @@ export default function SignUp() {
                                 onChange={handleLastNameChange}
                             />
                             <TextField
+                                error={errorKer}
                                 margin="normal"
                                 required
                                 fullWidth
@@ -137,6 +200,7 @@ export default function SignUp() {
                                 onChange={handlelFirstNameChange}
                             />
                             <TextField
+                                error={errorPass}
                                 margin="normal"
                                 required
                                 fullWidth

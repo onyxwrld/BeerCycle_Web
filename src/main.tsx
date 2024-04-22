@@ -19,6 +19,7 @@ import { ErrorPage } from './Pages/ErrorPage.tsx'
 import ReservationForm from './Pages/Foglaljform.tsx'
 import { StyledEngineProvider } from '@mui/styled-engine-sc'
 import { TestPage } from './Pages/testSnack.tsx'
+import { BasketProvider } from './Components/Auth/BasketContext.tsx'
 
 const router = createBrowserRouter([
   {
@@ -55,11 +56,11 @@ const router = createBrowserRouter([
   },
   {
     path: 'reservation',
-    element: <ReservationForm/>
+    element: <ReservationForm />
   },
   {
     path: 'test',
-    element: <TestPage/>
+    element: <TestPage />
   },
   {
     path: 'profile',
@@ -98,12 +99,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
-              <ApiProvider>
-                <MenuProvider>
-                  <RouterProvider router={router} />
-                </MenuProvider>
-              </ApiProvider>
-            </ThemeProvider>
-          </StyledEngineProvider>
-        </React.StrictMode>
-        )
+        <ApiProvider>
+          <BasketProvider>
+            <MenuProvider>
+              <RouterProvider router={router} />
+            </MenuProvider>
+          </BasketProvider>
+        </ApiProvider>
+      </ThemeProvider>
+    </StyledEngineProvider>
+  </React.StrictMode>
+)

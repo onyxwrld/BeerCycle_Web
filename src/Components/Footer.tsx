@@ -6,7 +6,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Link } from 'react-router-dom';
 
-interface OpeningHours {
+export interface OpeningHours {
     monday: string;
     tuesday: string;
     wednesday: string;
@@ -15,7 +15,7 @@ interface OpeningHours {
     saturday: string;
     sunday: string;
   }
-  interface Worker{
+  export  interface Worker{
     username: string;
     email: string;
     passowrd: string;
@@ -24,7 +24,7 @@ interface OpeningHours {
     role: string;
   }
   
-  interface DataStructure {
+export  interface DataStructure {
     phone_number: number;
     email: string;
     opening_hours_id: number;
