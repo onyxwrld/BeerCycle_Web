@@ -2,6 +2,9 @@ import { Button, Typography } from '@mui/material';
 import MySvg from '../Images/SVG/404.svg';
 import { Link } from 'react-router-dom';
 export function ErrorPage(){
+    /**
+     * Az errorPage akkor jelenik meg ha a felhasználó rossz elérési útvonalra próbál lépni. Ezt a logikát a react router kezeli a main.tsx-ben 
+     */
     return<>
     <div className='loadDiv'>
     <Typography sx={{

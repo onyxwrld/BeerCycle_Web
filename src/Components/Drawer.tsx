@@ -7,10 +7,22 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { ApiContext } from "./Auth/ApiProvider";
 import { Link } from "react-router-dom";
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-
+/**
+ * DrawerSide komponens, amely egy oldalsó navigációs menüt jelenít meg.
+ *
+ * @param isOpen A Drawer nyitott állapotát jelzi.
+ * @param onClose A Drawer bezárására szolgáló callback függvény.
+ *
+ * A komponens a felhasználó profilhoz, előzményekhez és véleményekhez kapcsolódó
+ * navigációs linkeket, valamint egy kijelentkezés gombot tartalmaz.
+ */
 export default function DrawerSide({isOpen, onClose}:  
     {isOpen: boolean, onClose: ()=>void})
 {
+    /**
+     * logout - Kijelentkezés kezelése.
+     * Aktiválja az ApiProvider által biztosított snackBarFunction és logout metódusokat.
+     */
     const api = useContext(ApiContext);
     const logout = () => {
         api.snackBarFunction('Sikeres kijelentkezés!',false)
@@ -19,7 +31,7 @@ export default function DrawerSide({isOpen, onClose}:
     return (
         <>
         <Drawer anchor="right" open={isOpen} onClose={onClose} >
-            <div className="flex flex-col h-full"> {/* Make it a flex container with full height */}
+            <div className="flex flex-col h-full">
                 <List>
                     <ListItem>
                         <Link to='/profile'>
@@ -58,7 +70,7 @@ export default function DrawerSide({isOpen, onClose}:
                         </Link>
                     </ListItem>
                 </List>
-                <div className="mt-auto"> {/* This pushes the logout item to the bottom */}
+                <div className="mt-auto">
                     <List>
                         <ListItem>
                             <ListItemButton onClick={logout}>

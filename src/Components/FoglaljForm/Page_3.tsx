@@ -3,25 +3,41 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { DataStructure, OpeningHours } from '../Footer';
-
+/**
+ * Props definíció a `DatePickerWithHour` komponenshez.
+ */
 interface Step3Props {
+     /** Kiválasztott óra az enum formátumban. */
     enumHour: string;
+     /** A kiválasztott kezdő dátum. */
     startDate: Date;
+    /** Funkció a kiválasztott óra frissítésére. */
     setEnumHour: (hour: string) => void;
+    /** Funkció a kiválasztott kezdő dátum frissítésére. */
     setStartDate: (date: Date) => void;
 }
 
+/**
+ * Egy React funkcionális komponens, amely lehetővé teszi a felhasználók számára, hogy válasszanak egy dátumot és egy órát.
+ * Tartalmaz egy dátumválasztót és egy legördülő menüt az óra kiválasztásához.
+ * A komponens adatokat is lekér, hogy meghatározza a nyitvatartási és zárási időket,
+ * amelyek alapján szűri a rendelkezésre álló órákat a kiválasztott nap alapján.
+ *
+ * @component
+ * @param props A komponenshez átadott tulajdonságok.
+ */
 export const DatePickerWithHour: React.FC<Step3Props> = ({ startDate, setStartDate, setEnumHour, enumHour }) => {
-
+// Kezelőfüggvény a dátumválasztó változásainak kezelésére
     const handleChange = (date: Date | null) => {
         if (date) {
             setStartDate(date);
         }
     };
-
+    // Kezelőfüggvény az óra kiválasztásának kezelésére
     const handleDateChange = (event: SelectChangeEvent) => {
         setEnumHour(event.target.value as string);
     };
+     // Az adatok állapotának kezelése és lekérdezés függvénye
     const [adatok, setData] = useState([] as DataStructure[]);
     const fetchData = async () => {
         try {
@@ -36,6 +52,7 @@ export const DatePickerWithHour: React.FC<Step3Props> = ({ startDate, setStartDa
         }
 
     };
+    // Adatok lekérdezése az effektek segítségével
     useEffect(() => {
         fetchData();
     }, []);
@@ -58,7 +75,7 @@ export const DatePickerWithHour: React.FC<Step3Props> = ({ startDate, setStartDa
     
         return [openDate, closeDate];
     };
-
+    // Funkció az időszűréshez, a megadott nyitvatartási idők alapján
     const filterTime = (time: Date) => {
     const dayOfWeek = startDate.toLocaleString('en-us', { weekday: 'long' }).toLowerCase();
     const timeRanges = getHoursForDay(time, dayOfWeek);
@@ -69,7 +86,7 @@ export const DatePickerWithHour: React.FC<Step3Props> = ({ startDate, setStartDa
 
     return time.getTime() >= openTime.getTime() && time.getTime() <= closeTime.getTime();
     };
-
+// A komponens renderelése
     return (
         <><Grid className='mt-2'>
             <DatePicker

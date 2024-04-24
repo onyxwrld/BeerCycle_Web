@@ -15,11 +15,14 @@ import { Card, CardMedia } from "@mui/material";
 
 
 export default function Menu() {
+
     const [food, setFood] = useState([] as Menu[]);
     const [types, setType] = useState<string[]>([]);
     const [selectedFoods, setSelectedFoods] = useState<Menu[]>([]);
     const api = useContext(MenuContext);
-
+    /**
+     * Egy megvalósitására váró funkció ami képes kezelni a kiválaszott ételek tipusát és csak az megjeleniteni.
+     */
     const handleChange = (event: SelectChangeEvent<typeof types>) => {
         const {
             target: { value },
@@ -28,21 +31,26 @@ export default function Menu() {
             typeof value === 'string' ? value.split(',') : value,
         );
     }
-
-    useEffect(() => {
-        async function LoadData() {
-            try {
-                const response = await fetch('http://localhost:3000/menu');
-                const data = await response.json() as Menu[];
-                setFood(data);
-            }
-            catch {
-                console.log("error")
-            }
+    /**
+     * A végpontrol lekért adatbázisban szereplő menü elemeket egy tömben tárolja el.
+     */
+    async function LoadData() {
+        try {
+            const response = await fetch('http://localhost:3000/menu');
+            const data = await response.json() as Menu[];
+            setFood(data);
         }
+        catch {
+            console.log("error")
+        }
+    }
+    useEffect(() => {
         LoadData();
     }, [])
-
+    /**
+     * Majd ezeket a tárólt adatokat bejárja és megjelníti a material ui által biztosított Kártya komponenseken keresztül.
+     * A Kártyán található egy gomb ami meghívja a kosár hozzáadásához szolgáló függvényt, és a kiválaszott id-t átadja.
+     */
     return (
         <section id="menuPage">
             <Container className="">

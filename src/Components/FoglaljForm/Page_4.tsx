@@ -3,7 +3,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { Basket } from '../../Interfaces/Basket';
 
-
+/**
+ * A Page_4 componens a foglaláshoz tartozó form negyeddik oldala.
+ * Ez a komponens fetcheli a kosár tartalmát amit a felasználó már össze válogatott a foglalás megkezdése során.
+ * A Material ui DataGrid kompenensét használva képes a Page_4 megjelniteni a kosár tartalámt oszloposan [nevét,árát]
+ */
 const columns = [
   { field: 'name', headerName: 'Termék neve', width: 150 },
   { field: 'type', headerName: 'Tipus', width: 150 },

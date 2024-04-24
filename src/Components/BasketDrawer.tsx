@@ -9,14 +9,26 @@ import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import { Basket } from "../Interfaces/Basket";
 import { ApiContext } from "./Auth/ApiProvider";
 
-export default function DrawerSide({ isOpen, onClose }:
+/**
+ * A DrawerSide komponens funkciója, hogy megjelenítse a felhasználó kosarának tartalmát
+ * és lehetőséget biztosítson elemek törlésére.
+ *
+ * @param props - The props
+ * @param props.isOpen - Megmutatja, hogy a fiók nyitva van-e.
+ * @param props.onClose - A fiók bezárását kezelő funkció.
+ */
+export default function DrawerSide({isOpen, onClose }:
     { isOpen: boolean, onClose: () => void }) {
     const api = useContext(ApiContext);
     const [basketData, setBasketData] = useState<Basket[]>([]);
     const token = localStorage.getItem('token');
     let basketId = localStorage.getItem('basketId');
+
+    /**
+    * Lekéri és frissíti a kosár tartalmát a szerverről.
+    */
     const fetchData = async () => {
-        if(token !=null){
+        if (token != null) {
             try {
                 const response = await fetch('http://localhost:3000/basket', {
                     method: 'GET',
@@ -26,39 +38,43 @@ export default function DrawerSide({ isOpen, onClose }:
                 })
                 const data = await response.json();
                 setBasketData(data);
-                localStorage.setItem('basketId',basketData[0].id.toString());
-                
+                localStorage.setItem('basketId', basketData[0].id.toString());
+
             } catch (error) {
                 console.error('Hiba a kosár adatok lekérése közben:', error);
             }
         }
-      else{
-        setBasketData([]);
-      }
+        else {
+            setBasketData([]);
+        }
     };
     useEffect(() => {
         fetchData();
     }, [isOpen]);
-
+    /**
+        * Egy adott elem törlése a kosárból.
+        * 
+        * @param id - Az eltávolítandó elem azonosítója.
+        */
     async function onDelete(id: number) {
-            const res = await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    menu: id 
-                  })
+        const res = await fetch(`http://localhost:3000/basket/${basketId}/removeitems`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                menu: id
             })
-            //const data = await response.json();
-             fetchData();
-            if(res.ok){
-                api.snackBarFunction('Elem törlése sikeres',false)
-            }
-            else{
-                api.snackBarFunction('Elem törlése sikertelen',true)
-            }
+        })
+        //const data = await response.json();
+        fetchData();
+        if (res.ok) {
+            api.snackBarFunction('Elem törlése sikeres', false)
+        }
+        else {
+            api.snackBarFunction('Elem törlése sikertelen', true)
+        }
     }
     return (
         <>
@@ -75,7 +91,7 @@ export default function DrawerSide({ isOpen, onClose }:
                                         basket.menu.map((menuItem: Menu, menuIndex: number) => (
                                             <ListItem key={menuIndex}>
                                                 {
-                                                    menuItem.type === 'Snack' ? <LunchDiningIcon className="text-orange-950"/> : <SportsBarIcon className="text-yellow-500"/>
+                                                    menuItem.type === 'Snack' ? <LunchDiningIcon className="text-orange-950" /> : <SportsBarIcon className="text-yellow-500" />
                                                 }
                                                 <ListItemButton>
                                                     <ListItemText>

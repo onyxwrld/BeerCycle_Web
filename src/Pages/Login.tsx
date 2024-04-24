@@ -10,7 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { ApiContext } from '../Components/Auth/ApiProvider';
 import MySvg from '../Images/SVG/Untitled.svg';
-
+/**
+ * A Login page inputokból áll ami bekéri a felhasználó adatát, majd egy ellenörzésen végig megy hogy jól töltötte ki az inputokat majd egy objektbe csomagolva küldi tovább az api provider részére ahol feldolgozásra kerül az adat szerkezet
+ */
 function Copyright(props: any) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -24,7 +26,10 @@ function Copyright(props: any) {
     );
 }
 
-
+/**
+ * 
+ * @returns Ellenőrzi hogy létezik e ilyen felhaszánló, és generál egy token-t amivel bejenlentkezhet a felhasználól.
+ */
 export default function SignIn() {
     const [userName, setUserName] = useState('');
     const [pass, setPass] = useState('');

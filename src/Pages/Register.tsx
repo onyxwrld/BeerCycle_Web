@@ -22,7 +22,9 @@ function Copyright(props: any) {
     );
 }
 
-
+/**
+ * A register page inputokból áll ami bekéri a felhasználó adatát, majd egy ellenörzésen végig megy hogy jól töltötte ki az inputokat majd egy objektbe csomagolva küldi tovább az api provider részére ahol feldolgozásra kerül az adat szerkezet
+ */
 export default function SignUp() {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');

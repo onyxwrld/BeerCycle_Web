@@ -11,7 +11,9 @@ import { Review } from "../Interfaces/Review";
 import { ReviewComponent } from "../Components/ReviewComp";
 import MySvg from '../Images/SVG/bottom.svg';
 import { Guest, LoggedIn } from "../Components/Auth/loginAuth";
-
+/**
+ * A főoldalra beégetett adatokat megjelniti.
+ */
 export function Fooldal() {
     return <div className="container">
         <section className="hero-section">
@@ -184,13 +186,20 @@ export function Fooldal() {
             <Button sx={{ zIndex: 1, position: 'absolute' }}>
                 Letöltés
             </Button>
-        
+
         </section>
     </div>
 }
+/** 
+ * A `ReviewList` komponens lekéri és megjeleníti a felhasználói véleményeket.
+ * A véleményeket csak akkor jeleníti meg, ha azok értékelése nagyobb mint 3.
+ * A megjelenítendő vélemények számát korlátozza az első háromra.
+ */
 export function ReviewList() {
     const [review, setReviews] = useState<Review[] | undefined>();
-
+    /** 
+        * A `name` funkció lekéri az összes véleményt a szerverről, és beállítja a `review` állapotot.
+        */
     async function name() {
         const response = await fetch('http://localhost:3000/review', {
             method: 'GET',
@@ -201,12 +210,14 @@ export function ReviewList() {
         const responseData = await response.json() as Review[];
         setReviews(responseData);
     }
+    // Az adatok lekérdezésére a komponens első renderelésekor kerül sor.
     useEffect(() => {
         name();
     }, [])
+     // Kiszűri a véleményeket aszerint, hogy az értékelésük nagyobb-e mint 3, és csak a legelső három véleményt tartja meg.
     const filteredReviews = review?.filter(item => item.rate > 3).slice(0, 3);
+     // Véletlenszerű sorrendbe rendezzük a kiválasztott véleményeket.
     const shuffledReviews = shuffleArray(filteredReviews);
-    const selectedReviews = shuffledReviews!.slice(0, 3);
     return (
         <section className="review-section">
             <Grid item spacing={12}>
@@ -217,7 +228,7 @@ export function ReviewList() {
             <Grid container spacing={2} className="mt-5">
                 <Grid item xs={6} alignItems="center" container justifyContent="center" >
                     {
-                        filteredReviews && filteredReviews.map((item, index) => {
+                        shuffledReviews && shuffledReviews.map((item, index) => {
                             return <ReviewComponent content={item.content} key={index} isMainPage={true} id={item.id} username={item.user.username} rate={item.rate} onDelete={name} />;
                         })
                     }
@@ -229,11 +240,15 @@ export function ReviewList() {
         </section>
     );
 }
+/** 
+ * A `shuffleArray` funkció véletlenszerűen átrendez egy tömb elemeit.
+ * Ez biztosítja, hogy a vélemények megjelenítése változatos legyen.
+ */
 function shuffleArray(array: Review[] | undefined) {
     if (!array) return [];
     for (let i = array!.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array![i], array![j]] = [array![j], array![i]];
+        [array![i], array![j]] = [array![j], array![i]]; // Kicseréli az elemeket véletlenszerűen.
     }
     return array;
 }

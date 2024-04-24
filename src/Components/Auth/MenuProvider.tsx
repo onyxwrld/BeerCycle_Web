@@ -14,11 +14,13 @@ export const MenuContext = createContext({
 interface Props {
     children: React.ReactNode;
 }
+/**
+ * A menuProvider a menu elemek kezelésére szolgáló contextus. 
+ */
 export function MenuProvider({ children }: Props) {
     const [basket, setBasket] = useState<Basket[]>([]);
     const token = localStorage.getItem('token');
     const api = useContext(ApiContext);
-    
     const [basketChanged, setBasketChanged] = useState<boolean>(false);
     useEffect(() => {
         if (basketChanged) {
@@ -32,6 +34,12 @@ export function MenuProvider({ children }: Props) {
         menuListaKiir: async () => {
 
         },
+        /**
+         * 
+         * @param menuItem 
+         * Mikor meghivódik a basketFeltölt egy menu itemet kap paraméterként. Majd a megadott végpontra postolja a menü id-ját ezáltal hozzá adja a kosárhoz az elemet.
+         * Majd a snackBar-t meghíva egy értesitést jelenit meg a felhasználó oldalán a hozzá adás sikerességéről.
+         */
         basketFeltolt: async (menuItem: Menu) => {
             const post = JSON.stringify({ menu: menuItem.id });
             const response = await fetch('http://localhost:3000/basket', {

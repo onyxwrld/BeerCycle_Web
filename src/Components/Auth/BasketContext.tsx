@@ -8,7 +8,9 @@ interface BasketContextType {
     itemCount: number;
     updateBasketContent: () => void;
 }
-
+/**
+ * Egy megvalósitandó funkció ami megszámolja a kosár tartalmát és frissiti egy badge számát  ami a kosár ikon felett jelenik meg.
+ */
 const BasketContext = createContext<BasketContextType | undefined>(undefined);
 
 export const useBasket = () => {

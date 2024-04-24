@@ -3,7 +3,9 @@ import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 
 export function RulesPage() {
-
+    /**
+     * A sticky modal megnyitásáért felelős függvények
+     */
     const [open, setOpen] = useState(false);
     const [openStickyId, setOpenStickyId] = useState('');
     const handleOpen = (id: string) => {
@@ -14,6 +16,10 @@ export function RulesPage() {
     const handleClose = () => {
         setOpen(false);
     };
+    /**
+     * Rendereléskor a getStickyContent ellenőrzi melyik cetlire kattintott a
+     * felhasználló és az id alapján adja vissza a megjelenitendő content-et
+     */
     const getStickyContent = () => {
         switch (openStickyId) {
             case 'sticky1':
@@ -122,6 +128,7 @@ export function RulesPage() {
                 return null;
         }
     };
+    
     return (<>
         <Modal open={open} onClose={handleClose} keepMounted>
             <div className="rounded-xl flex justify-center items-center h-full mx-auto max-w-3xl bg-amber m-5 p-5 overflow-y-scroll overflow-y-visible">

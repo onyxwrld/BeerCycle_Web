@@ -12,7 +12,9 @@ import { format } from 'date-fns';
 import { Basket } from '../Interfaces/Basket';
 import { Bicycle } from '../Interfaces/Reservation';
 
-
+/**
+ * A reservationForm a foglalás leadására szólgál, több komponens is megjelnik benne. A fő lényege hogy a kiválaszott adatokat postolja az adatbázisban.
+ */
 function ReservationForm() {
     const [step, setStep] = useState(1);
     const token = localStorage.getItem('token');

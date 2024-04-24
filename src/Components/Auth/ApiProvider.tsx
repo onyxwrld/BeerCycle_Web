@@ -3,7 +3,10 @@ import { User } from "../../Interfaces/User";
 import { useNavigate } from 'react-router-dom';
 import { Review } from "../../Interfaces/Review";
 import SnackBarAlert from "../SnackBar";
-
+/** 
+ * Létrehoz egy kontextust, amely az API függvényeket és állapotokat tartalmazza.
+ * Ez lehetővé teszi a függvények és adatok elérését a komponensfa bármely pontján.
+ */
 export const ApiContext = createContext({
     login: async (username: string, password: string): Promise<void> => {
         throw new Error("nincs implementálva");
@@ -24,7 +27,10 @@ export const ApiContext = createContext({
 interface Props {
     children: React.ReactNode;
 }
-
+/** 
+ * Az ApiProvider komponens biztosítja a kontextus értékek állapotkezelését és a kontextusban lévő
+ * függvények definícióját. Az állapotváltozások a kontextusban felhasznált komponenseket is frissítik.
+ */
 export function ApiProvider({ children }: Props) {
     const [token, setToken] = useState('');
     const [loeggedIn, setLoggedIn] = useState(false);
@@ -44,6 +50,9 @@ export function ApiProvider({ children }: Props) {
     }, [])
 
     useEffect(() => {
+        /* 
+         * A loadUserData ellenőrzi hogy a felhasználó sikeresen bejelntkezett-e a weboldalra.
+         */
         async function loadUserData() {
             const response = await fetch('http://localhost:3000/user/me', {
                 method: 'GET',
@@ -100,6 +109,10 @@ export function ApiProvider({ children }: Props) {
         isLoggedIn: () => {
             return loeggedIn;
         },
+        /**
+         * A logout meghivásakor minden user-hez tartozó adatot törli a weboldal adattárolói közül.
+         *
+         * */
         logout: () => { 
             setToken('');
             localStorage.removeItem('token');
@@ -110,6 +123,16 @@ export function ApiProvider({ children }: Props) {
             navigate('/')
             
         },
+        /**
+         * 
+         * @param username 
+         * @param password 
+         * @param email 
+         * @param last_name 
+         * @param first_name 
+         * @returns 
+         * A register meghivásakor az adott végpontra posztolja a felhasználó minden adatát siker esetén.
+         */
         register: async (username: string, password: string, email: string, last_name: string, first_name: string) => {
             const registerData = {
                 username,
@@ -136,6 +159,10 @@ export function ApiProvider({ children }: Props) {
                 return false
             }
         },
+        /**
+         * A bejelntkezett user által megírt össze review-t lekéri 
+         * 
+         */
         userReview: async () =>{
            try{ const response = await fetch(`http://localhost:3000/review/userid/${user?.id}`,{
                 method: 'GET',
@@ -155,6 +182,11 @@ export function ApiProvider({ children }: Props) {
             setAlertMessage(`Hiba történt a kérés során: ${error}`);
         }
         },
+        /**
+         * 
+         * @param alertMessage az értesitő szöveg
+         * @param error egy igaz/hamis érték hogy a snackbár errorként vagy succesként jelenjen meg.
+         */
         snackBarFunction: (alertMessage:string,error:boolean) => {
             setOpen(true)
             setAlertMessage(alertMessage)

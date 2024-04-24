@@ -2,9 +2,10 @@ import { Container } from '@mui/system';
 import MySvg from '../Images/SVG/sor_loading.svg';
 import { Grid } from '@mui/material';
 export function LoadingPage(){
-
+  /**
+   * A loadingPage egy egyedi animácó megjelintésére szólgál amig tölt az oldal komponense.
+   */
     return(
-       
         <Grid
         container
         spacing={0}

@@ -20,7 +20,7 @@ interface Props {
  * A foglalás képét a hozzátartozó bicikli alapján dönti el.
  * Két komponens figyeli a user interakciót,
  */
-const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
+const ReservationCard = ({ foglalas, refreshReservations }: Props) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const [open, setOpen] = useState(false);
@@ -37,8 +37,19 @@ const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
     setSelectedReservation(reservationItem)
     handelModalOpen();
   }
+  const handleCancelReservation = async (reservtionId: number) => {
+    const token = localStorage.getItem('token')
+    await fetch(`http://localhost:3000/reservation/stateme/${reservtionId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+  }
   const isDisabled = (x: Reservation) => {
     const startTimeDate = new Date(x.start_time);
+    handleCancelReservation(x.id)
     return startTimeDate.getTime() <= today.getTime() || x.state === ReservationState.Cancelled || x.state === ReservationState.Done;
   };
 
@@ -51,10 +62,10 @@ const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
   return (
     <>
       <DialogCompLemondas open={openDialog} setOpen={setOpneDialog} reservtionId={reservationId} refreshReservations={refreshReservations} />
-      {foglalas.map((x,index) => {
+      {foglalas.map((x, index) => {
         return (
           <Grid item spacing={4}>
-            <Card  key={index} className="p-4 m-5 hover:scale-110 transition ease-out bg-orange-200" sx={{
+            <Card key={index} className="p-4 m-5 hover:scale-110 transition ease-out bg-orange-200" sx={{
               borderRadius: '15px',
             }}>
               <CardMedia
@@ -110,9 +121,9 @@ const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
                   disabled={isDisabled(x)}
                 >
                   {
-                    x.state === ReservationState.Cancelled ? 'Lemondva' : 
-                    x.state === ReservationState.Done ? 'Kifizetve' : 
-                    'Lemondom'
+                    x.state === ReservationState.Cancelled ? 'Lemondva' :
+                      x.state === ReservationState.Done ? 'Kifizetve' :
+                        'Lemondom'
                   }
                 </Button>
                 <Button
@@ -142,17 +153,17 @@ const ReservationCard = ({ foglalas,refreshReservations }: Props)=> {
           <Typography>
             {
               <Grid container spacing={2}>
-              <Grid item spacing={6} className=" flex justify-start">
-                {
-                selectedReservation?.bicycle.type === BicycleType.Large ? 'Nagy bicikli' : 
-                selectedReservation?.bicycle.type === BicycleType.Medium ? 'Közepes bicikli' : 
-                'Kicsi bicikli'
-                }
+                <Grid item spacing={6} className=" flex justify-start">
+                  {
+                    selectedReservation?.bicycle.type === BicycleType.Large ? 'Nagy bicikli' :
+                      selectedReservation?.bicycle.type === BicycleType.Medium ? 'Közepes bicikli' :
+                        'Kicsi bicikli'
+                  }
+                </Grid>
+                <Grid item spacing={6} className=" flex justify-end">
+                  {selectedReservation?.bicycle.price.toLocaleString('hu-HU')} Ft
+                </Grid>
               </Grid>
-              <Grid item spacing={6} className=" flex justify-end">
-                {selectedReservation?.bicycle.price.toLocaleString('hu-HU')} Ft
-              </Grid>
-            </Grid>
             }
           </Typography>
           <Divider />

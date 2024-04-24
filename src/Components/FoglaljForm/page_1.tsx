@@ -5,7 +5,14 @@ interface Step1Props {
     size: string;
     setSize: (size: string) => void;
 }
-
+/**
+ * 
+ * @param size 
+ * A page_1 a foglalás első oldala ahol a felhasználó eldöntheti mekkora méretű biciklit szeretne. 
+ * Ezért felelős az interface, hogy a szülő komponensnek tovább adja a kiválasztott adatot.
+ * A komponens egy legördülő menüt kinál fel a felhasznáónak és válaszott méret szerint választja ki a megjelenitendő képet is.  
+ * @returns 
+ */
 export const Step1: React.FC<Step1Props> = ({ size, setSize }) => {
 
     const handleSizeChange = (event: SelectChangeEvent) => {

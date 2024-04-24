@@ -20,6 +20,10 @@ export function navigateTo({ to }: { to: string }) {
     const navigate = useNavigate();
     return navigate(to);
 }
+/**
+ * A profile page megjelniti a a felhasználó menüpontokat, melyek gombok és linkek amelyek tovább navigálnak a profile aloldalaira.
+ * 
+ */
 const token = localStorage.getItem('token');
 export function ProfilePage() {
     const api = useContext(ApiContext)
@@ -81,6 +85,11 @@ export function ProfilePage() {
         </Guest>
     </>
 }
+/**
+ * 
+ * A userData lekéri a felhaszáló által megadott regisztrációs adatokat.
+ * Jövöbeli funkció, hogy ezek szerkezthetőek legyenek. Végpont már kész csak a frontend rész nincs megírva.
+ */
 export function User_data() {
     const api = useContext(ApiContext);
     return <>
@@ -92,7 +101,10 @@ export function User_data() {
         </Grid>
     </>
 }
-
+/**
+ * 
+ * A history lekéri a már leadott fogalalásokat.
+ */
 export function History() {
     const [reservations, setReservations] = useState<Reservation[]>([]);
     const fetchReservations = async () => {
@@ -123,7 +135,10 @@ export function History() {
     <ReservationCard foglalas={reservations} refreshReservations={refreshReservations} />
     </Grid>
 }
-
+/**
+ * 
+ * A myReviews lekéri a felhasznáéó által irt összes review-t
+ */
 export function MyReviews() {
     const api = useContext(ApiContext);
     const [rate, setRate] = useState<number | null>(2);

@@ -4,15 +4,25 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import CloseIcon from '@mui/icons-material/Close';
 
 export function GalleryPage() {
-
+    /**
+     * A képek megnyitásáért felelős adatszerkezetek.
+     */
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
-
+    /**
+     * Mivel minden kép a frontend oldalrol érkezik, így tudjuk a képek nevét. 
+     * Ezért egy függvény feltölti a képek nevét egy tömb-be
+     */
     let selfi = 'selfi ';
     const selfiArray = [];
     for (let index = 1; index < 16; index++) {
         selfiArray.push(selfi + `(${index}).jpg`);
     }
+    /**
+     * 
+     * Megnyitásért ez a függvény felelős ami a kiválasztott képet tovább adja a Material ui modal komponensének.
+     * Igy mikor megnyilik a kép a tömböl kiválasztott cimmel állitja be a kép url-jét. 
+     */
     const handleOpen = (image: string) => {
         setSelectedImage(image);
         setOpen(true);
@@ -21,6 +31,14 @@ export function GalleryPage() {
     const handleClose = () => {
         setOpen(false);
     };
+    /**
+     * 
+     * @param leng a képeket tartalmazó tömb hossza
+     * @param selectedImage A kiválaszott kép cime
+     * 
+     * A handelNext egy gombra kattintáskor hivódik meg és választja ki az n+1 képet.
+     * Egy örök ciklusú képsor, szóval ha a felhasználó az n-dik képnél áll akkor egyből a legelső elemhez lép vissza.
+     */
     const handleNext = (leng: number,selectedImage:string) => {
         const currImg = parseInt(selectedImage.match(/\d+/)![0]);
         let nextImg;
