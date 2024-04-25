@@ -42,7 +42,8 @@ export function Fooldal() {
             </Grid>
 
             <div>
-                <Grid container spacing={1}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={6} lg={4}>
                     <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
                         <CardMedia
                             sx={{ height: 140 }}
@@ -63,6 +64,8 @@ export function Fooldal() {
                             </Link>
                         </CardActions>
                     </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={4}>
                     <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
 
                         <CardMedia
@@ -84,6 +87,8 @@ export function Fooldal() {
                             <Link to='rolunk'><Button size="small">Fedezd fel BeerCycle-t</Button></Link>
                         </CardActions>
                     </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={4}>
                     <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
                         <CardMedia
                             sx={{ height: 140 }}
@@ -102,6 +107,7 @@ export function Fooldal() {
                             <Link to="gallery"> <Button size="small">Irány a galléria</Button></Link>
                         </CardActions>
                     </Card>
+                    </Grid>
                 </Grid>
             </div>
         </section>
