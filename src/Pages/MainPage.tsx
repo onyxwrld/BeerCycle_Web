@@ -11,14 +11,18 @@ import { Review } from "../Interfaces/Review";
 import { ReviewComponent } from "../Components/ReviewComp";
 import MySvg from '../Images/SVG/bottom.svg';
 import { Guest, LoggedIn } from "../Components/Auth/loginAuth";
+import { useMediaQuery, useTheme, width } from "@mui/system";
 /**
  * A főoldalra beégetett adatokat megjelniti.
  */
 export function Fooldal() {
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     return <div className="container">
-        <section className="hero-section">
+        <section className="">
             <div className="relative">
-                <img src="/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 w-full h-full object-cover" />
+                <img src="/Images/heroSetcion_ujitott.png" id="hero-sectionLogo" className="absolute inset-0 z-0 h-max lg:w-full lg:h-full object-fill" />
                 <img src="/Images/BeerCycleText.png" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sm:w-3/4 transition ease-in-out hover:scale-110" />
                 <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 z-10">
                     <LoggedIn>
@@ -43,8 +47,10 @@ export function Fooldal() {
 
             <div>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} md={6} lg={4}>
-                    <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
+                    <Grid item xs={12} md={4} lg={4}>
+                    <Card sx={{ maxWidth: isMediumScreen ? '30%' : 
+                 '80%'
+                    , mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
                         <CardMedia
                             sx={{ height: 140 }}
                             image="/Images/ham.png"
@@ -65,8 +71,9 @@ export function Fooldal() {
                         </CardActions>
                     </Card>
                     </Grid>
-                    <Grid item xs={12} md={6} lg={4}>
-                    <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
+                    <Grid item xs={12} md={4} lg={4}>
+                    <Card sx={{ maxWidth: isMediumScreen ? '30%' : 
+                 '80%', mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
 
                         <CardMedia
                             sx={{ height: 140 }}
@@ -88,8 +95,9 @@ export function Fooldal() {
                         </CardActions>
                     </Card>
                     </Grid>
-                    <Grid item xs={12} md={6} lg={4}>
-                    <Card sx={{ maxWidth: 345, mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
+                    <Grid item xs={12} md={4} lg={4}>
+                    <Card sx={{maxWidth: isMediumScreen ? '30%' : 
+                 '80%', mx: 2, borderRadius: '15px' }} className="hover:scale-110 transition ease-out">
                         <CardMedia
                             sx={{ height: 140 }}
                             image="/Images/beer1.png"

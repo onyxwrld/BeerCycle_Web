@@ -37,9 +37,26 @@ function ReservationForm() {
     }
     const handleNext = () => {
         if (step < 5) {
+            if(step === 1){
+                console.log(basketId)    
+                if(basketId === null || basketId === undefined){
+                    const menu: Menu = {
+                        id: 11,
+                        name: "Mizse Szénsavmentes",
+                        price: 0,
+                        type: "Drink"
+                    }
+                    
+                    menuApi.basketFeltolt(menu)
+                    console.log(basketId)
+                }
+            } 
             setStep((prevStep) => prevStep + 1);
-        } else if (step === 5) {
+        }
+        
+        else if (step === 5) {
             try {
+                console.log(basketId)
                 ReservationPost();
                 return <SnackBarAlert alertMessage="sikeres" error={false} open={open} setOpen={setOpen} />
             }
@@ -58,15 +75,23 @@ function ReservationForm() {
     };
 
     const vegOsszegSzamolas = (data: Basket[]) => {
-        console.log(data);
-        for (let index = 0; index < data.length; index++) {
-            total += data[index].menu[index].price;
-            console.log(data[index].menu[index].name)
+        try {
+            for (let index = 0; index < data.length; index++) {
+                total += data[index].menu[index].price;
+            }
+            size === '1' ? total += bicycle[0].price :
+                size === '2' ? total += bicycle[1].price :
+                    total += bicycle[2].price
+            return total
         }
-        size === '1' ? total += bicycle[0].price :
-            size === '2' ? total += bicycle[1].price :
-                total += bicycle[2].price
-        return total
+
+        catch {
+            size === '1' ? total += bicycle[0].price :
+                size === '2' ? total += bicycle[1].price :
+                    total += bicycle[2].price
+            return total
+        }
+
     }
     const fetchData = async () => {
         if (token) {
@@ -79,7 +104,6 @@ function ReservationForm() {
                 });
                 const data = await response.json() as Basket[];
                 if (data.length > 0) {
-                    localStorage.setItem('basketId', data[0].id.toString());
                     setBasketData(data);
                 }
 
@@ -113,11 +137,10 @@ function ReservationForm() {
             return
         }
         if (basketId == null) {
-            console.log("üres a basketId");
-            navigate('/login');
+         
             return
         }
-        
+      
         const reservation = {
             user_id: parseInt(userId),
             bicycle_id: parseInt(size),
@@ -126,7 +149,6 @@ function ReservationForm() {
             location: address,
             basket_id: parseInt(basketId)
         };
-
         try {
             const response = await fetch('http://localhost:3000/reservation', {
                 method: 'POST',
@@ -139,6 +161,7 @@ function ReservationForm() {
 
             if (response.ok) {
                 api.snackBarFunction('Sikeres foglalás', false)
+                localStorage.removeItem('basketId')
                 setSize('');
                 setAddress('');
                 setEnumHour('');
@@ -186,13 +209,13 @@ function ReservationForm() {
                                     <Grid item spacing={6}>
                                         <Typography>
                                             Kattints a térképen arra a helyre ahova szeretnéd, hogy a biciglit szállitsuk neked!
-                                            
+
                                         </Typography>
                                         <Typography>
-                                        {address}
+                                            {address}
                                         </Typography>
                                     </Grid>
-                                  
+
                                 </Grid>
                             </>
                         )}
