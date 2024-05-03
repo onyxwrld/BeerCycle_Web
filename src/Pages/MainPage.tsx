@@ -197,10 +197,12 @@ export function Fooldal() {
                 alt="The house from the offer."
                 src="/Images/mobilDownload.png"
             />
-            <Button sx={{ zIndex: 1, position: 'absolute' }}>
-                Letöltés
-            </Button>
-
+              <Link to='https://github.com/Bluver11/BeerCycleMobilApp'>
+        <button
+            className="absolute z-50 bg-bloodRed hover:bg-bloodRed  font-bold text-white text-xl py-4 px-8 rounded-xl hover:rounded-xl transition hover:scale-110 ease-in-out"
+            style={{ top: '60%', left: '50%'  }}>Letöltés
+        </button>
+    </Link>
         </section>
     </div>
 }
